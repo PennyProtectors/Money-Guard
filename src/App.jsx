@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-import Loader from "./components/Loader/Loader";
 
 function App() {
   // Redux'tan loading state'lerini al
@@ -13,7 +12,6 @@ function App() {
   
   return (
     <>
-      <Loader loading={isLoading} />
       <Routes>
         <Route path="/" element={<RegistrationPage />} />
         <Route path="/login" element={<LoginPage />} />
