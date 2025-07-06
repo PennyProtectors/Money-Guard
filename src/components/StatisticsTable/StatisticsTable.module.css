@@ -1,0 +1,174 @@
+.tableContainer {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tableTitle {
+  margin: 0;
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.periodInfo {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.statisticsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 600px; /* Mobile'da scroll için minimum genişlik */
+}
+
+.statisticsTable th {
+  background-color: #f8f9fa;
+  padding: 12px 8px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+}
+
+.statisticsTable td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #dee2e6;
+  color: #333;
+}
+
+.statisticsTable tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.categoryCell {
+  font-weight: 500;
+  min-width: 120px;
+}
+
+.amount {
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.countCell {
+  text-align: center;
+  font-weight: 500;
+}
+
+.totalRow {
+  background-color: #f8f9fa !important;
+  border-top: 2px solid #dee2e6;
+}
+
+.totalRow td {
+  font-weight: 600;
+  color: #495057;
+}
+
+.noData {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.noData p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Mobile Responsive (375px - 768px) */
+@media (min-width: 375px) and (max-width: 768px) {
+  .tableContainer {
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
+  
+  .headerSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .tableTitle {
+    font-size: 1.1rem;
+  }
+  
+  .periodInfo {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+  }
+  
+  .statisticsTable {
+    font-size: 0.8rem;
+  }
+  
+  .statisticsTable th,
+  .statisticsTable td {
+    padding: 8px 6px;
+  }
+  
+  .categoryCell {
+    min-width: 100px;
+  }
+}
+
+/* Tablet Responsive (768px - 1280px) */
+@media (min-width: 768px) and (max-width: 1280px) {
+  .tableContainer {
+    padding: 1.25rem;
+  }
+  
+  .statisticsTable {
+    font-size: 0.85rem;
+  }
+  
+  .statisticsTable th,
+  .statisticsTable td {
+    padding: 10px 8px;
+  }
+}
+
+/* Desktop Responsive (1280px+) */
+@media (min-width: 1280px) {
+  .tableContainer {
+    padding: 1.5rem;
+  }
+  
+  .statisticsTable {
+    font-size: 0.9rem;
+  }
+  
+  .statisticsTable th,
+  .statisticsTable td {
+    padding: 12px 8px;
+  }
+} 
