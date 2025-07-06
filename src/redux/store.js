@@ -2,6 +2,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import authReducer from "../redux/auth/slice";
+import transactionReducer from "../redux/transactions/slice";
+import loaderReducer from "../redux/global/loaderSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -19,6 +21,8 @@ const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
+    transaction: transactionReducer,
+    loader: loaderReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>

@@ -35,12 +35,16 @@ const Registrations = () => {
       .required("Please confirm your password"),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     const { username, email, password } = values;
     const userData = { username, email, password }; // sadece gerekenler
-    console.log(userData);
-    dispatch(register(userData));
-    resetForm();
+    try {
+      await dispatch(register(userData)).unwrap();
+      resetForm();
+      navigate("/login"); // Kayıt başarılıysa giriş sayfasına yönlendir
+    } catch (error) {
+      alert("Kayıt başarısız: " + error);
+    }
   };
   return (
     <div>
