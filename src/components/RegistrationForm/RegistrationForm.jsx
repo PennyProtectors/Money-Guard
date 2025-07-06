@@ -5,6 +5,10 @@ import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { register } from "../../redux/auth/operations";
 import { useNavigate } from "react-router-dom";
+import css from "./RegistrationForm.module.css";
+import { IoPerson } from "react-icons/io5";
+import { MdEmail, MdLock } from "react-icons/md";
+import logo from "../../assets/images/Logo-Mobile.png";
 
 const Registrations = () => {
   const dispatch = useDispatch();
@@ -43,39 +47,82 @@ const Registrations = () => {
     resetForm();
   };
   return (
-    <div>
+    <div className={css.registerContiner}>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={registrationSchema}
       >
         {({ values }) => (
-          <Form>
-            <div>
-              <Field type="text" name="username" placeholder="Name" />
+          <Form className={css.registerForm}>
+            <div className={css.registerTitle}>
+              <img src={logo} alt="" />
+              <p>Money Guard</p>
+            </div>
+            <div className={css.registerInputGroup}>
+              <div className={css.registerInput}>
+                <IoPerson className={css.registerInputIcon} />
+                <Field
+                  className={css.registerInputField}
+                  type="text"
+                  name="username"
+                  placeholder="Name"
+                />
+              </div>
               <ErrorMessage name="username" component="span" />
             </div>
-            <div>
-              <Field type="email" name="email" placeholder="Email" />
+            <div className={css.registerInputGroup}>
+              <div className={css.registerInput}>
+                <MdEmail className={css.registerInputIcon} />
+                <Field
+                  className={css.registerInputField}
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
               <ErrorMessage name="email" component="span" />
             </div>
-            <div>
-              <Field type="password" name="password" placeholder="Password" />
+            <div className={css.registerInputGroup}>
+              <div className={css.registerInput}>
+                <MdLock className={css.registerInputIcon} />
+                <Field
+                  className={css.registerInputField}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
+              </div>
               <ErrorMessage name="password" component="span" />
             </div>
-            <div>
-              <Field
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password"
-              />
+            <div className={css.registerInputGroup}>
+              <div className={css.registerInput}>
+                <MdLock className={css.registerInputIcon} />
+                <Field
+                  className={css.registerInputField}
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                />
+              </div>
               <ErrorMessage name="confirmPassword" component="span" />
-              <PasswordStrengthBar password={values.password} />
+              <PasswordStrengthBar
+                password={values.password}
+                className={css.registerPasswordBar}
+              />
             </div>
-            <button type="submit">REGİSTER</button>
-            <button type="button" onClick={() => navigate("/login")}>
-              LOG IN
-            </button>
+            <div className={css.registerButonGroup}>
+              <button type="submit" className={css.registerButon}>
+                REGİSTER
+              </button>
+              <button
+                type="button"
+                className={css.registerLogInButon}
+                onClick={() => navigate("/login")}
+              >
+                LOG IN
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
