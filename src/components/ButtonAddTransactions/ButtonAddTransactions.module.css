@@ -1,0 +1,20 @@
+.buttonAddTransaction {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%);
+    padding: 15px;
+    opacity: 0.9;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 1px 9px 15px 0px #00000033;
+    cursor: pointer;
+}
+
+.buttonAddTransaction:hover {
+    opacity: 1;
+    box-shadow: 1px 9px 15px 0px #000000;
+}
