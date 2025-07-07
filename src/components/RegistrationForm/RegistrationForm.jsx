@@ -41,7 +41,7 @@ const Registrations = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     const { username, email, password } = values;
-    const userData = { username, email, password }; // sadece gerekenler
+    const userData = { username, email, password };
     console.log(userData);
     dispatch(register(userData));
     resetForm();

@@ -4,6 +4,9 @@ import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { logIn } from "../../redux/auth/operations";
 import { useNavigate } from "react-router-dom";
+import css from "./LoginForm.module.css";
+import logo from "../../assets/images/Logo-Mobile.png";
+import { MdEmail, MdLock } from "react-icons/md";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -33,25 +36,53 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className={css.loginContainer}>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={logInSchema}
       >
-        <Form>
-          <div>
-            <Field type="email" name="email" placeholder="Email" />
+        <Form className={css.loginForm}>
+          <div className={css.loginTitle}>
+            <img src={logo} alt="" />
+            <p>Money Guard</p>
+          </div>
+          <div className={css.loginInputGroup}>
+            <div className={css.loginInput}>
+              <MdEmail className={css.loginInputIcon} />
+              <Field
+                className={css.loginInputField}
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+            </div>
             <ErrorMessage name="email" component="span" />
           </div>
-          <div>
-            <Field type="password" name="password" placeholder="Password" />
+          <div className={css.loginInputGroup}>
+            <div className={css.loginInput}>
+              <MdLock className={css.loginInputIcon} />
+              <Field
+                className={css.loginInputField}
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+            </div>
             <ErrorMessage name="password" component="span" />
           </div>
-          <button type="submit">LOG IN</button>
-          <button type="button" onClick={() => navigate("/")}>
-            REGISTER
-          </button>
+          <div className={css.loginButonGroup}>
+            <button className={css.loginButon} type="submit">
+              LOG IN
+            </button>
+            <button
+              className={css.loginRegisterButon}
+              type="button"
+              onClick={() => navigate("/")}
+            >
+              REGISTER
+            </button>
+          </div>
         </Form>
       </Formik>
     </div>
