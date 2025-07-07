@@ -22,7 +22,7 @@
   height: 28.86px;
   left: 0px;
   top: 25.46px;
-  font-family: "Poppins", sans-serif;
+
   font-style: normal;
   font-weight: 400;
   font-size: 19.1111px;
@@ -90,7 +90,6 @@
   height: 50px;
   border: none;
   color: #fbfbfb;
-  font-family: " Poppins", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 100%;
@@ -106,7 +105,6 @@
   height: 50px;
   border: none;
   color: #623f8b;
-  font-family: " Poppins", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 100%;
@@ -115,12 +113,27 @@
   margin-bottom: 23px;
 }
 .registerPasswordBar {
-  width: 280px;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  gap: 0 !important;
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
+.registerPasswordBar p {
+  display: none;
+}
+.registerPasswordBar > div > div:nth-child(2),
+.registerPasswordBar > div > div:nth-child(4),
+.registerPasswordBar > div > div:nth-child(6) {
+  width: 0px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: transparent !important; /* Renk de gizlensin istersen */
+}
+
+/* @media (min-width: 768px) and (max-width: 1279px) {
   .registerContiner {
-    background-image: "../../assets/images/TabletFormBckgrnd.png";
+    background-image: url("../../assets/images/TabletFormBckgrnd.png");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -128,7 +141,7 @@
   .registerForm {
     width: 533px;
     height: 624px;
-    background-image: "../../assets/images/TabletFormBckgrnd.png";
+    background-image: url("../../assets/images/TabletFormBckgrnd.png");
   }
   .registerButon {
     width: 300px;
@@ -137,4 +150,17 @@
   .registerLogInButon {
     width: 300px;
   }
-}
+} */
+
+/* @media (min-width: 1280px) {
+  .registerContiner {
+    background-image: url("../../assets/images/RegisterBckgrnd-Desktop.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .registerForm {
+    width: 533px;
+    height: 624px;
+    background-image: url("../../assets/images/TabletFormBckgrnd.png");
+  }
+} */
