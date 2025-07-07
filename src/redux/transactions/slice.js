@@ -6,7 +6,6 @@ import {
   fetchTransaction,
   fetchTransactionCategory,
 } from "./operations";
-import { act } from "react";
 
 const initialState = {
   transactions: [],
@@ -15,7 +14,7 @@ const initialState = {
   error: null,
 };
 
-export const transactionSlice = createSlice({
+const transactionSlice = createSlice({
   name: "transaction",
   initialState,
   extraReducers: (builder) => {
@@ -61,3 +60,5 @@ export const transactionSlice = createSlice({
       });
   },
 });
+
+export default transactionSlice.reducer;
