@@ -3,10 +3,10 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://wallet.b.goit.study";
 
-const setAuthHeader = (token) => {
+export const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = "";
 };
 
