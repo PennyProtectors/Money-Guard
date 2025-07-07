@@ -36,7 +36,7 @@ const Header = () => {
     <div className={css.header}>
       <div>
         <img
-          src="../images/logo.png"
+          src="../assets/images/Logo-Mobile.png"
           alt="money_guarg_logo"
           className={css.logo}
         />
@@ -44,7 +44,7 @@ const Header = () => {
       <div>
         <p className={css.username}>{username || "..."}</p>
         <img
-          src="../images/exit.png"
+          src="../assets/images/exit.png"
           alt="çıkış"
           className={css.exitImage}
           onClick={handleLogout}
