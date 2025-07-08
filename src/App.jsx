@@ -3,20 +3,11 @@ import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import DashboadPage from "./pages/DashboadPage";
-
-import axios from "axios";
-
-function App() {
-  axios.defaults.baseURL = "https://wallet.b.goit.study/api";
-const token=localStorage.getItem("token");
-if(token){
-  axios.defaults.headers.common["Authorization"]=`Bearer ${token}`;
-}
-
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Loader from "./components/Loader/Loader";
 import { refreshUser } from "./redux/auth/operations";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,9 +16,9 @@ function App() {
   const loading = useSelector((state) => state?.transactions?.loading);
   const isRefreshing = useSelector((state) => state?.auth?.isRefreshing);
 
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(refreshUser());
+  // }, [dispatch]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -35,10 +26,11 @@ function App() {
     }
   }, [isLoggedIn, navigate]);
 
-  if (isRefreshing) return <Loader />;
+  // if (isRefreshing) return <Loader />;
 
   return (
     <>
+      <Toaster position="top-right" reverseOrder={false} />
       {loading && <Loader />}
       <Routes>
         <Route path="/" element={<RegistrationPage />} />

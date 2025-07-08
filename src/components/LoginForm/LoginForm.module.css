@@ -1,12 +1,9 @@
 .loginContainer {
   display: flex;
   flex-direction: column;
-  background-image: url("../../assets/images/RegisterBckgrnd-Mobile.png");
+  background-image: url("../../assets/images/Mobil_login_register_bckgrnd.png");
   background-repeat: no-repeat;
   background-size: cover;
-  /* align-items: center;
-  justify-content: center;
-  justify-items: center; */
 }
 
 .loginForm {
@@ -28,9 +25,6 @@
 .loginTitle p {
   width: 129px;
   height: 28.86px;
-  left: 0px;
-  top: 25.46px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 19.1111px;
@@ -47,7 +41,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid #ffffff66;
-  width: 280px; /* Veya ihtiyaca göre */
+  width: 280px;
   padding: 5px 0;
 }
 
@@ -72,8 +66,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  left: 20px;
-  top: 425px;
   align-items: center;
 }
 
@@ -113,36 +105,49 @@
   margin-bottom: 23px;
 }
 
-/* @media (min-width: 768px) and (max-width: 1279px) {
-  .loginContiner {
-    background-image: url("../../assets/images/TabletFormBckgrnd.png");
+.loginErrorMessage {
+  color: aqua;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .loginContainer {
+    background-image: url("../../assets/images/Tablet_login_bckgrnd.png");
     background-repeat: no-repeat;
     background-size: cover;
+    min-width: 768px;
+    align-items: center;
   }
 
-  .rloginForm {
+  .loginForm {
     width: 533px;
-    height: 624px;
-    background-image: url("../../assets/images/TabletFormBckgrnd.png");
-  }
-  .loginButon {
-    width: 300px;
+    height: 570px;
+    background-image: url("../../assets/images/Tablet_loginForm_bckgrnd.png");
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
+  .loginButon,
   .loginRegisterButon {
     width: 300px;
   }
-} */
+}
 
-/* @media (min-width: 1280px) {
-  .loginContiner {
-    background-image: url("../../assets/images/RegisterBckgrnd-Desktop.png");
+/* Desktop görünümü */
+@media (min-width: 1280px) {
+  .loginContainer {
+    background-image: url("../../assets/images/Desktop_login_bckgrnd.png");
     background-repeat: no-repeat;
     background-size: cover;
+    min-width: 1280px;
+    align-items: center;
+    height: 100vh;
   }
+
   .loginForm {
     width: 533px;
-    height: 624px;
-    background-image: url("../../assets/images/TabletFormBckgrnd.png");
+    height: 570px;
+    background-image: url("../../assets/images/Tablet_loginForm_bckgrnd.png");
+    background-size: cover;
+    background-repeat: no-repeat;
   }
-} */
+}
