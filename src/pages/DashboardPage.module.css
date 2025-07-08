@@ -1,0 +1,25 @@
+.dashboard {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.yourBalance {
+  width: 280px;
+  height: 80px;
+  background: rgba(82, 59, 126, 0.6);
+  border-radius: 8px;
+}
+
+.paths {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: white 40%;
+}
+
+.balance {
+  font-size: 12px;
+  font-weight: 400;
+}
