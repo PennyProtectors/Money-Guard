@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import css from "./Header.module.css";
 import axios from "axios";
 import { clearAuthHeader, setAuthHeader } from "../redux/auth/operations";
-
+import logo from "../assets/images/logo.png";
+import exit from "../assets/images/exit.png";
 const Header = () => {
   axios.defaults.baseURL = "https://wallet.b.goit.study/api";
   const [username, setUsername] = useState("");
@@ -35,16 +36,12 @@ const Header = () => {
   return (
     <div className={css.header}>
       <div>
-        <img
-          src="../assets/images/Logo-Mobile.png"
-          alt="money_guarg_logo"
-          className={css.logo}
-        />
+        <img src={logo} alt="money_guarg_logo" className={css.logo} />
       </div>
-      <div>
-        <p className={css.username}>{username || "..."}</p>
+      <div className={css.user}>
+        <p className={css.username}>{username || "name"}</p>
         <img
-          src="../assets/images/exit.png"
+          src={exit}
           alt="çıkış"
           className={css.exitImage}
           onClick={handleLogout}
