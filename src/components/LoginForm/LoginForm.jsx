@@ -57,7 +57,11 @@ const LoginForm = () => {
                 placeholder="Email"
               />
             </div>
-            <ErrorMessage name="email" component="span" />
+            <ErrorMessage
+              name="email"
+              component="span"
+              className={css.loginErrorMessage}
+            />
           </div>
           <div className={css.loginInputGroup}>
             <div className={css.loginInput}>
@@ -69,7 +73,11 @@ const LoginForm = () => {
                 placeholder="Password"
               />
             </div>
-            <ErrorMessage name="password" component="span" />
+            <ErrorMessage
+              name="password"
+              component="span"
+              className={css.loginErrorMessage}
+            />
           </div>
           <div className={css.loginButonGroup}>
             <button className={css.loginButon} type="submit">

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 axios.defaults.baseURL = "https://wallet.b.goit.study";
 
@@ -17,8 +18,10 @@ export const register = createAsyncThunk(
       const res = await axios.post("/api/auth/sign-up", credentials);
       console.log(res.data);
       setAuthHeader(res.data.token);
+      toast.success(`Welcome ${res.data.user.username || "user"}`);
       return res.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -30,8 +33,10 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post("/api/auth/sign-in", credentials);
       setAuthHeader(res.data.token);
+      toast.success(`Welcome ${res.data.user.username || "user"}`);
       return res.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -43,8 +48,10 @@ export const logOut = createAsyncThunk("auth/logot", async (_, thunkAPI) => {
       try {
         const res = await axios.delete("/api/auth/sign-out");
         clearAuthHeader();
+        toast.success(`Goodbye ${res.data.user.username || "user"}`);
         return;
       } catch (error) {
+        toast.error(error.response?.data?.message || error.message);
         return thunkAPI.rejectWithValue(error.message);
       }
     };
