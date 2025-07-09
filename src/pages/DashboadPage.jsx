@@ -21,11 +21,21 @@ function DashboardPage() {
         <div className={css.tabletContent}>
           <div className={css.leftSidebar}>
             <div className={css.menuItems}>
-              <div className={`${css.menuItem} ${activeTab === "home" ? css.active : ""}`} onClick={() => setActiveTab("home")}>
+              <div
+                className={`${css.menuItem} ${
+                  activeTab === "home" ? css.active : ""
+                }`}
+                onClick={() => setActiveTab("home")}
+              >
                 <img src={home} alt="Home" />
                 <span>Home</span>
               </div>
-              <div className={`${css.menuItem} ${activeTab === "stats" ? css.active : ""}`} onClick={() => setActiveTab("stats")}>
+              <div
+                className={`${css.menuItem} ${
+                  activeTab === "stats" ? css.active : ""
+                }`}
+                onClick={() => setActiveTab("stats")}
+              >
                 <img src={stats} alt="Statistics" />
                 <span>Statistics</span>
               </div>
@@ -48,38 +58,44 @@ function DashboardPage() {
       <div className={css.mobileDashboard}>
         <Header />
         <div className={css.mobileNavigation}>
-          <div 
-            className={`${css.navItem} ${activeTab === "home" ? css.activeNavItem : ""}`} 
+          <div
+            className={`${css.navItem} ${
+              activeTab === "home" ? css.activeNavItem : ""
+            }`}
             onClick={() => setActiveTab("home")}
           >
             <img src={home} alt="Home" />
           </div>
-          <div 
-            className={`${css.navItem} ${activeTab === "stats" ? css.activeNavItem : ""}`} 
+          <div
+            className={`${css.navItem} ${
+              activeTab === "stats" ? css.activeNavItem : ""
+            }`}
             onClick={() => setActiveTab("stats")}
           >
             <img src={stats} alt="Statistics" />
           </div>
-          <div 
-            className={`${css.navItem} ${activeTab === "currency" ? css.activeNavItem : ""}`} 
+          <div
+            className={`${css.navItem} ${
+              activeTab === "currency" ? css.activeNavItem : ""
+            }`}
             onClick={() => setActiveTab("currency")}
           >
             <img src={dollar} alt="Currency" />
           </div>
         </div>
-        
+
         {activeTab === "home" && (
           <div className={css.mobileContent}>
             <Balance />
           </div>
         )}
-        
+
         {activeTab === "stats" && (
           <div className={css.mobileContent}>
             <Dashboard />
           </div>
         )}
-        
+
         {activeTab === "currency" && (
           <div className={css.mobileContent}>
             <Currency />
@@ -95,20 +111,20 @@ function DashboardPage() {
       <Header />
       <div>
         <div className={css.paths}>
-          <img 
-            src={home} 
-            alt="home" 
+          <img
+            src={home}
+            alt="home"
             onClick={() => setActiveTab("home")}
             className={activeTab === "home" ? css.activeTab : ""}
           />
-          <img 
-            src={stats} 
-            alt="statistics" 
+          <img
+            src={stats}
+            alt="statistics"
             onClick={() => setActiveTab("stats")}
             className={activeTab === "stats" ? css.activeTab : ""}
           />
         </div>
-        
+
         {activeTab === "home" ? (
           <main className={css.content}>
             <Balance />

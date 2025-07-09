@@ -16,9 +16,9 @@ function App() {
   const loading = useSelector((state) => state?.transactions?.loading);
   const isRefreshing = useSelector((state) => state?.auth?.isRefreshing);
 
-  // useEffect(() => {
-  //   dispatch(refreshUser());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -26,15 +26,15 @@ function App() {
     }
   }, [isLoggedIn, navigate]);
 
-  // if (isRefreshing) return <Loader />;
+  if (isRefreshing) return <Loader />;
 
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
       {loading && <Loader />}
       <Routes>
-        <Route path="/" element={<RegistrationPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route
           path="/dashboard"
           element={isLoggedIn ? <DashboadPage /> : <Navigate to="/" />}

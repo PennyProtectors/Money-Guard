@@ -86,7 +86,7 @@ const LoginForm = () => {
             <button
               className={css.loginRegisterButon}
               type="button"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/register")}
             >
               REGISTER
             </button>

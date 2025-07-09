@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const username = useSelector(state => state.auth.user?.username);
+  const username = useSelector((state) => state.auth.user?.username);
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
 
   const handleLogout = () => {
