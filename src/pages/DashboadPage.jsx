@@ -1,60 +1,143 @@
-import Header from "../components/Header";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import css from "./DashboardPage.module.css";
-import Dashboard from "../components/Dashboard";
-import home from "../assets/images/baseline-home-24px 3.png";
-import trade from "../assets/images/baseline-timeline-24px 3.png";
-import dollar from "../assets/images/baseline-timeline-24px 4.png";
-import { useNavigate } from "react-router";
+import Header from "../components/Header";
 import Balance from "../components/Balance/Balance";
 import Currency from "../components/Currency/Currency";
+import Dashboard from "../components/Dashboard";
+import { useMediaQuery } from "react-responsive";
+import home from "../assets/images/baseline-home-24px 3.png";
+import stats from "../assets/images/baseline-timeline-24px 3.png";
+import dollar from "../assets/images/baseline-timeline-24px 3.png";
 
-function DashboadPage() {
-  const navigate = useNavigate();
-  const handleHome = () => {
-    navigate("/");
-  };
-  const handleBalance = () => {
-    navigate("/");
-  };
-  const handleDollar = () => {
-    navigate("/");
-  };
-const [balance,setBalance]=useState(0)
-  axios.defaults.baseURL = "https://wallet.b.goit.study/api";
+function DashboardPage() {
+  const [activeTab, setActiveTab] = useState("home");
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  useEffect(()=>{
-    const token=localStorage.getItem("token");
-    if(!token) return;
-    const fetchBalance=async ()=>{
-      const response=await axios.get("/users/current");
-      setBalance(response.data.balance)
-    }
-  })
+  if (isTablet) {
+    return (
+      <div className={css.tabletDashboard}>
+        <Header />
+        <div className={css.tabletContent}>
+          <div className={css.leftSidebar}>
+            <div className={css.menuItems}>
+              <div
+                className={`${css.menuItem} ${
+                  activeTab === "home" ? css.active : ""
+                }`}
+                onClick={() => setActiveTab("home")}
+              >
+                <img src={home} alt="Home" />
+                <span>Home</span>
+              </div>
+              <div
+                className={`${css.menuItem} ${
+                  activeTab === "stats" ? css.active : ""
+                }`}
+                onClick={() => setActiveTab("stats")}
+              >
+                <img src={stats} alt="Statistics" />
+                <span>Statistics</span>
+              </div>
+            </div>
+            <div className={css.balanceContainer}>
+              <Balance />
+            </div>
+          </div>
+          <div className={css.rightContent}>
+            <Currency />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
+  // Mobil görünümü için yeni tasarım
+  if (isMobile) {
+    return (
+      <div className={css.mobileDashboard}>
+        <Header />
+        <div className={css.mobileNavigation}>
+          <div
+            className={`${css.navItem} ${
+              activeTab === "home" ? css.activeNavItem : ""
+            }`}
+            onClick={() => setActiveTab("home")}
+          >
+            <img src={home} alt="Home" />
+          </div>
+          <div
+            className={`${css.navItem} ${
+              activeTab === "stats" ? css.activeNavItem : ""
+            }`}
+            onClick={() => setActiveTab("stats")}
+          >
+            <img src={stats} alt="Statistics" />
+          </div>
+          <div
+            className={`${css.navItem} ${
+              activeTab === "currency" ? css.activeNavItem : ""
+            }`}
+            onClick={() => setActiveTab("currency")}
+          >
+            <img src={dollar} alt="Currency" />
+          </div>
+        </div>
+
+        {activeTab === "home" && (
+          <div className={css.mobileContent}>
+            <Balance />
+          </div>
+        )}
+
+        {activeTab === "stats" && (
+          <div className={css.mobileContent}>
+            <Dashboard />
+          </div>
+        )}
+
+        {activeTab === "currency" && (
+          <div className={css.mobileContent}>
+            <Currency />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Desktop görünümü
   return (
     <div className={css.dashboard}>
       <Header />
       <div>
         <div className={css.paths}>
-          <img src={home} alt="home" onClick={handleHome}></img>
-          <img src={trade} alt="balance" onClick={handleBalance}></img>
-          <img src={dollar} alt="dollar" onClick={handleDollar}></img>
-        </div>
-        <div className={css.yourBalance}>
-          <h6 className={css.balance}>YOUR BALANCE</h6>
-          {/* <p>{purchase}</p> */}
+          <img
+            src={home}
+            alt="home"
+            onClick={() => setActiveTab("home")}
+            className={activeTab === "home" ? css.activeTab : ""}
+          />
+          <img
+            src={stats}
+            alt="statistics"
+            onClick={() => setActiveTab("stats")}
+            className={activeTab === "stats" ? css.activeTab : ""}
+          />
         </div>
 
-        <main className={css.content}>
-          <Balance />
-          <Currency />
-        </main>
-
-        <Dashboard />
+        {activeTab === "home" ? (
+          <main className={css.content}>
+            <Balance />
+            <Dashboard />
+          </main>
+        ) : (
+          <main className={css.content}>
+            <Dashboard />
+          </main>
+        )}
       </div>
     </div>
   );
 }
 
-export default DashboadPage;
+export default DashboardPage;

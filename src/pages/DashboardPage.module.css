@@ -1,22 +1,141 @@
+/* Mobil görünüm için yeni stiller */
+.mobileDashboard {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2b145f, #34084b);
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileNavigation {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 0;
+  background-color: rgba(82, 59, 126, 0.3);
+}
+
+.navItem {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.navItem img {
+  width: 24px;
+  height: 24px;
+}
+
+.activeNavItem {
+  background-color: rgba(111, 85, 213, 0.7);
+  opacity: 1;
+}
+
+.mobileContent {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Tablet görünümü için stiller */
+.tabletDashboard {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2b145f, #34084b);
+  overflow: hidden;
+  position: relative;
+}
+
+.tabletContent {
+  display: flex;
+  padding: 0;
+  height: calc(100vh - 80px);
+  align-items: flex-start;
+}
+
+.leftSidebar {
+  max-width: calc(100% - 200px);
+
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px 0 20px;
+  margin-right: 2%;
+}
+
+.rightContent {
+  flex: 1;
+  padding: 40px 20px 0 20px;
+  max-width: calc(100% - 200px);
+}
+
+.balanceContainer {
+  max-width: 100%;
+  margin-top: 0;
+}
+
+.currencyContainer {
+  height: auto;
+  max-height: 350px;
+}
+
+.menuItems {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.menuItem img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+}
+
+.menuItem span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.menuItem.active {
+  background-color: rgba(111, 85, 213, 0.7);
+  color: white;
+}
+
+.menuItem.active img,
+.menuItem.active span {
+  opacity: 1;
+  color: white;
+}
+
+/* Mevcut stiller */
 .dashboard {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(219.62deg, rgba(109, 84, 235, 0.73) 28.31%, rgba(101, 35, 146, 0.73) 66.76%);
-
-  
-}
-
-.yourBalance {
-  display: flex;
-  align-items: center;
-  padding-left:10px;
-  width: 280px;
-
-  background: rgba(82, 59, 126, 0.6);
-  border-radius: 8px;
-  
+  background: linear-gradient(
+    219.62deg,
+    rgba(109, 84, 235, 0.73) 28.31%,
+    rgba(101, 35, 146, 0.73) 66.76%
+  );
 }
 
 .paths {
@@ -25,10 +144,23 @@
   justify-content: center;
   gap: 10px;
   color: white 40%;
-  margin:12px;
+  margin: 15px 0;
 }
 
-.balance {
-  font-size: 12px;
-  font-weight: 400;
+.paths img {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.activeTab {
+  opacity: 1 !important;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 20px;
+  gap: 20px;
 }

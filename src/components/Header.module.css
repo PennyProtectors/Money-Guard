@@ -1,34 +1,72 @@
 .header {
-  width: 320px;
-  height: 60px;
-  background-color: rgba(46, 23, 70, 1);
+  height: 80px;
+  background: linear-gradient(270.02deg, #2e1746 3.2%, #2e225f 99.98%);
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  background: linear-gradient(270.02deg, #2e1746 3.2%, #2e225f 99.98%);
- color:white 60%;
+  align-items: center;
+  padding: 0 30px;
+  color: white;
 }
  
 .logo {
-    width: 86px;
-    height: 36px;
+  width: 30px;
+  height: 30px;
 }
 
-
-.exitImage{
-    width: 18px;
-    height: 18px;
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.user{
-    display: flex;
-    align-items: center;
-    gap:10px;
-    color:rgba(255, 255, 255, 0.6);
+.logoText {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
 }
 
-.username{
-    font-size: 16px;
-    font-weight: 400;
-    
+.user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.exitButton {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  padding-left: 20px;
+}
+
+.exitButton span {
+  font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  .header {
+    height: 60px;
+    padding: 0 15px;
+  }
+  
+  .logoText {
+    display: none;
+  }
+  
+  .exitButton {
+    border: none;
+    padding-left: 0;
+  }
+  
+  .exitButton span {
+    display: none;
+  }
 }

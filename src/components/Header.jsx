@@ -1,51 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import css from "./Header.module.css";
-import axios from "axios";
-import { clearAuthHeader, setAuthHeader } from "../redux/auth/operations";
-import logo from "../assets/images/logo.png";
-import exit from "../assets/images/exit.png";
+import logo from "../assets/images/TabletLogo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../redux/auth/operations";
+import { useMediaQuery } from "react-responsive";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+
 const Header = () => {
-  axios.defaults.baseURL = "https://wallet.b.goit.study/api";
-  const [username, setUsername] = useState("");
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    setAuthHeader(token);
-    const getUser = async () => {
-      try {
-        const response = await axios.get(
-          "https://wallet.b.goit.study/api/users/current"
-        );
-        console.log(response);
-
-        const email = response.data.user.email;
-        const userName = email.split("@")[0];
-        setUsername(userName);
-      } catch (error) {
-        console.error("Kullanıcı bilgisini alamadık!");
-      }
-    };
-    getUser();
-  }, []);
+  const dispatch = useDispatch();
+  const username = useSelector((state) => state.auth.user?.username);
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
 
   const handleLogout = () => {
-    clearAuthHeader(token);
-    localStorage.removeItem("token");
-    window.location.href = "/login";
+    confirmAlert({
+      title: "exit",
+      message: "You are about to log out",
+      buttons: [
+        {
+          label: "yes",
+          onClick: () => {
+            dispatch(logOut());
+            localStorage.removeItem("token");
+            Navigate("/login");
+          },
+          label: "no",
+          onClick: () => {},
+        },
+      ],
+    });
   };
+
   return (
     <div className={css.header}>
-      <div>
-        <img src={logo} alt="money_guarg_logo" className={css.logo} />
+      <div className={css.logoContainer}>
+        <img src={logo} alt="money_guard_logo" className={css.logo} />
+        <span className={css.logoText}>Money Guard</span>
       </div>
       <div className={css.user}>
-        <p className={css.username}>{username || "name"}</p>
-        <img
-          src={exit}
-          alt="çıkış"
-          className={css.exitImage}
-          onClick={handleLogout}
-        />
+        <p className={css.username}>{username || "Name"}</p>
+        <div className={css.exitButton} onClick={handleLogout}>
+          <span>Exit</span>
+        </div>
       </div>
     </div>
   );
