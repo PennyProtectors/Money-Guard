@@ -164,3 +164,13 @@
   padding-top: 20px;
   gap: 20px;
 }
+
+.addTransactionBtn{
+  width: 44px;
+  height: 44px;
+  visibility: visible;
+  position: fixed;
+  z-index: 100;
+  background-color: red;
+
+}

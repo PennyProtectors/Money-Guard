@@ -8,6 +8,7 @@ import { useMediaQuery } from "react-responsive";
 import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
 import dollar from "../assets/images/baseline-timeline-24px 3.png";
+import addBtn from "../assets/images/add-btn.png";
 
 function DashboardPage() {
   const [activeTab, setActiveTab] = useState("home");
@@ -135,6 +136,9 @@ function DashboardPage() {
             <Dashboard />
           </main>
         )}
+      </div>
+      <div className={css.addTransactionBtn}>
+        <img src={addBtn} alt="add_transaction_btn" ></img>
       </div>
     </div>
   );
