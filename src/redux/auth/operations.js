@@ -42,19 +42,20 @@ export const logIn = createAsyncThunk(
   }
 );
 
-export const logOut = createAsyncThunk("auth/logot", async (_, thunkAPI) => {
-  "auth/logout",
-    async (_, thunkAPI) => {
-      try {
-        const res = await axios.delete("/api/auth/sign-out");
-        clearAuthHeader();
-        toast.success(`Goodbye ${res.data.user.username || "user"}`);
-        return;
-      } catch (error) {
-        toast.error(error.response?.data?.message || error.message);
-        return thunkAPI.rejectWithValue(error.message);
-      }
-    };
+export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    const user = state.auth?.user?.username;
+
+    // const res = await axios.delete("/api/auth/sign-out");
+    clearAuthHeader();
+    // toast.success(`Goodbye ${res.data.user.username || "user"}`);
+    toast.success(`Goodbye ${user}`);
+    return;
+  } catch (error) {
+    toast.error(error.response?.data?.message || error.message);
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
 export const refreshUser = createAsyncThunk(

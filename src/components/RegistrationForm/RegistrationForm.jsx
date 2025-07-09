@@ -134,7 +134,7 @@ const Registrations = () => {
               <button
                 type="button"
                 className={css.registerLogInButon}
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/")}
               >
                 LOG IN
               </button>
