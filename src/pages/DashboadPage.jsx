@@ -1,3 +1,4 @@
+
 import Header from "../components/Header";
 import React, { useEffect, useState } from "react";
 import css from "./DashboardPage.module.css";
@@ -6,7 +7,9 @@ import home from "../assets/images/baseline-home-24px 3.png";
 import trade from "../assets/images/baseline-timeline-24px 3.png";
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
 import { useNavigate } from "react-router";
-import axios from "axios";
+import Balance from '../components/Balance/Balance';
+import Currency from '../components/Currency/Currency';
+
 function DashboadPage() {
   const navigate = useNavigate();
   const handleHome = () => {
@@ -44,10 +47,18 @@ const [balance,setBalance]=useState(0)
           {/* <p>{purchase}</p> */}
         </div>
 
+      <main className={css.content}>
+        <Balance />
+        <Currency />
+      </main>
+
         <Dashboard />
       </div>
+
     </div>
   );
 }
 
-export default DashboadPage;
+
+export default DashboardPage;
+
