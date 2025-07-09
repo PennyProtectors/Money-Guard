@@ -47,7 +47,7 @@ const Registrations = () => {
     resetForm();
   };
   return (
-    <div className={css.registerContiner}>
+    <div className={css.registerContainer}>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -69,7 +69,11 @@ const Registrations = () => {
                   placeholder="Name"
                 />
               </div>
-              <ErrorMessage name="username" component="span" />
+              <ErrorMessage
+                name="username"
+                component="span"
+                className={css.registerErrorMessage}
+              />
             </div>
             <div className={css.registerInputGroup}>
               <div className={css.registerInput}>
@@ -81,7 +85,11 @@ const Registrations = () => {
                   placeholder="Email"
                 />
               </div>
-              <ErrorMessage name="email" component="span" />
+              <ErrorMessage
+                name="email"
+                component="span"
+                className={css.registerErrorMessage}
+              />
             </div>
             <div className={css.registerInputGroup}>
               <div className={css.registerInput}>
@@ -93,7 +101,11 @@ const Registrations = () => {
                   placeholder="Password"
                 />
               </div>
-              <ErrorMessage name="password" component="span" />
+              <ErrorMessage
+                name="password"
+                component="span"
+                className={css.registerErrorMessage}
+              />
             </div>
             <div className={css.registerInputGroup}>
               <div className={css.registerInput}>
@@ -105,7 +117,11 @@ const Registrations = () => {
                   placeholder="Confirm password"
                 />
               </div>
-              <ErrorMessage name="confirmPassword" component="span" />
+              <ErrorMessage
+                name="confirmPassword"
+                component="span"
+                className={css.registerErrorMessage}
+              />
               <PasswordStrengthBar
                 password={values.password}
                 className={css.registerPasswordBar}

@@ -1,12 +1,12 @@
-.registerContiner {
+.registerContainer {
   display: flex;
   flex-direction: column;
-  background-image: url("../../assets/images/RegisterBckgrnd-Mobile.png");
+  background-image: url("../../assets/images/Mobil_login_register_bckgrnd.png");
   background-repeat: no-repeat;
   background-size: cover;
-  /* align-items: center;
+  align-items: center;
   justify-content: center;
-  justify-items: center; */
+  justify-items: center;
 }
 
 .registerTitle {
@@ -22,7 +22,6 @@
   height: 28.86px;
   left: 0px;
   top: 25.46px;
-
   font-style: normal;
   font-weight: 400;
   font-size: 19.1111px;
@@ -36,6 +35,9 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  box-sizing: border-box;
 }
 
 .registerInputGroup {
@@ -131,36 +133,43 @@
   background-color: transparent !important; /* Renk de gizlensin istersen */
 }
 
-/* @media (min-width: 768px) and (max-width: 1279px) {
-  .registerContiner {
-    background-image: url("../../assets/images/TabletFormBckgrnd.png");
+.registerErrorMessage {
+  color: aqua;
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  .registerContainer {
+    background-image: url("../../assets/images/RegisterTablet_bckgrnd.png");
     background-repeat: no-repeat;
     background-size: cover;
+    min-width: 768px;
+    align-items: center;
   }
 
   .registerForm {
     width: 533px;
     height: 624px;
-    background-image: url("../../assets/images/TabletFormBckgrnd.png");
-  }
-  .registerButon {
-    width: 300px;
+    background-image: url("../../assets/images/Tablet_loginForm_bckgrnd.png");
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    box-sizing: border-box;
   }
 
-  .registerLogInButon {
+  .registerButon .registerLogInButon {
     width: 300px;
   }
-} */
-
-/* @media (min-width: 1280px) {
-  .registerContiner {
-    background-image: url("../../assets/images/RegisterBckgrnd-Desktop.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+}
+@media (min-width: 1280px) {
+  .registerContainer {
+    background-image: url("../../assets/images/RegisterDesktop_bckgrnd.png");
+    min-width: 1280px;
+    align-items: center;
+    justify-content: center;
   }
   .registerForm {
     width: 533px;
     height: 624px;
-    background-image: url("../../assets/images/TabletFormBckgrnd.png");
+    background-image: url("../../assets/images/Tablet_loginForm_bckgrnd.png");
+    box-sizing: border-box;
   }
-} */
+}
