@@ -1,14 +1,22 @@
 .dashboard {
-  display: block;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(219.62deg, rgba(109, 84, 235, 0.73) 28.31%, rgba(101, 35, 146, 0.73) 66.76%);
+
+  
 }
 
 .yourBalance {
+  display: flex;
+  align-items: center;
+  padding-left:10px;
   width: 280px;
-  height: 80px;
+
   background: rgba(82, 59, 126, 0.6);
   border-radius: 8px;
+  
 }
 
 .paths {
@@ -17,6 +25,7 @@
   justify-content: center;
   gap: 10px;
   color: white 40%;
+  margin:12px;
 }
 
 .balance {

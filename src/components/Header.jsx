@@ -14,7 +14,7 @@ const Header = () => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          "https://wallet.b.goit.study/api/auth/sign-up"
+          "https://wallet.b.goit.study/api/users/current"
         );
         console.log(response);
 

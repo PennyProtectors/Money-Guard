@@ -1,11 +1,12 @@
 import Header from "../components/Header";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import css from "./DashboardPage.module.css";
 import Dashboard from "../components/Dashboard";
 import home from "../assets/images/baseline-home-24px 3.png";
-import balance from "../assets/images/baseline-timeline-24px 3.png";
+import trade from "../assets/images/baseline-timeline-24px 3.png";
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
 import { useNavigate } from "react-router";
+import axios from "axios";
 function DashboadPage() {
   const navigate = useNavigate();
   const handleHome = () => {
@@ -17,6 +18,17 @@ function DashboadPage() {
   const handleDollar = () => {
     navigate("/");
   };
+const [balance,setBalance]=useState(0)
+  axios.defaults.baseURL = "https://wallet.b.goit.study/api";
+
+  useEffect(()=>{
+    const token=localStorage.getItem("token");
+    if(!token) return;
+    const fetchBalance=async ()=>{
+      const response=await axios.get("/users/current");
+      setBalance(response.data.balance)
+    }
+  })
 
   return (
     <div className={css.dashboard}>
@@ -24,7 +36,7 @@ function DashboadPage() {
       <div>
         <div className={css.paths}>
           <img src={home} alt="home" onClick={handleHome}></img>
-          <img src={balance} alt="balance" onClick={handleBalance}></img>
+          <img src={trade} alt="balance" onClick={handleBalance}></img>
           <img src={dollar} alt="dollar" onClick={handleDollar}></img>
         </div>
         <div className={css.yourBalance}>
