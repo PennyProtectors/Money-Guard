@@ -4,6 +4,8 @@ import logo from "../assets/images/TabletLogo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/auth/operations";
 import { useMediaQuery } from "react-responsive";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -11,7 +13,22 @@ const Header = () => {
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
 
   const handleLogout = () => {
-    dispatch(logOut());
+    confirmAlert({
+      title: "exit",
+      message: "You are about to log out",
+      buttons: [
+        {
+          label: "yes",
+          onClick: () => {
+            dispatch(logOut());
+            localStorage.removeItem("token");
+            Navigate("/login");
+          },
+          label: "no",
+          onClick: () => {},
+        },
+      ],
+    });
   };
 
   return (
