@@ -1,49 +1,110 @@
-import { useEffect, useState } from 'react';
-import styles from './Currency.module.css';
-import axios from 'axios';
+// components/Currency/Currency.jsx
+import React from "react";
+import styles from "./Currency.module.css";
+import { useMediaQuery } from "react-responsive";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+} from "chart.js";
+
+// Chart.js bileşenlerini kaydet
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 export default function Currency() {
-  const [currencyData, setCurrencyData] = useState([]);
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  
+  // Sabit döviz kurları
+  const rates = [
+    { currency: "USD", buy: 27.55, sell: 27.65 },
+    { currency: "EUR", buy: 30.00, sell: 30.10 }
+  ];
+  
+  // Grafik verileri
+  const chartData = {
+    labels: ["6 gün önce", "5 gün önce", "4 gün önce", "3 gün önce", "2 gün önce", "Bugün"],
+    datasets: [
+      {
+        label: "USD/EUR",
+        data: [27.45, 27.50, 27.55, 27.52, 27.48, 27.55],
+        borderColor: "#ff6384",
+        backgroundColor: "rgba(255, 99, 132, 0.1)",
+        tension: 0.4,
+        fill: true,
+        borderWidth: 2
+      },
+      
+    ]
+  };
 
-  useEffect(() => {
-    const fetchCurrency = async () => {
-      const lastFetch = localStorage.getItem('currencyTimestamp');
-      const now = Date.now();
-
-      if (lastFetch && now - Number(lastFetch) < 3600000) {
-        const cachedData = JSON.parse(localStorage.getItem('currencyData'));
-        if (cachedData) {
-          setCurrencyData(cachedData);
-          return;
-        }
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        mode: 'index',
+        intersect: false,
       }
-
-      try {
-        const response = await axios.get('https://api.monobank.ua/bank/currency');
-        const filtered = response.data.filter(
-          item => item.currencyCodeA === 840 || item.currencyCodeA === 978
-        );
-        setCurrencyData(filtered);
-        localStorage.setItem('currencyData', JSON.stringify(filtered));
-        localStorage.setItem('currencyTimestamp', now.toString());
-      } catch (error) {
-        console.error('Currency fetch error:', error.message);
+    },
+    scales: {
+      x: {
+        display: false
+      },
+      y: {
+        display: false
       }
-    };
-
-    fetchCurrency();
-  }, []);
+    },
+    elements: {
+      point: {
+        radius: isTablet ? 1 : 3,
+        hoverRadius: isTablet ? 2 : 4
+      },
+      line: {
+        borderWidth: isTablet ? 1.5 : 2
+      }
+    }
+  };
 
   return (
-    <div className={styles.wrapper}>
-      {currencyData.map((item, index) => (
-        <div className={styles.row} key={index}>
-          <span>{item.currencyCodeA === 840 ? 'USD' : 'EUR'}</span>
-          <span>
-            {item.rateSell ? item.rateSell.toFixed(2) : '---'} ₴
-          </span>
+    <div className={styles.currencyContainer}>
+      <div className={styles.currencyTable}>
+        <div className={styles.tableHeader}>
+          <div className={styles.headerCell}>Currency</div>
+          <div className={styles.headerCell}>Purchase</div>
+          <div className={styles.headerCell}>Sale</div>
         </div>
-      ))}
+        {rates.map((rate, index) => (
+          <div key={index} className={styles.tableRow}>
+            <div className={styles.currencyCell}>{rate.currency}</div>
+            <div className={styles.rateCell}>{rate.buy.toFixed(2)}</div>
+            <div className={styles.rateCell}>{rate.sell.toFixed(2)}</div>
+          </div>
+        ))}
+      </div>
+      
+      <div className={styles.chartContainer}>
+        <Line data={chartData} options={chartOptions} />
+      </div>
     </div>
   );
 }

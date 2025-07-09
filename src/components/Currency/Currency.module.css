@@ -1,28 +1,102 @@
-.wrapper {
-    background-color: #ffffff;
-    border-radius: 30px;
-    padding: 12px;
-    margin-top: 20px;
-    font-size: 12px;
-    line-height: 1.2;
-    color: #000;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+
+.currencyContainer {
+  background-color: rgba(82, 59, 126, 0.4);
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.currencyTable {
+  width: 100%;
+}
+
+.tableHeader {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 12px 20px;
+}
+
+.headerCell {
+  flex: 1;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tableRow {
+  display: flex;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.currencyCell {
+  flex: 1;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+
+.rateCell {
+  flex: 1;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+
+.chartContainer {
+  flex: 1;
+  min-height: 120px;
+  padding: 0 10px 10px;
+}
+
+/* Mobil görünüm için stiller */
+@media screen and (max-width: 767px) {
+  .currencyContainer {
+    border-radius: 20px;
   }
   
-  .row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
+  .tableHeader {
+    padding: 10px;
   }
   
-  .row:last-child {
+  .headerCell {
+    font-size: 14px;
+  }
+  
+  .tableRow {
+    padding: 10px;
+  }
+  
+  .currencyCell, .rateCell {
+    font-size: 14px;
+  }
+  
+  .chartContainer {
+    min-height: 150px;
+  }
+}
+
+/* Tablet görünümü için stiller */
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  .currencyContainer {
+    height: auto;
     margin-bottom: 0;
   }
   
-  @media screen and (min-width: 768px) {
-    .wrapper {
-      padding: 16px;
-      font-size: 14px;
-    }
+  .chartContainer {
+    min-height: 100px;
+    max-height: 200px;
+    padding: 0 10px 10px;
   }
   
+  .tableHeader {
+    padding: 10px 15px;
+  }
+  
+  .tableRow {
+    padding: 10px 15px;
+  }
+}
