@@ -90,7 +90,6 @@ const TransactionsListMobileItem = ({ transaction }) => {
               strokeLinejoin="round"
             />
           </svg>
-         
         </button>
       </div>
     </div>

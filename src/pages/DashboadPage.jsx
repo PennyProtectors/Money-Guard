@@ -42,14 +42,12 @@ ChartJS.register(
   Filler
 );
 
-
 function DashboardPage() {
   const [activeTab, setActiveTab] = useState("home");
   const [showModal, setShowModal] = useState(false);
 
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
   const isMobile = useMediaQuery({ maxWidth: 767 });
-
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -108,7 +106,6 @@ function DashboardPage() {
     },
   };
 
-
   if (isTablet) {
     return (
       <div className={css.tabletDashboard}>
@@ -117,16 +114,18 @@ function DashboardPage() {
           <div className={css.leftSidebar}>
             <div className={css.menuItems}>
               <div
-                className={`${css.menuItem} ${activeTab === "home" ? css.active : ""
-                  }`}
+                className={`${css.menuItem} ${
+                  activeTab === "home" ? css.active : ""
+                }`}
                 onClick={() => setActiveTab("home")}
               >
                 <img src={home} alt="Home" />
                 <span>Home</span>
               </div>
               <div
-                className={`${css.menuItem} ${activeTab === "stats" ? css.active : ""
-                  }`}
+                className={`${css.menuItem} ${
+                  activeTab === "stats" ? css.active : ""
+                }`}
                 onClick={() => setActiveTab("stats")}
               >
                 <img src={stats} alt="Statistics" />
@@ -156,22 +155,25 @@ function DashboardPage() {
         <Header />
         <div className={css.mobileNavigation}>
           <div
-            className={`${css.navItem} ${activeTab === "home" ? css.activeNavItem : ""
-              }`}
+            className={`${css.navItem} ${
+              activeTab === "home" ? css.activeNavItem : ""
+            }`}
             onClick={() => setActiveTab("home")}
           >
             <img src={home} alt="Home" />
           </div>
           <div
-            className={`${css.navItem} ${activeTab === "stats" ? css.activeNavItem : ""
-              }`}
+            className={`${css.navItem} ${
+              activeTab === "stats" ? css.activeNavItem : ""
+            }`}
             onClick={() => setActiveTab("stats")}
           >
             <img src={stats} alt="Statistics" />
           </div>
           <div
-            className={`${css.navItem} ${activeTab === "currency" ? css.activeNavItem : ""
-              }`}
+            className={`${css.navItem} ${
+              activeTab === "currency" ? css.activeNavItem : ""
+            }`}
             onClick={() => setActiveTab("currency")}
           >
             <img src={dollar} alt="Currency" />
@@ -196,14 +198,12 @@ function DashboardPage() {
           </div>
         )}
 
-        <TransactionsListMobile/>
-        
+        <TransactionsListMobile />
 
         <ButtonAddTransactions onClick={handleOpenModal} />
         {showModal && (
           <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
         )}
-
       </div>
     );
   }
@@ -275,16 +275,12 @@ function DashboardPage() {
         </div>
       </div>
 
-     <TransactionsListDesktop/>
-  
-
+      <TransactionsListDesktop />
 
       <ButtonAddTransactions onClick={handleOpenModal} />
       {showModal && (
         <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
       )}
-
-
     </div>
   );
 }
