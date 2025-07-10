@@ -49,7 +49,7 @@ function DashboardPage() {
             <Currency />
           </div>
         </div>
-        <ButtonAddTransactions/>
+        <ButtonAddTransactions />
       </div>
     );
   }
@@ -103,14 +103,13 @@ function DashboardPage() {
             <Currency />
           </div>
         )}
-         <ButtonAddTransactions/>
+        <ButtonAddTransactions />
       </div>
     );
   }
 
   // Desktop görünümü
   return (
-    
     <div className={css.dashboard}>
       <Header />
       <div>
@@ -140,8 +139,7 @@ function DashboardPage() {
           </main>
         )}
       </div>
-      
-     
+      <ButtonAddTransactions />
     </div>
   );
 }
