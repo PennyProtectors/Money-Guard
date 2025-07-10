@@ -14,9 +14,12 @@ import dollar from "../assets/images/baseline-timeline-24px 4.png";
 import TransactionsList from "../components/TransactionsList/TransactionsList";
 import TransactionsListDesktop from "../components/TransactionsList/TransactionsListDesktop";
 import TransactionsListMobile from "../components/TransactionsList/TransactionsListMobile";
+
 import ModalAddTransaction from "../components/ModalAddTransaction/ModalAddTransaction";
 
+
 // import { Line } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -281,6 +284,7 @@ function DashboardPage() {
       {showModal && (
         <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
       )}
+
     </div>
   );
 }
