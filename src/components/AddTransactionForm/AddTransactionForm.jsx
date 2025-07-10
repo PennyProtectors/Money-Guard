@@ -82,14 +82,14 @@ const AddTransactionForm = ({ onClose }) => {
 
             {/* Tutar */}
             <div>
-                <label>Tutar</label>
+                {/* <label>Tutar</label> */}
                 <input type="number" {...register('amount')} />
                 {errors.amount && <p>{errors.amount.message}</p>}
             </div>
 
             {/* Tarih */}
             <div>
-                <label>Tarih</label>
+                {/* <label>Tarih</label> */}
                 <DatePicker
                     selected={getValues('date')}
                     onChange={(date) => setValue('date', date)}
@@ -99,15 +99,15 @@ const AddTransactionForm = ({ onClose }) => {
 
             {/* Yorum */}
             <div>
-                <label>Yorum</label>
+                {/* <label>Yorum</label> */}
                 <input {...register('comment')} />
                 {errors.comment && <p>{errors.comment.message}</p>}
             </div>
 
             {/* İşlem ve iptal */}
             <div>
-                <button type="submit">Ekle</button>
-                <button type="button" onClick={onClose}>İptal</button>
+                <button type="submit">Add</button>
+                <button type="button" onClick={onClose}>Cancel</button>
             </div>
         </form>
     );
