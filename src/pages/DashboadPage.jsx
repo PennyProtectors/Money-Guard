@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Balance from "../components/Balance/Balance";
 import Currency from "../components/Currency/Currency";
 import Dashboard from "../components/Dashboard";
+import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAddTransactions";
 import { useMediaQuery } from "react-responsive";
 import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
@@ -18,7 +19,7 @@ import {
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler,
 } from "chart.js";
 
 // Chart.js bileşenlerini kaydet
@@ -37,21 +38,28 @@ function DashboardPage() {
   const [activeTab, setActiveTab] = useState("home");
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  
+
   // Grafik verileri
   const chartData = {
-    labels: ["6 gün önce", "5 gün önce", "4 gün önce", "3 gün önce", "2 gün önce", "Bugün"],
+    labels: [
+      "6 gün önce",
+      "5 gün önce",
+      "4 gün önce",
+      "3 gün önce",
+      "2 gün önce",
+      "Bugün",
+    ],
     datasets: [
       {
         label: "USD/EUR",
-        data: [27.45, 27.50, 27.55, 27.52, 27.48, 27.55],
+        data: [27.45, 27.5, 27.55, 27.52, 27.48, 27.55],
         borderColor: "#ff6384",
         backgroundColor: "rgba(255, 99, 132, 0.1)",
         tension: 0.4,
         fill: true,
-        borderWidth: 2
-      }
-    ]
+        borderWidth: 2,
+      },
+    ],
   };
 
   const chartOptions = {
@@ -59,30 +67,30 @@ function DashboardPage() {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false
+        display: false,
       },
       tooltip: {
-        mode: 'index',
+        mode: "index",
         intersect: false,
-      }
+      },
     },
     scales: {
       x: {
-        display: false
+        display: false,
       },
       y: {
-        display: false
-      }
+        display: false,
+      },
     },
     elements: {
       point: {
         radius: 3,
-        hoverRadius: 4
+        hoverRadius: 4,
       },
       line: {
-        borderWidth: 2
-      }
-    }
+        borderWidth: 2,
+      },
+    },
   };
 
   if (isTablet) {
@@ -185,21 +193,31 @@ function DashboardPage() {
       <div className={css.desktopContent}>
         <div className={css.leftPanel}>
           <div className={css.menuContainer}>
-            <div className={`${css.menuItem} ${activeTab === "home" ? css.active : ""}`} onClick={() => setActiveTab("home")}>
+            <div
+              className={`${css.menuItem} ${
+                activeTab === "home" ? css.active : ""
+              }`}
+              onClick={() => setActiveTab("home")}
+            >
               <img src={home} alt="Home" />
               <span>Home</span>
             </div>
-            <div className={`${css.menuItem} ${activeTab === "stats" ? css.active : ""}`} onClick={() => setActiveTab("stats")}>
+            <div
+              className={`${css.menuItem} ${
+                activeTab === "stats" ? css.active : ""
+              }`}
+              onClick={() => setActiveTab("stats")}
+            >
               <img src={stats} alt="Statistics" />
               <span>Statistics</span>
             </div>
           </div>
-          
+
           <div className={css.balanceSection}>
             <p className={css.balanceLabel}>YOUR BALANCE</p>
             <p className={css.balanceAmount}>₴ 24 000.00</p>
           </div>
-          
+
           <div className={css.currencySection}>
             <div className={css.currencyHeader}>
               <div className={css.currencyHeaderCell}>Currency</div>
@@ -221,7 +239,7 @@ function DashboardPage() {
             </div>
           </div>
         </div>
-        
+
         <div className={css.rightPanel}>
           {activeTab === "home" ? (
             <div className={css.transactionsTable}>
