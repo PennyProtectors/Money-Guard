@@ -7,7 +7,8 @@ import Dashboard from "../components/Dashboard";
 import { useMediaQuery } from "react-responsive";
 import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
-import dollar from "../assets/images/baseline-timeline-24px 3.png";
+import dollar from "../assets/images/baseline-timeline-24px 4.png";
+import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAddTransactions";
 
 function DashboardPage() {
   const [activeTab, setActiveTab] = useState("home");
@@ -136,6 +137,11 @@ function DashboardPage() {
           </main>
         )}
       </div>
+      {isMobile || isTablet ? (
+        <ButtonAddTransactions />
+      ) : (
+        <ButtonAddTransactions />
+      )}
     </div>
   );
 }

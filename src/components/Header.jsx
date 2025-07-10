@@ -6,15 +6,16 @@ import { logOut } from "../redux/auth/operations";
 import { useMediaQuery } from "react-responsive";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   const dispatch = useDispatch();
   const username = useSelector((state) => state.auth.user?.username);
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
-
+const navigate=useNavigate();
   const handleLogout = () => {
     confirmAlert({
-      title: "exit",
+      title: "want to exit?",
       message: "You are about to log out",
       buttons: [
         {
@@ -22,10 +23,13 @@ const Header = () => {
           onClick: () => {
             dispatch(logOut());
             localStorage.removeItem("token");
-            Navigate("/login");
+            navigate("/login");
           },
+        },
+        {
           label: "no",
           onClick: () => {},
+
         },
       ],
     });
