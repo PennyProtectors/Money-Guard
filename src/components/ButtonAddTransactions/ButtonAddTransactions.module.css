@@ -13,6 +13,7 @@
     border: none;
     box-shadow: 1px 9px 15px 0px #00000033;
     cursor: pointer;
+    user-select: none;
 }
 
 .buttonAddTransaction:hover {

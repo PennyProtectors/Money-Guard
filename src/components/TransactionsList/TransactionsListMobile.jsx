@@ -1,57 +1,24 @@
 import React from "react";
 import css from "./TransactionsList.module.css";
 
+import { useSelector } from "react-redux";
+
 const TransactionsListMobile = () => {
-  const data = [
-    {
-      id: "623eabe4-5175-469e-a710-63840c417172",
-      transactionDate: "2025-07-07",
-      type: "INCOME",
-      comment: "Test",
-      amount: 1000,
-      balanceAfter: 1000,
-      categoryId: "063f1132-ba5d-42b4-951d-44011ca46262",
-      userId: "5a51b69b-9cef-4e02-8433-150da878aebb",
-    },
-    {
-      id: "ef93d8e4-3732-4a6c-9130-9a0554e09f11",
-      transactionDate: "2025-07-07",
-      type: "EXPENSE",
-      comment: "Fuel",
-      amount: -2100.3,
-      balanceAfter: -1100.3000000000002,
-      categoryId: "3caa7ba0-79c0-40b9-ae1f-de1af1f6e386",
-      userId: "5a51b69b-9cef-4e02-8433-150da878aebb",
-    },
-    {
-      id: "56c15039-f44c-4aab-87b7-2c2f2e9919fc",
-      transactionDate: "2025-07-07",
-      type: "EXPENSE",
-      comment: "Quiz Book",
-      amount: -500,
-      balanceAfter: -1600.3000000000002,
-      categoryId: "1272fcc4-d59f-462d-ad33-a85a075e5581",
-      userId: "5a51b69b-9cef-4e02-8433-150da878aebb",
-    },
-    {
-      id: "90746ba6-f962-4543-8397-ac7ead289bfb",
-      transactionDate: "2025-07-07",
-      type: "EXPENSE",
-      comment: "Bag",
-      amount: -1375.85,
-      balanceAfter: -2976.15,
-      categoryId: "76cc875a-3b43-4eae-8fdb-f76633821a34",
-      userId: "5a51b69b-9cef-4e02-8433-150da878aebb",
-    },
-  ];
+  const data = useSelector((state) => state.transaction.transactions);
+  // const data = [];
+
   return (
     <div className={css.transactionsList_Area}>
-      {data.map((transaction) => (
-        <TransactionsListMobileItem
-          key={transaction.id}
-          transaction={transaction}
-        />
-      ))}
+      {data && data.length > 0 ? (
+        data.map((transaction) => (
+          <TransactionsListMobileItem
+            key={transaction.id}
+            transaction={transaction}
+          />
+        ))
+      ) : (
+        <p className={css.errorMessage}>No transactions found !</p>
+      )}
     </div>
   );
 };
@@ -61,6 +28,7 @@ const TransactionsListMobileItem = ({ transaction }) => {
   React.useEffect(() => {
     setIsIncome(transaction.type === "INCOME");
   }, [transaction.type]);
+  const categoriesData = useSelector((state) => state.transaction.category);
   return (
     <div
       className={
@@ -81,7 +49,11 @@ const TransactionsListMobileItem = ({ transaction }) => {
       </div>
       <div className={css.transactionItem_Row}>
         <h6 className={css.Key}>Category</h6>
-        <span className={css.Value}>Other</span>
+        <span className={css.Value}>
+          {categoriesData.find(
+            (category) => category.id === transaction.categoryId
+          ).name || "Uncategorized"}
+        </span>
       </div>
       <div className={css.transactionItem_Row}>
         <h6 className={css.Key}>Comment</h6>
@@ -118,7 +90,7 @@ const TransactionsListMobileItem = ({ transaction }) => {
               strokeLinejoin="round"
             />
           </svg>
-          Edit
+         
         </button>
       </div>
     </div>
