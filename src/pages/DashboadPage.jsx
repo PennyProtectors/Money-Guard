@@ -11,6 +11,10 @@ import stats from "../assets/images/baseline-timeline-24px 3.png";
 
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
 
+import TransactionsList from "../components/TransactionsList/TransactionsList";
+import TransactionsListDesktop from "../components/TransactionsList/TransactionsListDesktop";
+import TransactionsListMobile from "../components/TransactionsList/TransactionsListMobile";
+
 import ModalAddTransaction from "../components/ModalAddTransaction/ModalAddTransaction";
 
 // import dollar from "../assets/images/baseline-timeline-24px 3.png";
@@ -194,10 +198,15 @@ function DashboardPage() {
             <Currency />
           </div>
         )}
+
+        <TransactionsListMobile/>
+        
+
         <ButtonAddTransactions onClick={handleOpenModal} />
         {showModal && (
           <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
         )}
+
       </div>
     );
   }
@@ -269,10 +278,15 @@ function DashboardPage() {
         </div>
       </div>
 
+     <TransactionsListDesktop/>
+  
+
+
       <ButtonAddTransactions onClick={handleOpenModal} />
       {showModal && (
         <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
       )}
+
     </div>
   );
 }
