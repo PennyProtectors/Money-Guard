@@ -1,6 +1,7 @@
 import React from "react";
 import css from "./Header.module.css";
 import logo from "../assets/images/TabletLogo.png";
+import exit from "../assets/images/exit.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/auth/operations";
 import { useMediaQuery } from "react-responsive";
@@ -12,7 +13,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const username = useSelector((state) => state.auth.user?.username);
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
-const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleLogout = () => {
     confirmAlert({
       title: "want to exit?",
@@ -29,7 +30,6 @@ const navigate=useNavigate();
         {
           label: "no",
           onClick: () => {},
-
         },
       ],
     });
@@ -42,9 +42,9 @@ const navigate=useNavigate();
         <span className={css.logoText}>Money Guard</span>
       </div>
       <div className={css.user}>
-        <p className={css.username}>{username || "Name"}</p>
+        <p className={css.username}>{username} |</p>
         <div className={css.exitButton} onClick={handleLogout}>
-          <span>Exit</span>
+          <img src={exit} alt="altButton" />
         </div>
       </div>
     </div>

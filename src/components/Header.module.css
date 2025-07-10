@@ -39,6 +39,8 @@
 }
 
 .exitButton {
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -47,9 +49,7 @@
   padding-left: 20px;
 }
 
-.exitButton span {
-  font-size: 16px;
-}
+
 
 @media (max-width: 767px) {
   .header {
@@ -66,7 +66,5 @@
     padding-left: 0;
   }
   
-  .exitButton span {
-    display: none;
-  }
+  
 }
