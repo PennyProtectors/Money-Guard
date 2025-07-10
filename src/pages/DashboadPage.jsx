@@ -9,6 +9,9 @@ import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
 import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAddTransactions";
+import TransactionsList from "../components/TransactionsList/TransactionsList";
+import TransactionsListDesktop from "../components/TransactionsList/TransactionsListDesktop";
+import TransactionsListMobile from "../components/TransactionsList/TransactionsListMobile";
 
 function DashboardPage() {
   const [activeTab, setActiveTab] = useState("home");
@@ -103,6 +106,7 @@ function DashboardPage() {
             <Currency />
           </div>
         )}
+        <TransactionsListMobile/>
         <ButtonAddTransactions />
       </div>
     );
@@ -139,6 +143,7 @@ function DashboardPage() {
           </main>
         )}
       </div>
+     <TransactionsListDesktop/>
       <ButtonAddTransactions />
     </div>
   );
