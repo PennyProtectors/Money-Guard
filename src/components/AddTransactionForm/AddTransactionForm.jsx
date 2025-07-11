@@ -1,6 +1,5 @@
-
-import React, { useState } from "react";
-import * as yup from "yup";
+import React, { useDebugValue, useState } from "react";
+import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Formik, Form, Field } from "formik";
@@ -10,35 +9,65 @@ import css from "./AddTransactionForm.module.css";
 
 // Icons
 import { FaPlus, FaMinus } from "react-icons/fa";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addTransaction } from "../../redux/transactions/operations";
 
 // Validation schema
-const schema = yup.object().shape({
-  amount: yup
-    .number()
+const schema = Yup.object().shape({
+  amount: Yup.number()
     .typeError("Please enter the number")
     .required("Amaount required"),
-  date: yup.date().required("Date required"),
-  comment: yup.string().required("Comment required"),
-  type: yup.string().required(),
-  category: yup.string(),
+  transactionDate: Yup.date().required("Date required"),
+  comment: Yup.string().required("Comment required"),
+  type: Yup.string().required(),
+  categoryId: Yup.string(),
 });
 
 const AddTransactionForm = ({ onClose }) => {
+  const categories = useSelector((state) => state.transaction.category);
+  const dispatch = useDispatch();
 
   const [income, setIncome] = useState(false);
-  const handleSubmit = (values) => {
-    console.log("Form submitted with values:", values);
+  // const handleSubmit = (values) => {
+  //   console.log("Form submitted with values:", values);
+  //   dispatch(addTransaction());
+  //   // onclose();
+  // };
+
+  const handleSubmit = (values, { resetForm }) => {
+    console.log(values.date);
+
+    const transaction = {
+      transactionDate: new Date().toISOString().split("T")[0],
+      amount: income
+        ? Math.abs(Number(values.amount))
+        : -Math.abs(Number(values.amount)),
+      comment: values.comment,
+      type: income ? "INCOME" : "EXPENSE",
+      categoryId: values.categoryId,
+    };
+
+    dispatch(addTransaction(transaction))
+      .unwrap()
+      .then(() => {
+        resetForm();
+        onClose();
+      })
+      .catch((error) => {
+        console.error("Transaction eklenemedi:", error);
+      });
   };
+
   return (
     <Formik
       validationSchema={schema}
       onSubmit={handleSubmit}
       initialValues={{
         amount: "",
-        date: new Date(),
+        transactionDate: new Date().toISOString().split("T")[0],
         comment: "",
-        type: income ? "income" : "expense",
+        type: income ? "INCOME" : "EXPENSE",
+        categoryId: "",
       }}
     >
       <Form className={css.TransactionForm}>
@@ -54,7 +83,7 @@ const AddTransactionForm = ({ onClose }) => {
                 : css.switchLabel
             }
           >
-            Income
+            INCOME
           </label>
           <div className={css.switchBox}>
             {income === true ? (
@@ -81,30 +110,41 @@ const AddTransactionForm = ({ onClose }) => {
                 : css.switchLabel
             }
           >
-            Expence
+            EXPENSE
           </label>
         </div>
+
         <div className={css.FormRow}>
+          <Field as="select" name="categoryId" className={css.FormInput}>
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </Field>
+
           <Field
             type="number"
             name="amount"
             className={css.FormInput}
             placeholder={"0.00"}
           />
-          <input
+          <Field
             type="date"
-            name="date"
+            name="transactionDate"
             className={css.FormInput}
             placeholder={"07.07.2023"}
           />
         </div>
         <div className={css.FormRow}>
-          <textarea
+          <Field
+            as="textarea"
             name="comment"
             className={[css.FormInput, css.FormInputText].join(" ")}
             placeholder="Comment"
             rows={4}
-          ></textarea>
+          />
         </div>
         <div className={css.FormRow}>
           <button
@@ -126,7 +166,6 @@ const AddTransactionForm = ({ onClose }) => {
       </Form>
     </Formik>
   );
-
 };
 
 export default AddTransactionForm;
