@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/api/auth/sign-up", credentials);
+      const res = await axios.post("api/auth/sign-up", credentials);
       console.log(res.data);
       setAuthHeader(res.data.token);
       toast.success(`Welcome ${res.data.user.username || "user"}`);
@@ -34,7 +34,7 @@ export const logIn = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/api/auth/sign-in", credentials);
+      const res = await axios.post("api/auth/sign-in", credentials);
       setAuthHeader(res.data.token);
       toast.success(`Welcome ${res.data.user.username || "user"}`);
       return res.data;
@@ -71,7 +71,7 @@ export const refreshUser = createAsyncThunk(
     }
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get("/api/users/current");
+      const res = await axios.get("api/users/current");
       thunkAPI.dispatch(fetchTransaction());
       thunkAPI.dispatch(fetchTransactionCategory());
       return res.data;
