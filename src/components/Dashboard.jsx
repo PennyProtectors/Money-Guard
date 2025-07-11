@@ -5,7 +5,7 @@ const Dashboard = () => {
   const [paids, setPaids] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  axios.defaults.baseURL = "https://wallet.b.goit.study/api";
+  // axios.defaults.baseURL = "https://wallet.b.goit.study/api";
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
