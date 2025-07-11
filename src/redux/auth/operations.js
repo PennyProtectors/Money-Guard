@@ -1,7 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import {
+  fetchTransaction,
+  fetchTransactionCategory,
+} from "../transactions/operations";
 axios.defaults.baseURL = "https://wallet.b.goit.study";
 
 export const setAuthHeader = (token) => {
@@ -69,6 +72,8 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await axios.get("/api/users/current");
+      thunkAPI.dispatch(fetchTransaction());
+      thunkAPI.dispatch(fetchTransactionCategory());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
