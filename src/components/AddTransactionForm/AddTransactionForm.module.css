@@ -119,6 +119,7 @@
         text-align: center;
         text-transform: uppercase;
         box-shadow: 1px 9px 15px 0px #00000033;
+        cursor: pointer;
     }
 
     .FormRow .FormButton.submitButton {

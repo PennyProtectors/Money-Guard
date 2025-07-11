@@ -7,7 +7,7 @@
         height: 100%;
         display: flex;
         justify-content: center;
-        align-items: center;
+        /* align-items: center; */
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -22,4 +22,10 @@
     .ModalArea {
         padding: 40px 20px;
     }
+
+    .ModalCloseBtn {
+        display: none;
+    }
+
+
 }

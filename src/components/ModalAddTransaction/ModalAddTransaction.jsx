@@ -10,10 +10,10 @@ const ModalAddTransaction = ({ show, onClose }) => {
   return (
     <div className={css.ModalBackdrop} onClick={onClose}>
       <div className={css.ModalArea} onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>
+        <button className={css.ModalCloseBtn} onClick={onClose}>
           X
-        </button>{" "}
-        // svg eklenicek
+        </button>
+        
         <AddTransactionForm onClose={onClose} />
       </div>
     </div>

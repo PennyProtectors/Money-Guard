@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,7 +22,7 @@ const schema = yup.object().shape({
   category: yup.string(),
 });
 
-const AddTransactionForm = () => {
+const AddTransactionForm = ({ onClose }) => {
   const [income, setIncome] = useState(false);
 
   return (
@@ -102,12 +102,19 @@ const AddTransactionForm = () => {
           ></textarea>
         </div>
         <div className={css.FormRow}>
-          <button type="submit" className={[css.FormButton, css.submitButton].join(" ")}>
+          <button
+            type="submit"
+            className={[css.FormButton, css.submitButton].join(" ")}
+          >
             ADD
           </button>
         </div>
         <div className={css.FormRow}>
-          <button type="submit" className={css.FormButton}>
+          <button
+            type="submit"
+            onClick={() => onClose()}
+            className={css.FormButton}
+          >
             CANCEL
           </button>
         </div>
