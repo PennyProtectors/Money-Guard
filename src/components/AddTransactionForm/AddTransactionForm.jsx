@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import * as yup from "yup";
 import DatePicker from "react-datepicker";
@@ -9,6 +10,7 @@ import css from "./AddTransactionForm.module.css";
 
 // Icons
 import { FaPlus, FaMinus } from "react-icons/fa";
+
 
 // Validation schema
 const schema = yup.object().shape({
@@ -23,6 +25,7 @@ const schema = yup.object().shape({
 });
 
 const AddTransactionForm = ({ onClose }) => {
+
   const [income, setIncome] = useState(false);
 
   return (
@@ -121,6 +124,7 @@ const AddTransactionForm = ({ onClose }) => {
       </Form>
     </Formik>
   );
+
 };
 
 export default AddTransactionForm;

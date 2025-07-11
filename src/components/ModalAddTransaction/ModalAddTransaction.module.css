@@ -1,3 +1,4 @@
+
 @media (max-width: 767px) {
     .ModalBackdrop {
         position: fixed;
@@ -27,3 +28,4 @@
         display: none;
     }
 }
+

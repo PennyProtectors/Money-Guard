@@ -7,6 +7,7 @@ import AddTransactionForm from "../AddTransactionForm/AddTransactionForm";
 const ModalAddTransaction = ({ show, onClose }) => {
   if (!show) return null;
 
+
   return (
     <div className={css.ModalBackdrop} onClick={onClose}>
       <div className={css.ModalArea} onClick={(e) => e.stopPropagation()}>
@@ -18,6 +19,7 @@ const ModalAddTransaction = ({ show, onClose }) => {
       </div>
     </div>
   );
+
 };
 
 export default ModalAddTransaction;
