@@ -44,16 +44,12 @@ const TransactionsListDesktop_Item = ({ transaction }) => {
   React.useEffect(() => {
     setIsIncome(transaction.type === "INCOME");
   }, [transaction.type]);
-  const categoriesData = useSelector((state) => state.transaction.category);
+  
   return (
     <tr className={css.transactionsList_Table_Row}>
       <td className={css.date}>{transaction.transactionDate}</td>
       <td className={css.type}>{transaction.type === "INCOME" ? "+" : "-"}</td>
-      <td className={css.category}>
-        {categoriesData.find(
-          (category) => category.id === transaction.categoryId
-        ).name || "Uncategorized"}
-      </td>
+      <td className={css.category}>{transaction.category}</td>
       <td className={css.comment}>{transaction.comment}</td>
       <td>
         <span className={css.sum}>

@@ -72,8 +72,8 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await axios.get("api/users/current");
+      await thunkAPI.dispatch(fetchTransactionCategory());
       thunkAPI.dispatch(fetchTransaction());
-      thunkAPI.dispatch(fetchTransactionCategory());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
