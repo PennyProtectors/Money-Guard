@@ -1,0 +1,77 @@
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.switchLabel {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.switchInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* görünmez yapıyoruz, tasarımı kendimiz yapıyoruz */
+
+.commentDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentDiv label {
+  color: rgb(255, 255, 255, 0.6);
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.commentDiv input {
+  margin: 10px auto;
+  width: 280px;
+}
+
+.addBtn {
+  box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    96.76deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
+  );
+  border-radius: 20px;
+  width: 280px;
+  height: 50px;
+  border: none;
+  color: #fbfbfb;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 10%;
+  text-align: center;
+  cursor: pointer;
+  margin: 40px 20px 20px 20px;
+}
+
+.closeBtn {
+  box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
+  background: #fcfcfc;
+  border-radius: 20px;
+  width: 280px;
+  height: 50px;
+  border: none;
+  color: #623f8b;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 10%;
+  text-align: center;
+  margin-bottom: 23px;
+  cursor: pointer;
+}

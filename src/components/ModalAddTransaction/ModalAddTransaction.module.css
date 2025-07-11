@@ -1,8 +1,31 @@
+.modalBackdrop {
+  border: 1px solid #ffffff;
+  width: 100%;
+  min-height: 600px;
+  background-color: linear-gradient(to bottom, #4b1e7c 19%, #302e8e 100%);
+  position: relative;
+}
+
+/* .modalContent {
+  
+} */
+
 .closeBtn {
+  padding: 0px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 21px;
+  right: 20px;
   background: transparent;
   border: none;
   cursor: pointer;
+  color: #ffffff;
+}
+
+h2 {
+  width: 280px;
+  height: 31px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 24px;
+  margin: 40px auto 32px;
 }
