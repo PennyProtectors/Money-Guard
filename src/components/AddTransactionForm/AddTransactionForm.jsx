@@ -27,16 +27,18 @@ const schema = yup.object().shape({
 const AddTransactionForm = ({ onClose }) => {
 
   const [income, setIncome] = useState(false);
-
+  const handleSubmit = (values) => {
+    console.log("Form submitted with values:", values);
+  };
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={() => {}}
+      onSubmit={handleSubmit}
       initialValues={{
-        type: income ? "income" : "expense",
         amount: "",
         date: new Date(),
         comment: "",
+        type: income ? "income" : "expense",
       }}
     >
       <Form className={css.TransactionForm}>
@@ -89,7 +91,7 @@ const AddTransactionForm = ({ onClose }) => {
             className={css.FormInput}
             placeholder={"0.00"}
           />
-          <Field
+          <input
             type="date"
             name="date"
             className={css.FormInput}
@@ -114,7 +116,7 @@ const AddTransactionForm = ({ onClose }) => {
         </div>
         <div className={css.FormRow}>
           <button
-            type="submit"
+            type="reset"
             onClick={() => onClose()}
             className={css.FormButton}
           >

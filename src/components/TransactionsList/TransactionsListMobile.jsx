@@ -28,7 +28,7 @@ const TransactionsListMobileItem = ({ transaction }) => {
   React.useEffect(() => {
     setIsIncome(transaction.type === "INCOME");
   }, [transaction.type]);
-  const categoriesData = useSelector((state) => state.transaction.category);
+
   return (
     <div
       className={
@@ -49,11 +49,7 @@ const TransactionsListMobileItem = ({ transaction }) => {
       </div>
       <div className={css.transactionItem_Row}>
         <h6 className={css.Key}>Category</h6>
-        <span className={css.Value}>
-          {categoriesData.find(
-            (category) => category.id === transaction.categoryId
-          ).name || "Uncategorized"}
-        </span>
+        <span className={css.Value}>{transaction.category}</span>
       </div>
       <div className={css.transactionItem_Row}>
         <h6 className={css.Key}>Comment</h6>

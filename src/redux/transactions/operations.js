@@ -7,7 +7,17 @@ export const fetchTransaction = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get("/api/transactions");
-      return res.data;
+
+      const responseData = res.data;
+      const result = responseData.map((transactionItem) => {
+        const cateId = transactionItem.categoryId;
+        const categoryData = thunkAPI
+          .getState()
+          .transaction.category.find((category) => category.id === cateId);
+        transactionItem.category = categoryData ? categoryData.name : "Unknown";
+        return transactionItem;
+      });
+      return result;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
