@@ -1,15 +1,100 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Base styles */
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Main container with iMac background */
+.main-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #101010;
+  overflow: hidden;
+}
+
+/* Background gradient effects */
+.main-container::before {
+  content: '';
+  position: absolute;
+  width: 1814px;
+  height: 1342px;
+  left: -223px;
+  top: -164px;
+  background: linear-gradient(219.62deg, rgba(109, 84, 235, 0.6) 28.31%, rgba(101, 35, 146, 0.6) 66.76%);
+  filter: blur(200px);
+  z-index: 0;
+}
+
+.main-container::after {
+  content: '';
+  position: absolute;
+  width: 893px;
+  height: 901px;
+  right: -200px;
+  top: 277px;
+  background: linear-gradient(219.62deg, rgba(109, 84, 235, 0.6) 28.31%, rgba(101, 35, 146, 0.6) 66.76%);
+  filter: blur(200px);
+  z-index: 0;
+}
+
+/* Additional gradient elements */
+.gradient-element-1 {
+  position: absolute;
+  width: 330px;
+  height: 333px;
+  left: 679px;
+  top: 697px;
+  background: #6D1C77;
+  filter: blur(150px);
+  z-index: 0;
+}
+
+.gradient-element-2 {
+  position: absolute;
+  width: 363px;
+  height: 366px;
+  right: 100px;
+  top: 151px;
+  background: #302E8E;
+  filter: blur(150px);
+  z-index: 0;
+}
+
+.gradient-element-3 {
+  position: absolute;
+  width: 760px;
+  height: 766px;
+  left: -196px;
+  top: 269px;
+  background: linear-gradient(207.18deg, #341FA0 46.11%, #652392 63.65%);
+  filter: blur(200px);
+  z-index: 0;
+}
+
 /* Chart Component Styles */
 .chart-container {
-  background: white;
+  position: relative;
+  background: rgba(82, 59, 126, 0.6);
   border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(50px);
   padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10;
+  max-width: 715px;
+  margin: 0 auto;
 }
 
 .chart-title {
-  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
   font-weight: 600;
-  color: #1f2937;
+  font-size: 18px;
+  line-height: 24px;
+  color: #FBFBFB;
   margin-bottom: 16px;
   text-align: center;
 }
@@ -17,12 +102,27 @@
 .chart-wrapper {
   position: relative;
   height: 320px;
+  background: rgba(74, 86, 226, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .chart-wrapper {
     height: 384px;
   }
+}
+
+/* Glassmorphism effect for chart wrapper */
+.chart-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 11.08%, rgba(255, 255, 255, 0.321875) 39.7%, rgba(255, 255, 255, 0.161974) 57.58%, rgba(255, 255, 255, 0.0907054) 69.56%, rgba(255, 255, 255, 0) 87.43%);
+  pointer-events: none;
 }
 
 .chart-center-text {
@@ -35,6 +135,7 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  z-index: 5;
 }
 
 .center-content {
@@ -42,15 +143,23 @@
 }
 
 .total-label {
-  font-size: 14px;
-  color: #6b7280;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
   margin-bottom: 4px;
 }
 
 .total-amount {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1f2937;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 45px;
+  color: #FBFBFB;
 }
 
 .no-data-container {
@@ -58,24 +167,40 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  background: rgba(74, 86, 226, 0.1);
+  border-radius: 8px;
 }
 
 .no-data-content {
   text-align: center;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .no-data-title {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 600;
   font-size: 18px;
+  line-height: 24px;
+  color: #FBFBFB;
   margin-bottom: 8px;
 }
 
 .no-data-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
+  line-height: 21px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .mobile-legend {
   margin-top: 24px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(25px);
 }
 
 @media (min-width: 768px) {
@@ -87,13 +212,16 @@
 .legend-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 12px;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .legend-color {
@@ -101,12 +229,101 @@
   height: 12px;
   border-radius: 50%;
   flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .legend-label {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
-  color: #374151;
+  line-height: 21px;
+  color: #FBFBFB;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Chart data visualization elements */
+.chart-data-point {
+  color: #FF868D;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+.chart-positive-value {
+  color: #FFB627;
+}
+
+.chart-negative-value {
+  color: #FF868D;
+}
+
+/* Responsive design */
+@media (max-width: 767px) {
+  .chart-container {
+    margin: 16px;
+    padding: 16px;
+  }
+  
+  .chart-title {
+    font-size: 16px;
+  }
+  
+  .total-amount {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  
+  .legend-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .chart-container {
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .chart-container {
+    max-width: 715px;
+  }
+}
+
+/* Loading state */
+.chart-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Hover effects */
+.legend-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
+}
+
+/* Custom scrollbar for overflow content */
+.chart-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chart-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.chart-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.chart-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
