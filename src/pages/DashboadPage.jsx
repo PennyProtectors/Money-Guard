@@ -31,6 +31,7 @@ import {
   Legend,
   Filler,
 } from "chart.js";
+import { Line } from "react-chartjs-2";
 
 // Chart.js bileşenlerini kaydet
 ChartJS.register(
