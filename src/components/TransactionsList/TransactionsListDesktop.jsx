@@ -7,21 +7,24 @@ const TransactionsListDesktop = () => {
 
   return (
     <table className={css.transactionsList_Table}>
-      <tr
-        className={[
-          css.transactionsList_Table_Row,
-          css.transactionsList_Table_Header,
-        ].join(" ")}
-      >
-        <th className={css.column}>Date</th>
-        <th className={css.column}>Type</th>
-        <th className={css.column}>Category</th>
-        <th className={css.column}>Comment</th>
-        <th colSpan="1" className={css.column}>
-          Sum
-        </th>
-        <th></th>
-      </tr>
+      <thead>
+        <tr
+          className={[
+            css.transactionsList_Table_Row,
+            css.transactionsList_Table_Header,
+          ].join(" ")}
+        >
+          <th className={css.column}>Date</th>
+          <th className={css.column}>Type</th>
+          <th className={css.column}>Category</th>
+          <th className={css.column}>Comment</th>
+          <th colSpan="1" className={css.column}>
+            Sum
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
       {data && data.length > 0
         ? data.map((transaction) => (
             <TransactionsListDesktop_Item
@@ -29,7 +32,9 @@ const TransactionsListDesktop = () => {
               transaction={transaction}
             />
           ))
-        : null}
+          : null}
+        
+        </tbody>
     </table>
   );
 };
