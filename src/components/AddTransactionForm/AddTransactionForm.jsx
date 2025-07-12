@@ -27,7 +27,7 @@ const AddTransactionForm = ({ onClose }) => {
   const categories = useSelector((state) => state.transaction.category);
   const dispatch = useDispatch();
 
-  const [income, setIncome] = useState(false);
+  const [income, setIncome] = useState(true);
   // const handleSubmit = (values) => {
   //   console.log("Form submitted with values:", values);
   //   dispatch(addTransaction());
@@ -115,33 +115,39 @@ const AddTransactionForm = ({ onClose }) => {
         </div>
 
         <div className={css.FormRow}>
-          <Field as="select" name="categoryId" className={css.FormInput}>
-            <option value="">Select Category</option>
-            {categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            ))}
-          </Field>
+          {!income && (
+            <Field as="select" name="categoryId" className={css.FormInput}>
+              <option value="">Select Category</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </Field>
+          )}
 
-          <Field
-            type="number"
-            name="amount"
-            className={css.FormInput}
-            placeholder={"0.00"}
-          />
-          <Field
-            type="date"
-            name="transactionDate"
-            className={css.FormInput}
-            placeholder={"07.07.2023"}
-          />
+          <div className={css.amountDateGroup}>
+            <Field
+              type="number"
+              name="amount"
+              className={css.FormInput}
+              placeholder={"0.00"}
+            />
+            <Field
+              type="date"
+              name="transactionDate"
+              className={css.FormInput}
+              placeholder={"07.07.2023"}
+            />
+          </div>
+
+
         </div>
         <div className={css.FormRow}>
           <Field
             as="textarea"
             name="comment"
-            className={[css.FormInput, css.FormInputText].join(" ")}
+            className={[css.FormInput, css.commentInput].join(" ")}
             placeholder="Comment"
             rows={4}
           />
