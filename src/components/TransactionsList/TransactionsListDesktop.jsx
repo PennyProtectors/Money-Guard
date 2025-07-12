@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./TransactionsList.module.css";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
+import { deleteTransaction } from "../../redux/transactions/operations";
 const TransactionsListDesktop = () => {
   const data = useSelector((state) => state.transaction.transactions);
 
@@ -25,26 +26,27 @@ const TransactionsListDesktop = () => {
         </tr>
       </thead>
       <tbody>
-      {data && data.length > 0
-        ? data.map((transaction) => (
-            <TransactionsListDesktop_Item
-              key={transaction.id}
-              transaction={transaction}
-            />
-          ))
+        {data && data.length > 0
+          ? data.map((transaction) => (
+              <TransactionsListDesktop_Item
+                key={transaction.id}
+                transaction={transaction}
+              />
+            ))
           : null}
-        
-        </tbody>
+      </tbody>
     </table>
   );
 };
 
 const TransactionsListDesktop_Item = ({ transaction }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [isIncome, setIsIncome] = React.useState(false);
+  const dispatch = useDispatch();
   React.useEffect(() => {
     setIsIncome(transaction.type === "INCOME");
   }, [transaction.type]);
-  
+
   return (
     <tr className={css.transactionsList_Table_Row}>
       <td className={css.date}>{transaction.transactionDate}</td>
@@ -64,7 +66,7 @@ const TransactionsListDesktop_Item = ({ transaction }) => {
         <div className={css.buttons}>
           <button
             type="button"
-            onClick={() => {}}
+            onClick={() => setIsOpen(true)}
             className={`${css.transactionItem_Button}`}
           >
             <svg
@@ -84,9 +86,15 @@ const TransactionsListDesktop_Item = ({ transaction }) => {
               />
             </svg>
           </button>
+          {isOpen && (
+            <ModalEditTransaction
+              transaction={transaction}
+              onClose={() => setIsOpen(false)}
+            />
+          )}
           <button
             type="button"
-            onClick={() => {}}
+            onClick={() => dispatch(deleteTransaction(transaction.id))}
             className={[css.transactionItem_Button, css.delete].join(" ")}
           >
             Delete

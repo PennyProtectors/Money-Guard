@@ -36,17 +36,21 @@ const transactionSlice = createSlice({
         state.error = action.payload.message;
       })
       .addCase(editTransaction.fulfilled, (state, action) => {
-        const edittedTransactionId = state.transactions.find(
-          (item) => item.id === action.payload.id
+        const updatedTransaction = action.payload;
+        const index = state.transactions.findIndex(
+          (item) => item.id === updatedTransaction.id
         );
-        state.transactions[edittedTransactionId] = action.payload;
+
+        if (index !== -1) {
+          state.transactions[index] = updatedTransaction;
+        }
       })
       .addCase(editTransaction.rejected, (state, action) => {
         state.error = action.payload.message;
       })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.transactions = state.transactions.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item.id !== action.payload
         );
       })
       .addCase(deleteTransaction.rejected, (state, action) => {

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./TransactionsList.module.css";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
+import { deleteTransaction } from "../../redux/transactions/operations";
 
 const TransactionsListMobile = () => {
   const data = useSelector((state) => state.transaction.transactions);
@@ -25,6 +27,9 @@ const TransactionsListMobile = () => {
 
 const TransactionsListMobileItem = ({ transaction }) => {
   const [isIncome, setIsIncome] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     setIsIncome(transaction.type === "INCOME");
   }, [transaction.type]);
@@ -68,8 +73,16 @@ const TransactionsListMobileItem = ({ transaction }) => {
         </span>
       </div>
       <div className={[css.transactionItem_Row, css.buttons].join(" ")}>
-        <button className={[css.delete, css.btn].join(" ")}>Delete</button>
-        <button className={[css.edit, css.btn].join(" ")}>
+        <button
+          className={[css.delete, css.btn].join(" ")}
+          onClick={() => dispatch(deleteTransaction(transaction.id))}
+        >
+          Delete
+        </button>
+        <button
+          className={[css.edit, css.btn].join(" ")}
+          onClick={() => setIsOpen(true)}
+        >
           <svg
             width="14"
             height="13"
@@ -87,6 +100,12 @@ const TransactionsListMobileItem = ({ transaction }) => {
             />
           </svg>
         </button>
+        {isOpen && (
+          <ModalEditTransaction
+            transaction={transaction}
+            onClose={() => setIsOpen(false)}
+          />
+        )}
       </div>
     </div>
   );

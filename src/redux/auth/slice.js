@@ -7,6 +7,8 @@ import {
   register,
 } from "../auth/operations";
 
+const tokenFromStorage = localStorage.getItem("token");
+
 const initialState = {
   user: {
     name: null,
@@ -14,7 +16,7 @@ const initialState = {
   },
   isLoggedIn: false,
   isRefreshing: false,
-  token: null,
+  token: tokenFromStorage || null,
 };
 
 export const authSlice = createSlice({
