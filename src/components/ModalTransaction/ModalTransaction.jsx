@@ -14,11 +14,10 @@ const ModalTransaction = ({ show, onClose, type, data }) => {
         <button className={css.ModalCloseBtn} onClick={onClose}>
           X
         </button>
-
-        {type === "add" && <AddTransactionForm onClose={onClose} />}
         {type === "edit" && (
           <EditTransactionForm data={data} onClose={onClose} />
         )}
+        {type === "add" && <AddTransactionForm onClose={onClose} />}
       </div>
     </div>
   );

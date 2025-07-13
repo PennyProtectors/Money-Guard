@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Formik, Form, Field } from "formik";
 
 // Styles
-import css from "./EditTransactionForm.module.css";
+import css from "../AddTransactionForm/AddTransactionForm.module.css";
 
 // Icons
 import { FaPlus, FaMinus } from "react-icons/fa";
@@ -43,23 +43,23 @@ const EditTransactionForm = ({ data, onClose }) => {
         : values.categoryId,
     };
 
-    dispatch(editTransaction(transaction));
+    dispatch(addTransaction(transaction));
     actions.resetForm();
     onClose();
   };
 
   const categoriesData = useSelector((state) => state.transaction.category);
-
+  console.log("EditTransactionForm Data:", data);
   return (
     <Formik
       validationSchema={schema}
       onSubmit={handleSubmit}
       initialValues={{
-        amount: data.amount,
-        transactionDate: data.transactionDate,
-        comment: data.comment,
-        type: data.type === "INCOME" ? "INCOME" : "EXPENSE",
-        categoryId: data.categoryId,
+        amount: data ? Math.abs(Number(data.amount)) : "",
+        transactionDate: new Date().toISOString().split("T")[0],
+        comment: "",
+        type: income ? "INCOME" : "EXPENSE",
+        categoryId: "",
       }}
     >
       <Form className={css.TransactionForm}>
@@ -104,10 +104,6 @@ const EditTransactionForm = ({ data, onClose }) => {
           >
             expense
           </label>
-        </div>
-
-        <div className={css.FormRow}>
-          <Field type="text" name="transactionId" />
         </div>
         <div className={css.FormRow}>
           {income === false ? (
