@@ -5,6 +5,8 @@ import Loader from "./components/Loader/Loader";
 import { Toaster } from "react-hot-toast";
 import { lazy, Suspense, useEffect } from "react";
 import { refreshUser } from "./redux/auth/operations";
+import Currency from "./components/Currency/Currency";
+import StatisticsTab from "./pages/StatisticsTab";
 
 const PrivateRoute = lazy(() =>
   import("./components/PrivateRoute/PrivateRoute")
@@ -43,10 +45,14 @@ function App() {
                 <DashboadPage />
               </PrivateRoute>
             }
-          />
+          >
+            {" "}
+            <Route path="currency" element={<Currency />} />
+            <Route path="statics" element={<StatisticsTab />} />
+          </Route>
 
           <Route
-            path="/login"
+            path="login"
             element={
               <RestrictedRoute redirectTo="/">
                 <LoginPage />
@@ -55,7 +61,7 @@ function App() {
           />
 
           <Route
-            path="/register"
+            path="register"
             element={
               <RestrictedRoute redirectTo="/">
                 <RegistrationPage />
