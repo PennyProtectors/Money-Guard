@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
-  color: #fbfbfb;
+  color: #FBFBFB;
   /* box-sizing: border-box; */
 }
 
@@ -29,10 +29,6 @@
   text-align: center;
 }
 
-.FormTitle {
-  margin: 0;
-}
-
 .FormRow .switchLabel {
   font-weight: 600;
   font-size: 16px;
@@ -41,12 +37,12 @@
 }
 
 .FormRow .switchLabel.incomeLabel {
-  color: #ffb627;
+  color: #FFB627;
   font-weight: 800;
 }
 
-.FormRow .switchLabel.expenceLabel {
-  color: #ff868d;
+.FormRow .switchLabel.expenseLabel {
+  color: #FF868D;
   font-weight: 800;
 }
 
@@ -72,33 +68,32 @@
   align-items: center;
 }
 
-
 .FormRow .switchBox .switchIcon:hover {
   opacity: 1;
-  cursor: pointer;
+  cursor: pointer
 }
 
 .FormRow .switchBox .switchIcon.incomeSwitch {
   top: -1px;
   left: -10px;
-  background: #ffb627;
-  box-shadow: 0px 6px 15px 0px #ffc72780;
+  background: #FFB627;
+  box-shadow: 0px 6px 15px 0px #FFC72780;
 }
 
-.FormRow .switchBox .switchIcon.expenceSwitch {
+.FormRow .switchBox .switchIcon.expenseSwitch {
   top: -1;
   right: -10px;
-  background: #ff868d;
-  box-shadow: 0px 6px 15px 0px #ff868d80;
+  background: #FF868D;
+  box-shadow: 0px 6px 15px 0px #FF868D80;
 }
 
 .FormRow .FormInput {
-  width: 280px;
+  width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid #fbfbfb;
+  border-bottom: 1px solid #FBFBFB;
   padding: 8px 20px;
-  color: #ffffff66;
+  color: #FFFFFF66;
   font-weight: 600;
   font-size: 18px;
   line-height: 100%;
@@ -116,21 +111,13 @@
   color: #4D3594;
 }
 
-.FormRow .amountDateGroup .FormInput:first-child {
-  margin-bottom: 40px;
-}
-
-.FormRow .commentInput {
-  width: 280px;
-}
-
 .FormRow .FormButton {
   width: 100%;
   padding: 12px 120px;
   border-radius: 20px;
   border: none;
   font-weight: 400;
-  background-color: #fbfbfb;
+  background-color: #FBFBFB;
   font-size: 18px;
   line-height: 100%;
   letter-spacing: 3px;
@@ -142,65 +129,7 @@
 
 .FormRow .FormButton.submitButton {
   color: white;
-  background: linear-gradient(96.76deg,
-      #ffc727 -16.42%,
-      #9e40ba 97.04%,
-      #7000ff 150.71%);
+  background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%);
 }
 
-/* TABLET */
-@media (min-width: 768px) and (max-width: 1279px) {
-  .amountDateGroup {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .FormRow .amountDateGroup .FormInput {
-    width: 181px;
-    height: 35px;
-    padding: 0;
-    margin-right: 10px;
-  }
-
-  .FormRow .commentInput {
-    width: 360px;
-    height: 32px;
-  }
-
-  .FormRow .submitButton,
-  .FormRow .FormButton {
-    width: 300px;
-    height: 50px;
-  }
-}
-
-
-
-
-/* DESKTOP */
-@media (min-width: 1280px) {
-  .amountDateGroup {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .FormRow .amountDateGroup .FormInput {
-    width: 181px;
-    height: 35px;
-    padding: 0;
-    margin-right: 10px;
-  }
-
-  .FormRow .commentInput {
-    width: 360px;
-    height: 32px;
-  }
-
-  .FormRow.submitButton,
-  .FormRow .FormButton {
-    width: 300px;
-    height: 50px;
-  }
-
-}
-
+@media (max-width: 767px) {}
