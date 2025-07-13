@@ -24,7 +24,6 @@ const schema = Yup.object().shape({
 });
 
 const AddTransactionForm = ({ onClose }) => {
-  const categories = useSelector((state) => state.transaction.category);
   const dispatch = useDispatch();
 
   const [income, setIncome] = useState(false);
@@ -44,7 +43,9 @@ const AddTransactionForm = ({ onClose }) => {
         : -Math.abs(Number(values.amount)),
       comment: values.comment,
       type: income ? "INCOME" : "EXPENSE",
-      categoryId: values.categoryId,
+      categoryId: income
+        ? "063f1132-ba5d-42b4-951d-44011ca46262"
+        : values.categoryId,
     };
 
     dispatch(addTransaction(transaction))
@@ -57,7 +58,7 @@ const AddTransactionForm = ({ onClose }) => {
         console.error("Transaction eklenemedi:", error);
       });
   };
-
+  const categoriesData = useSelector((state) => state.transaction.category);
   return (
     <Formik
       validationSchema={schema}
@@ -115,16 +116,26 @@ const AddTransactionForm = ({ onClose }) => {
         </div>
 
         <div className={css.FormRow}>
-          {!income && (
-            <Field as="select" name="categoryId" className={css.FormInput}>
-              <option value="">Select Category</option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
+          <div className={css.FormRow}>
+            {income === false ? (
+              <Field
+                as="select"
+                name="categoryId"
+                className={[css.FormInput, css.selectInput].join(" ")}
+                placeholder="Select Category"
+              >
+                <option value="" disabled>
+                  Select Category
                 </option>
-              ))}
-            </Field>
-          )}
+                {categoriesData.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Field>
+            ) : null}
+          </div>
+
           <ErrorMessage name="categoryId" component="div" />
 
           <div className={css.amountDateGroup}>
