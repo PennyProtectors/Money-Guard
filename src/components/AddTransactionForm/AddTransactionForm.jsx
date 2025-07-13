@@ -1,8 +1,8 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 // Styles
 import css from "./AddTransactionForm.module.css";
@@ -16,15 +16,14 @@ import { addTransaction } from "../../redux/transactions/operations";
 const schema = Yup.object().shape({
   amount: Yup.number()
     .typeError("Please enter the number")
-    .required("Amaount required"),
-  transactionDate: Yup.date().required("Date required"),
-  comment: Yup.string().required("Comment required"),
+    .required("Amount is required"),
+  transactionDate: Yup.date().required("Date is required"),
+  comment: Yup.string().required("Comment is required"),
   type: Yup.string().required(),
-  categoryId: Yup.string(),
+  categoryId: Yup.string().required("Category is required"),
 });
 
 const AddTransactionForm = ({ onClose }) => {
-  const categories = useSelector((state) => state.transaction.category);
   const dispatch = useDispatch();
 
   const [income, setIncome] = useState(false);
@@ -57,7 +56,7 @@ const AddTransactionForm = ({ onClose }) => {
         console.error("Transaction eklenemedi:", error);
       });
   };
-
+  const categoriesData = useSelector((state) => state.transaction.category);
   return (
     <Formik
       validationSchema={schema}
@@ -115,36 +114,53 @@ const AddTransactionForm = ({ onClose }) => {
         </div>
 
         <div className={css.FormRow}>
-          <Field as="select" name="categoryId" className={css.FormInput}>
-            <option value="">Select Category</option>
-            {categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            ))}
-          </Field>
+          <div className={css.FormRow}>
+            {income === false ? (
+              <Field
+                as="select"
+                name="categoryId"
+                className={[css.FormInput, css.selectInput].join(" ")}
+                placeholder="Select Category"
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                {categoriesData.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Field>
+            ) : null}
+          </div>
+          <ErrorMessage name="categoryId" component="div" />
 
-          <Field
-            type="number"
-            name="amount"
-            className={css.FormInput}
-            placeholder={"0.00"}
-          />
-          <Field
-            type="date"
-            name="transactionDate"
-            className={css.FormInput}
-            placeholder={"07.07.2023"}
-          />
+          <div className={css.amountDateGroup}>
+            <Field
+              type="number"
+              name="amount"
+              className={css.FormInput}
+              placeholder={"0.00"}
+            />
+            <ErrorMessage name="amount" component="div" />
+            <Field
+              type="date"
+              name="transactionDate"
+              className={css.FormInput}
+              placeholder={"07.07.2023"}
+            />
+            <ErrorMessage name="transactionDate" component="div" />
+          </div>
         </div>
         <div className={css.FormRow}>
           <Field
             as="textarea"
             name="comment"
-            className={[css.FormInput, css.FormInputText].join(" ")}
+            className={[css.FormInput, css.commentInput].join(" ")}
             placeholder="Comment"
             rows={4}
           />
+          <ErrorMessage name="comment" component="div" />
         </div>
         <div className={css.FormRow}>
           <button

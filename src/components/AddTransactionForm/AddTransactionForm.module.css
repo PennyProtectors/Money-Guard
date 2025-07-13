@@ -1,131 +1,200 @@
-
-@media (max-width: 767px) {
-
-    .TransactionForm {
-        padding: 28px 20px;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        color: #FBFBFB;
-        /* box-sizing: border-box; */
-    }
-
-    .FormRow {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: 40px;
-        column-gap: 20px;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .FormRow .FormTitle {
-        /* width: 100%; */
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 100%;
-        letter-spacing: 0%;
-        text-align: center;
-    }
-
-    .FormRow .switchLabel {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 100%;
-        letter-spacing: 0%;
-    }
-
-    .FormRow .switchLabel.incomeLabel {
-        color: #FFB627;
-        font-weight: 800;
-    }
-
-    .FormRow .switchLabel.expenceLabel {
-        color: #FF868D;
-        font-weight: 800;
-    }
-
-    .FormRow .switchBox {
-        display: flex;
-        align-items: center;
-        background-color: white;
-        width: 80px;
-        height: 40px;
-        border-radius: 30px;
-        position: relative;
-    }
-
-    .FormRow .switchBox .switchIcon {
-        position: absolute;
-        width: 44px;
-        height: 44px;
-        color: white;
-        border-radius: 50%;
-        opacity: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .FormRow .switchBox .switchIcon:hover {
-        opacity: 1;
-        cursor: pointer
-    }
-
-    .FormRow .switchBox .switchIcon.incomeSwitch {
-        top: -1px;
-        left: -10px;
-        background: #FFB627;
-        box-shadow: 0px 6px 15px 0px #FFC72780;
-    }
-
-    .FormRow .switchBox .switchIcon.expenceSwitch {
-        top: -1;
-        right: -10px;
-        background: #FF868D;
-        box-shadow: 0px 6px 15px 0px #FF868D80;
-    }
-
-
-
-
-
-    .FormRow .FormInput {
-        width: 100%;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid #FBFBFB;
-        padding: 8px 20px;
-        color: #FFFFFF66;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 100%;
-        letter-spacing: 0%;
-    }
-
-    .FormRow .FormButton {
-        width: 100%;
-        padding: 12px 120px;
-        border-radius: 20px;
-        border: none;
-        font-weight: 400;
-        background-color: #FBFBFB;
-        font-size: 18px;
-        line-height: 100%;
-        letter-spacing: 3px;
-        text-align: center;
-        text-transform: uppercase;
-        box-shadow: 1px 9px 15px 0px #00000033;
-        cursor: pointer;
-    }
-
-    .FormRow .FormButton.submitButton {
-        color: white;
-        background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%);
-    }
+.TransactionForm {
+  padding: 28px 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  color: #fbfbfb;
+  /* box-sizing: border-box; */
 }
 
+.FormRow {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 40px;
+  column-gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.FormRow .FormTitle {
+  /* width: 100%; */
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+.FormTitle {
+  margin: 0;
+}
+
+.FormRow .switchLabel {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.FormRow .switchLabel.incomeLabel {
+  color: #ffb627;
+  font-weight: 800;
+}
+
+.FormRow .switchLabel.expenceLabel {
+  color: #ff868d;
+  font-weight: 800;
+}
+
+.FormRow .switchBox {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 80px;
+  height: 40px;
+  border-radius: 30px;
+  position: relative;
+}
+
+.FormRow .switchBox .switchIcon {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  color: white;
+  border-radius: 50%;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.FormRow .switchBox .switchIcon:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.FormRow .switchBox .switchIcon.incomeSwitch {
+  top: -1px;
+  left: -10px;
+  background: #ffb627;
+  box-shadow: 0px 6px 15px 0px #ffc72780;
+}
+
+.FormRow .switchBox .switchIcon.expenceSwitch {
+  top: -1;
+  right: -10px;
+  background: #ff868d;
+  box-shadow: 0px 6px 15px 0px #ff868d80;
+}
+
+.FormRow .FormInput {
+  width: 280px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #fbfbfb;
+  padding: 8px 20px;
+  color: #ffffff66;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.FormRow .FormInput.selectInput>option {
+  color: #FFFFFF;
+  background-color: #4D3594;
+
+}
+
+.FormRow .FormInput.selectInput>option:hover {
+  background-color: #FBFBFB;
+  color: #4D3594;
+}
+
+.FormRow .amountDateGroup .FormInput:first-child {
+  margin-bottom: 40px;
+}
+
+.FormRow .commentInput {
+  width: 280px;
+}
+
+.FormRow .FormButton {
+  width: 100%;
+  padding: 12px 120px;
+  border-radius: 20px;
+  border: none;
+  font-weight: 400;
+  background-color: #fbfbfb;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 1px 9px 15px 0px #00000033;
+  cursor: pointer;
+}
+
+.FormRow .FormButton.submitButton {
+  color: white;
+  background: linear-gradient(96.76deg,
+      #ffc727 -16.42%,
+      #9e40ba 97.04%,
+      #7000ff 150.71%);
+}
+
+/* TABLET */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .amountDateGroup {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .FormRow .amountDateGroup .FormInput {
+    width: 181px;
+    height: 35px;
+    padding: 0;
+    margin-right: 10px;
+  }
+
+  .FormRow .commentInput {
+    width: 360px;
+    height: 32px;
+  }
+
+  .FormRow .submitButton,
+  .FormRow .FormButton {
+    width: 300px;
+    height: 50px;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1280px) {
+  .amountDateGroup {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .FormRow .amountDateGroup .FormInput {
+    width: 181px;
+    height: 35px;
+    padding: 0;
+    margin-right: 10px;
+  }
+
+  .FormRow .commentInput {
+    width: 360px;
+    height: 32px;
+  }
+
+  .FormRow.submitButton,
+  .FormRow .FormButton {
+    width: 300px;
+    height: 50px;
+  }
+}
