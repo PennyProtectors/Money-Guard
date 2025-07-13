@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import css from "./TransactionsList.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
 import { deleteTransaction } from "../../redux/transactions/operations";
 import ModalTransaction from "../ModalTransaction/ModalTransaction";
 const TransactionsListDesktop = () => {
-  const data = useSelector((state) => state.transaction.transactions);
+  let transactionsData = useSelector((state) => state.transaction.transactions);
+  const sorted = (transactionsData = [...transactionsData].sort(
+    (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
+  ));
   const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] =
     useState(false);
   const [editTransactionData, setEditTransactionData] = useState(null);
@@ -41,8 +43,8 @@ const TransactionsListDesktop = () => {
           </tr>
         </thead>
         <tbody>
-          {data && data.length > 0
-            ? data.map((transaction) => (
+          {sorted && sorted.length > 0
+            ? sorted.map((transaction) => (
                 <TransactionsListDesktop_Item
                   key={transaction.id}
                   transaction={transaction}

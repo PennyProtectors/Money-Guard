@@ -14,8 +14,6 @@ const Dashboard = () => {
         const response = await axios.get("/transactions");
         setPaids(response.data);
         setIsLoading(true);
-
-        console.log(data);
       } catch (error) {
         console.error("Veriler alınamadı:", error.message);
       } finally {
