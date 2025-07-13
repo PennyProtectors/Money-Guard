@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
 import { deleteTransaction } from "../../redux/transactions/operations";
 
-const TransactionsListMobile = () => {
+const TransactionsListMobile = ({
+  setDeleteTransactionData,
+  setEditTransactionData,
+}) => {
   const data = useSelector((state) => state.transaction.transactions);
   // const data = [];
 
@@ -16,6 +19,8 @@ const TransactionsListMobile = () => {
           <TransactionsListMobileItem
             key={transaction.id}
             transaction={transaction}
+            setEditTransactionData={setEditTransactionData}
+            setDeleteTransactionData={setDeleteTransactionData}
           />
         ))
       ) : (
@@ -25,7 +30,11 @@ const TransactionsListMobile = () => {
   );
 };
 
-const TransactionsListMobileItem = ({ transaction }) => {
+const TransactionsListMobileItem = ({
+  transaction,
+  setEditTransactionData,
+  setDeleteTransactionData,
+}) => {
   const [isIncome, setIsIncome] = React.useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -81,7 +90,7 @@ const TransactionsListMobileItem = ({ transaction }) => {
         </button>
         <button
           className={[css.edit, css.btn].join(" ")}
-          onClick={() => setIsOpen(true)}
+          onClick={() => setEditTransactionData(transaction)}
         >
           <svg
             width="14"

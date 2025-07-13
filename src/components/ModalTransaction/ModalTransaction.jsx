@@ -3,8 +3,9 @@ import React from "react";
 import css from "./ModalTransaction.module.css";
 
 import AddTransactionForm from "../AddTransactionForm/AddTransactionForm";
+import EditTransactionForm from "../EditTransactionForm/EditTransactionForm";
 
-const ModalTransaction = ({ show, onClose }) => {
+const ModalTransaction = ({ show, onClose, type, data }) => {
   if (!show) return null;
 
   return (
@@ -14,7 +15,10 @@ const ModalTransaction = ({ show, onClose }) => {
           X
         </button>
 
-        <AddTransactionForm onClose={onClose} />
+        {type === "add" && <AddTransactionForm onClose={onClose} />}
+        {type === "edit" && (
+          <EditTransactionForm data={data} onClose={onClose} />
+        )}
       </div>
     </div>
   );

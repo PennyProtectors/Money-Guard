@@ -1,286 +1,175 @@
-// import React from "react";
-// import { useForm, Controller } from "react-hook-form";
-// import { useDispatch } from "react-redux";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import DatePicker from "react-datepicker";
-// import * as yup from "yup";
-// import { editTransaction } from "../../redux/transactions/operations";
-// import css from "./EditTransactionForm.module.css";
-// import "react-datepicker/dist/react-datepicker.css";
-
-// const validationSchema = yup.object().shape({
-//   amount: yup
-//     .number()
-//     .typeError("Please enter a valid number")
-//     .positive("Amount must be positive")
-//     .required("Amount is required"),
-//   comment: yup
-//     .string()
-//     .max(50, "Max 50 characters")
-//     .required("Comment is required"),
-//   date: yup.date().required("Date is required"),
-// });
-
-// const EditTransactionForm = ({ transaction, onClose }) => {
-//   const dispatch = useDispatch();
-
-//   const {
-//     register,
-//     handleSubmit,
-//     control,
-//     setError,
-//     formState: { errors },
-//   } = useForm({
-//     resolver: yupResolver(validationSchema),
-//     defaultValues: {
-//       type: transaction?.type || "Income",
-//       amount: transaction?.amount || "",
-//       comment: transaction?.comment || "",
-//       date: transaction?.date ? new Date(transaction.date) : new Date(),
-//     },
-//   });
-
-//   const onSubmit = async (data) => {
-//     try {
-//       // const formattedDate = data.date.toISOString().split("T")[0];
-
-//       await dispatch(
-//         editTransaction({
-//           id: transaction.id,
-//           body: {
-//             amount: data.amount,
-//             comment: data.comment,
-//             type: transaction.type, // bu zorunluysa
-//           },
-//         })
-//       ).unwrap();
-
-//       onClose(true);
-//     } catch (err) {
-//       setError("server", {
-//         type: "manual",
-//         message: err.message || "Something went wrong",
-//       });
-//     }
-//   };
-
-//   return (
-//     <div className={css.overlay}>
-//       <div className={css.modal}>
-//         <button className={css.closeBtn} onClick={() => onClose(false)}>
-//           &times;
-//         </button>
-//         <h2>Edit Transaction</h2>
-
-//         <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-//           <label>
-//             Amount
-//             <input type="number" step="0.01" {...register("amount")} />
-//             {errors.amount && (
-//               <p className={css.error}>{errors.amount.message}</p>
-//             )}
-//           </label>
-
-//           <label>
-//             Comment
-//             <input type="text" {...register("comment")} />
-//             {errors.comment && (
-//               <p className={css.error}>{errors.comment.message}</p>
-//             )}
-//           </label>
-
-//           <label>
-//             Date
-//             <Controller
-//               control={control}
-//               name="date"
-//               render={({ field }) => (
-//                 <DatePicker
-//                   selected={field.value}
-//                   onChange={(date) => field.onChange(date)}
-//                   dateFormat="yyyy-MM-dd"
-//                   className={css.datepicker}
-//                 />
-//               )}
-//             />
-//             {errors.date && <p className={css.error}>{errors.date.message}</p>}
-//           </label>
-
-//           {errors.server && (
-//             <p className={css.error}>{errors.server.message}</p>
-//           )}
-
-//           <div className={css.buttons}>
-//             <button type="submit" className={css.saveBtn}>
-//               Save
-//             </button>
-//             <button
-//               type="button"
-//               className={css.cancelBtn}
-//               onClick={() => onClose(true)}
-//             >
-//               Cancel
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default EditTransactionForm;
-
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { yupResolver } from "@hookform/resolvers/yup";
-import DatePicker from "react-datepicker";
+import React, { useState } from "react";
 import * as yup from "yup";
-import { editTransaction } from "../../redux/transactions/operations";
-import css from "./EditTransactionForm.module.css";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Formik, Form, Field } from "formik";
 
-const validationSchema = yup.object().shape({
-  amount: yup
-    .number()
-    .typeError("Please enter a valid number")
-    .positive("Amount must be positive")
-    .required("Amount is required"),
-  comment: yup
-    .string()
-    .max(50, "Max 50 characters")
-    .required("Comment is required"),
-  date: yup.date().required("Date is required"),
-});
+// Styles
+import css from "./EditTransactionForm.module.css";
 
-const EditTransactionForm = ({ transaction, onClose }) => {
+// Icons
+import { FaPlus, FaMinus } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+
+// Operations
+import { editTransaction } from "../../redux/transactions/operations";
+
+const EditTransactionForm = ({ data, onClose }) => {
   const dispatch = useDispatch();
+  const [income, setIncome] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    setError,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationSchema),
-    defaultValues: {
-      type: transaction?.type || "INCOME",
-      amount: Math.abs(transaction?.amount) || "",
-      comment: transaction?.comment || "",
-      date: transaction?.transactionDate
-        ? new Date(transaction.transactionDate)
-        : new Date(),
-    },
+  // Validation schema
+  const schema = yup.object().shape({
+    amount: yup
+      .number()
+      .typeError("Please enter the number")
+      .required("Amaount required"),
+    transactionDate: yup.date().required("Date required"),
+    comment: yup.string().required("Comment required"),
+    type: yup.string().required(),
+    categoryId: yup.string(),
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const adjustedAmount =
-        transaction.type === "EXPENSE"
-          ? -Math.abs(data.amount)
-          : Math.abs(data.amount);
+  const handleSubmit = (values, actions) => {
+    const transaction = {
+      transactionDate: new Date().toISOString().split("T")[0],
+      amount: income
+        ? Math.abs(Number(values.amount))
+        : -Math.abs(Number(values.amount)),
+      comment: values.comment,
+      type: income ? "INCOME" : "EXPENSE",
+      categoryId: income
+        ? "063f1132-ba5d-42b4-951d-44011ca46262"
+        : values.categoryId,
+    };
 
-      await dispatch(
-        editTransaction({
-          id: transaction.id,
-          body: {
-            amount: adjustedAmount,
-            comment: data.comment,
-            type: transaction.type,
-          },
-        })
-      ).unwrap();
-
-      onClose(true);
-    } catch (err) {
-      setError("server", {
-        type: "manual",
-        message: err.message || "Something went wrong",
-      });
-    }
+    dispatch(editTransaction(transaction));
+    actions.resetForm();
+    onClose();
   };
 
-  return (
-    <div className={css.overlay}>
-      <div className={css.modal}>
-        <button className={css.closeBtn} onClick={() => onClose(false)}>
-          &times;
-        </button>
-        <h2>Edit Transaction</h2>
+  const categoriesData = useSelector((state) => state.transaction.category);
 
-        {/* ✅ INCOME / EXPENSE yazısı */}
-        <div className={css.typeHeader}>
-          <span
+  return (
+    <Formik
+      validationSchema={schema}
+      onSubmit={handleSubmit}
+      initialValues={{
+        amount: data.amount,
+        transactionDate: data.transactionDate,
+        comment: data.comment,
+        type: data.type === "INCOME" ? "INCOME" : "EXPENSE",
+        categoryId: data.categoryId,
+      }}
+    >
+      <Form className={css.TransactionForm}>
+        <div className={css.FormRow}>
+          <h3 className={css.FormTitle}>Add Transaction</h3>
+        </div>
+        <div className={css.FormRow}>
+          <label
+            htmlFor="incomeTrans"
             className={
-              transaction.type === "INCOME" ? css.incomeText : css.expenseText
+              income === true
+                ? [css.switchLabel, css.incomeLabel]
+                : css.switchLabel
             }
           >
-            {transaction.type === "INCOME" ? "INCOME" : "EXPENSE"}
-          </span>
+            Income
+          </label>
+          <div className={css.switchBox}>
+            {income === true ? (
+              <div
+                onClick={() => setIncome(false)}
+                className={[css.incomeSwitch, css.switchIcon].join(" ")}
+              >
+                <FaPlus className={css.icon} />
+              </div>
+            ) : (
+              <div
+                onClick={() => setIncome(true)}
+                className={[css.expenseSwitch, css.switchIcon].join(" ")}
+              >
+                <FaMinus className={css.icon} />
+              </div>
+            )}
+          </div>
+          <label
+            htmlFor="expenseTrans"
+            className={
+              income === false
+                ? [css.switchLabel, css.expenseLabel]
+                : css.switchLabel
+            }
+          >
+            expense
+          </label>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-          {/* ✅ Category sadece EXPENSE ise göster */}
-          {transaction.type === "EXPENSE" && (
-            <div className={css.readonlyField}>
-              {/* <label>Category</label> */}
-              <p>{transaction.category}</p>
-            </div>
-          )}
-
-          <label>
-            {/* Amount */}
-            <input type="number" step="0.01" {...register("amount")} />
-            {errors.amount && (
-              <p className={css.error}>{errors.amount.message}</p>
-            )}
-          </label>
-
-          <label>
-            {/* Comment */}
-            <input type="text" {...register("comment")} />
-            {errors.comment && (
-              <p className={css.error}>{errors.comment.message}</p>
-            )}
-          </label>
-
-          <label>
-            {/* Date */}
-            <Controller
-              control={control}
-              name="date"
-              render={({ field }) => (
-                <DatePicker
-                  selected={field.value}
-                  onChange={(date) => field.onChange(date)}
-                  dateFormat="yyyy-MM-dd"
-                  className={css.datepicker}
-                />
-              )}
-            />
-            {errors.date && <p className={css.error}>{errors.date.message}</p>}
-          </label>
-
-          {errors.server && (
-            <p className={css.error}>{errors.server.message}</p>
-          )}
-
-          <div className={css.buttons}>
-            <button type="submit" className={css.saveBtn}>
-              Save
-            </button>
-            <button
-              type="button"
-              className={css.cancelBtn}
-              onClick={() => onClose(true)}
+        <div className={css.FormRow}>
+          <Field type="text" name="transactionId" />
+        </div>
+        <div className={css.FormRow}>
+          {income === false ? (
+            <Field
+              as="select"
+              name="categoryId"
+              className={[css.FormInput, css.selectInput].join(" ")}
+              placeholder="Select Category"
             >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+              <option value="" disabled>
+                Select Category
+              </option>
+              {categoriesData.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </Field>
+          ) : null}
+        </div>
+        <div className={css.FormRow}>
+          <Field
+            type="number"
+            name="amount"
+            className={css.FormInput}
+            placeholder={"0.00"}
+          />
+          <Field
+            type="date"
+            name="transactionDate"
+            className={css.FormInput}
+            placeholder={"07.07.2023"}
+          />
+        </div>
+        <div className={css.FormRow}>
+          <Field
+            as="textarea"
+            name="comment"
+            className={[css.FormInput, css.FormInputText].join(" ")}
+            placeholder="Comment"
+            rows={4}
+          ></Field>
+        </div>
+        <div className={css.FormRow}>
+          <button
+            type="submit"
+            className={[css.FormButton, css.submitButton].join(" ")}
+          >
+            ADD
+          </button>
+        </div>
+        <div className={css.FormRow}>
+          <button
+            type="button"
+            onClick={() => onClose()}
+            className={css.FormButton}
+          >
+            CANCEL
+          </button>
+        </div>
+      </Form>
+    </Formik>
   );
 };
 
