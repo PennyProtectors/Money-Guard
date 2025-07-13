@@ -2,6 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 axios.defaults.baseURL = "https://wallet.b.goit.study/";
 
+const mapCategoryToTransaction = (responseData, thunkAPI) => {
+  const cateId = responseData.categoryId;
+  const categoryData = thunkAPI
+    .getState()
+    .transaction.category.find((category) => category.id === cateId);
+  responseData.category = categoryData ? categoryData.name : "Unknown";
+  return responseData;
+};
+
 export const fetchTransaction = createAsyncThunk(
   "transactions/fetchAllTransaction",
   async (_, thunkAPI) => {
@@ -9,15 +18,9 @@ export const fetchTransaction = createAsyncThunk(
       const res = await axios.get("/api/transactions");
 
       const responseData = res.data;
-      const result = responseData.map((transactionItem) => {
-        const cateId = transactionItem.categoryId;
-        const categoryData = thunkAPI
-          .getState()
-          .transaction.category.find((category) => category.id === cateId);
-        transactionItem.category = categoryData ? categoryData.name : "Unknown";
-        return transactionItem;
+      return responseData.map((transaction) => {
+        return mapCategoryToTransactions(transaction, thunkAPI);
       });
-      return result;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -29,7 +32,7 @@ export const addTransaction = createAsyncThunk(
   async (transaction, thunkAPI) => {
     try {
       const res = await axios.post("/api/transactions", transaction);
-      return res.data;
+      return mapCategoryToTransaction(res.data, thunkAPI);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
