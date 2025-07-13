@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,7 +9,7 @@ import css from "../AddTransactionForm/AddTransactionForm.module.css";
 
 // Icons
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // Operations
 import { editTransaction } from "../../redux/transactions/operations";
@@ -17,7 +17,11 @@ import { editTransaction } from "../../redux/transactions/operations";
 const EditTransactionForm = ({ data, onClose }) => {
   const dispatch = useDispatch();
   const [income, setIncome] = useState(false);
-
+  useEffect(() => {
+    if (data) {
+      setIncome(data.type === "INCOME");
+    }
+  }, [data]);
   // Validation schema
   const schema = yup.object().shape({
     amount: yup
@@ -43,13 +47,12 @@ const EditTransactionForm = ({ data, onClose }) => {
         : values.categoryId,
     };
 
-    dispatch(addTransaction(transaction));
+    dispatch(editTransaction(transaction));
     actions.resetForm();
     onClose();
   };
 
-  const categoriesData = useSelector((state) => state.transaction.category);
-  console.log("EditTransactionForm Data:", data);
+  // const categoriesData = useSelector((state) => state.transaction.category);
   return (
     <Formik
       validationSchema={schema}
@@ -59,84 +62,75 @@ const EditTransactionForm = ({ data, onClose }) => {
         transactionDate: new Date().toISOString().split("T")[0],
         comment: "",
         type: income ? "INCOME" : "EXPENSE",
-        categoryId: "",
+        categoryId: data ? data.categoryId : "",
       }}
     >
       <Form className={css.TransactionForm}>
         <div className={css.FormRow}>
-          <h3 className={css.FormTitle}>Add Transaction</h3>
+          <h3 className={css.FormTitle}>Edit Transaction</h3>
         </div>
         <div className={css.FormRow}>
           <label
             htmlFor="incomeTrans"
             className={
               income === true
-                ? [css.switchLabel, css.incomeLabel]
+                ? [css.switchLabel, css.incomeLabel].join(" ")
                 : css.switchLabel
             }
           >
             Income
           </label>
-          <div className={css.switchBox}>
-            {income === true ? (
-              <div
-                onClick={() => setIncome(false)}
-                className={[css.incomeSwitch, css.switchIcon].join(" ")}
-              >
-                <FaPlus className={css.icon} />
-              </div>
-            ) : (
-              <div
-                onClick={() => setIncome(true)}
-                className={[css.expenseSwitch, css.switchIcon].join(" ")}
-              >
-                <FaMinus className={css.icon} />
-              </div>
-            )}
-          </div>
+          /
           <label
             htmlFor="expenseTrans"
             className={
               income === false
-                ? [css.switchLabel, css.expenseLabel]
+                ? [css.switchLabel, css.expenseLabel].join(" ")
                 : css.switchLabel
             }
           >
-            expense
+            Expense
           </label>
         </div>
         <div className={css.FormRow}>
-          {income === false ? (
-            <Field
-              as="select"
-              name="categoryId"
-              className={[css.FormInput, css.selectInput].join(" ")}
-              placeholder="Select Category"
-            >
-              <option value="" disabled>
-                Select Category
-              </option>
-              {categoriesData.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </Field>
-          ) : null}
+          <p className={css.FormInput}> {data.category} </p>
         </div>
-        <div className={css.FormRow}>
-          <Field
-            type="number"
-            name="amount"
-            className={css.FormInput}
-            placeholder={"0.00"}
-          />
-          <Field
-            type="date"
-            name="transactionDate"
-            className={css.FormInput}
-            placeholder={"07.07.2023"}
-          />
+        {/* <div className={css.FormRow}>
+            {income === false ? (
+              <Field
+                as="select"
+                name="categoryId"
+                className={[css.FormInput, css.selectInput].join(" ")}
+                placeholder="Select Category"
+                hidden
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                {categoriesData.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Field>
+            ) : null}
+          </div> */}
+
+        <div className={css.FormDateAndAmountGroup}>
+          <div className={css.FormRow}>
+            <Field
+              type="number"
+              name="amount"
+              className={css.FormInput}
+              placeholder={"0.00"}
+            />
+            <Field
+              type="date"
+              name="transactionDate"
+              className={css.FormInput}
+              placeholder={"07.07.2023"}
+            />
+          </div>
         </div>
         <div className={css.FormRow}>
           <Field
@@ -152,7 +146,7 @@ const EditTransactionForm = ({ data, onClose }) => {
             type="submit"
             className={[css.FormButton, css.submitButton].join(" ")}
           >
-            ADD
+            Save
           </button>
         </div>
         <div className={css.FormRow}>
