@@ -3,13 +3,12 @@ import axios from "axios";
 axios.defaults.baseURL = "https://wallet.b.goit.study/";
 
 const mapCategoryToTransaction = (responseData, thunkAPI) => {
-    const cateId = responseData.categoryId;
-    const categoryData = thunkAPI
-      .getState()
-      .transaction.category.find((category) => category.id === cateId);
-    responseData.category = categoryData ? categoryData.name : "Unknown";
-    return responseData;
-  };
+  const cateId = responseData.categoryId;
+  const categoryData = thunkAPI
+    .getState()
+    .transaction.category.find((category) => category.id === cateId);
+  responseData.category = categoryData ? categoryData.name : "Unknown";
+  return responseData;
 };
 
 export const fetchTransaction = createAsyncThunk(
@@ -21,7 +20,7 @@ export const fetchTransaction = createAsyncThunk(
       const responseData = res.data;
       return responseData.map((transaction) => {
         return mapCategoryToTransactions(transaction, thunkAPI);
-         });
+      });
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -34,7 +33,6 @@ export const addTransaction = createAsyncThunk(
     try {
       const res = await axios.post("/api/transactions", transaction);
       return mapCategoryToTransaction(res.data, thunkAPI);
-      
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
