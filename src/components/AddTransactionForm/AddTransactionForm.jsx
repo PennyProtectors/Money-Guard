@@ -43,7 +43,9 @@ const AddTransactionForm = ({ onClose }) => {
         : -Math.abs(Number(values.amount)),
       comment: values.comment,
       type: income ? "INCOME" : "EXPENSE",
-      categoryId: values.categoryId,
+      categoryId: income
+        ? "063f1132-ba5d-42b4-951d-44011ca46262"
+        : values.categoryId,
     };
 
     dispatch(addTransaction(transaction))
@@ -114,7 +116,6 @@ const AddTransactionForm = ({ onClose }) => {
         </div>
 
         <div className={css.FormRow}>
-
           <div className={css.FormRow}>
             {income === false ? (
               <Field
