@@ -16,7 +16,7 @@
 
   @media (max-width: 767px) {
       .ModalBackdrop {
-          background: url("../../assets/images/RegisterBckgrnd-Mobile.png");
+          background: url("../../assets/images/Mobil_login_register_bckgrnd.png");
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;

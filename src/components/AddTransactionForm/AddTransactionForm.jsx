@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import * as Yup from "yup";
-// import DatePicker from "react-datepicker";
+import * as yup from "yup";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 
 // Styles
 import css from "./AddTransactionForm.module.css";
@@ -10,32 +10,27 @@ import css from "./AddTransactionForm.module.css";
 // Icons
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addTransaction } from "../../redux/transactions/operations";
 
-// Validation schema
-const schema = Yup.object().shape({
-  amount: Yup.number()
-    .typeError("Please enter the number")
-    .required("Amount is required"),
-  transactionDate: Yup.date().required("Date is required"),
-  comment: Yup.string().required("Comment is required"),
-  type: Yup.string().required(),
-  categoryId: Yup.string().required("Category is required"),
-});
+// Operations
+import { addTransaction } from "../../redux/transactions/operations";
 
 const AddTransactionForm = ({ onClose }) => {
   const dispatch = useDispatch();
-
   const [income, setIncome] = useState(false);
-  // const handleSubmit = (values) => {
-  //   console.log("Form submitted with values:", values);
-  //   dispatch(addTransaction());
-  //   // onclose();
-  // };
 
-  const handleSubmit = (values, { resetForm }) => {
-    console.log(values.date);
+  // Validation schema
+  const schema = yup.object().shape({
+    amount: yup
+      .number()
+      .typeError("Please enter the number")
+      .required("Amaount required"),
+    transactionDate: yup.date().required("Date required"),
+    comment: yup.string().required("Comment required"),
+    type: yup.string().required(),
+    category: yup.string(),
+  });
 
+  const handleSubmit = (values, actions) => {
     const transaction = {
       transactionDate: new Date().toISOString().split("T")[0],
       amount: income
@@ -48,20 +43,15 @@ const AddTransactionForm = ({ onClose }) => {
         : values.categoryId,
     };
 
-    dispatch(addTransaction(transaction))
-      .unwrap()
-      .then(() => {
-        resetForm();
-        onClose();
-      })
-      .catch((error) => {
-        console.error("Transaction eklenemedi:", error);
-      });
+    dispatch(addTransaction(transaction));
+    actions.resetForm();
+    onClose();
   };
+
   const categoriesData = useSelector((state) => state.transaction.category);
+
   return (
     <Formik
-      validationSchema={schema}
       onSubmit={handleSubmit}
       initialValues={{
         amount: "",
@@ -84,7 +74,7 @@ const AddTransactionForm = ({ onClose }) => {
                 : css.switchLabel
             }
           >
-            INCOME
+            Income
           </label>
           <div className={css.switchBox}>
             {income === true ? (
@@ -97,73 +87,64 @@ const AddTransactionForm = ({ onClose }) => {
             ) : (
               <div
                 onClick={() => setIncome(true)}
-                className={[css.expenceSwitch, css.switchIcon].join(" ")}
+                className={[css.expenseSwitch, css.switchIcon].join(" ")}
               >
                 <FaMinus className={css.icon} />
               </div>
             )}
           </div>
           <label
-            htmlFor="expenceTrans"
+            htmlFor="expenseTrans"
             className={
               income === false
-                ? [css.switchLabel, css.expenceLabel]
+                ? [css.switchLabel, css.expenseLabel]
                 : css.switchLabel
             }
           >
-            EXPENSE
+            expense
           </label>
         </div>
-
         <div className={css.FormRow}>
-          <div className={css.FormRow}>
-            {income === false ? (
-              <Field
-                as="select"
-                name="categoryId"
-                className={[css.FormInput, css.selectInput].join(" ")}
-                placeholder="Select Category"
-              >
-                <option value="" disabled>
-                  Select Category
+          {income === false ? (
+            <Field
+              as="select"
+              name="categoryId"
+              className={[css.FormInput, css.selectInput].join(" ")}
+              placeholder="Select Category"
+            >
+              <option value="" disabled>
+                Select Category
+              </option>
+              {categoriesData.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
                 </option>
-                {categoriesData.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </Field>
-            ) : null}
-          </div>
-
-          <ErrorMessage name="categoryId" component="div" />
-
-          <div className={css.amountDateGroup}>
-            <Field
-              type="number"
-              name="amount"
-              className={css.FormInput}
-              placeholder={"0.00"}
-            />
-            <ErrorMessage name="amount" component="div" />
-            <Field
-              type="date"
-              name="transactionDate"
-              className={css.FormInput}
-              placeholder={"07.07.2023"}
-            />
-            <ErrorMessage name="transactionDate" component="div" />
-          </div>
+              ))}
+            </Field>
+          ) : null}
+        </div>
+        <div className={css.FormRow}>
+          <Field
+            type="number"
+            name="amount"
+            className={css.FormInput}
+            placeholder={"0.00"}
+          />
+          <Field
+            type="date"
+            name="transactionDate"
+            className={css.FormInput}
+            placeholder={"07.07.2023"}
+          />
         </div>
         <div className={css.FormRow}>
           <Field
             as="textarea"
             name="comment"
-            className={[css.FormInput, css.commentInput].join(" ")}
+            className={[css.FormInput, css.FormInputText].join(" ")}
             placeholder="Comment"
             rows={4}
-          />
-          <ErrorMessage name="comment" component="div" />
+          ></Field>
         </div>
         <div className={css.FormRow}>
           <button
@@ -175,7 +156,7 @@ const AddTransactionForm = ({ onClose }) => {
         </div>
         <div className={css.FormRow}>
           <button
-            type="reset"
+            type="button"
             onClick={() => onClose()}
             className={css.FormButton}
           >
