@@ -2,7 +2,10 @@ import React from "react";
 import styles from "./Balance.module.css";
 import { useMediaQuery } from "react-responsive";
 
+
 const Balance = () => {
+ 
+ 
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
   const isMobile = useMediaQuery({ maxWidth: 767 });
   

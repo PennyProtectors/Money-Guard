@@ -3,7 +3,7 @@ import css from "./DashboardPage.module.css";
 import Header from "../components/Header";
 import Balance from "../components/Balance/Balance";
 import Currency from "../components/Currency/Currency";
-import Dashboard from "../components/Dashboard";
+
 import StatisticsTab from "./StatisticsTab";
 import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAddTransactions";
 import { useMediaQuery } from "react-responsive";
@@ -32,6 +32,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 // Chart.js bileşenlerini kaydet
 ChartJS.register(
@@ -108,7 +109,7 @@ function DashboardPage() {
       },
     },
   };
-
+  const location = useLocation();
   if (isTablet) {
     return (
       <div className={css.tabletDashboard}>
@@ -117,25 +118,22 @@ function DashboardPage() {
           <div className={css.leftSidebar}>
             <div className={css.menuItems}>
               <div
-                className={`${css.menuItem} ${
-                  activeTab === "home" ? css.active : ""
-                }`}
-                onClick={() => setActiveTab("home")}
+                className={`${css.menuItem}`}
+                // className={`${css.menuItem} ${
+                //   activeTab === "home" ? css.active : ""
+                // }`}
               >
                 <img src={home} alt="Home" />
                 <span>Home</span>
               </div>
-              <div
-                className={`${css.menuItem} ${
-                  activeTab === "stats" ? css.active : ""
-                }`}
-                onClick={() => setActiveTab("stats")}
-              >
-                <img src={stats} alt="Statistics" />
-                <span>Statistics</span>
+              <div className={`${css.menuItem} ${css.location === "/statics"}`}>
+                <Link to="statics" className={css.menuItem}>
+                  <img src={stats} alt="Statistics" />
+                  <span>Statistics</span>
+                </Link>
               </div>
             </div>
-            <div className={css.balanceContainer}>
+            <div className={`${css.balanceContainer} `}>
               <Balance />
             </div>
           </div>
@@ -148,6 +146,7 @@ function DashboardPage() {
           <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}
         <TransactionsList />
+        <Outlet />
       </div>
     );
   }
@@ -158,29 +157,22 @@ function DashboardPage() {
       <div className={css.mobileDashboard}>
         <Header />
         <div className={css.mobileNavigation}>
-          <div
-            className={`${css.navItem} ${
-              activeTab === "home" ? css.activeNavItem : ""
-            }`}
-            onClick={() => setActiveTab("home")}
-          >
-            <img src={home} alt="Home" />
+          <div className={`${css.navItem} ${location.pathname === "/"}`}>
+            <Link to="/">
+              <img src={home} alt="Home" />
+            </Link>
+          </div>
+          <div className={`${css.navItem} ${location.pathname === "/statics"}`}>
+            <Link to="statics">
+              <img src={stats} alt="Statistics" />
+            </Link>
           </div>
           <div
-            className={`${css.navItem} ${
-              activeTab === "stats" ? css.activeNavItem : ""
-            }`}
-            onClick={() => setActiveTab("stats")}
+            className={`${css.navItem} ${location.pathname === "/currency"}`}
           >
-            <img src={stats} alt="Statistics" />
-          </div>
-          <div
-            className={`${css.navItem} ${
-              activeTab === "currency" ? css.activeNavItem : ""
-            }`}
-            onClick={() => setActiveTab("currency")}
-          >
-            <img src={dollar} alt="Currency" />
+            <Link to="currency">
+              <img src={dollar} alt="Currency" />
+            </Link>
           </div>
         </div>
 
@@ -208,6 +200,7 @@ function DashboardPage() {
         {showModal && (
           <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}
+        <Outlet />
       </div>
     );
   }
@@ -283,6 +276,7 @@ function DashboardPage() {
       {showModal && (
         <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
       )}
+      <Outlet />
     </div>
   );
 }
