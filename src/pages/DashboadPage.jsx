@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import css from "./DashboardPage.module.css";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import Balance from "../components/Balance/Balance";
 import Currency from "../components/Currency/Currency";
 
