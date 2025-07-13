@@ -19,7 +19,7 @@ export const fetchTransaction = createAsyncThunk(
 
       const responseData = res.data;
       return responseData.map((transaction) => {
-        return mapCategoryToTransactions(transaction, thunkAPI);
+        return mapCategoryToTransaction(transaction, thunkAPI);
       });
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -60,8 +60,8 @@ export const editTransaction = createAsyncThunk(
     try {
       const { transactionId, ...body } = transaction;
       const res = await axios.patch(`/api/transactions/${transactionId}`, body);
-      thunkAPI.dispatch(fetchTransaction());
-      return res.data;
+
+      return mapCategoryToTransaction(res.data, thunkAPI);
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message
