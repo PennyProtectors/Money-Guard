@@ -27,12 +27,13 @@ const AddTransactionForm = ({ onClose }) => {
     transactionDate: yup.date().required("Date required"),
     comment: yup.string().required("Comment required"),
     type: yup.string().required(),
-    category: yup.string(),
+    categoryId: yup.string(),
   });
 
   const handleSubmit = (values, actions) => {
     const transaction = {
-      transactionDate: new Date().toISOString().split("T")[0],
+      transactionDate:
+        values.transactionDate || new Date().toISOString().split("T")[0],
       amount: income
         ? Math.abs(Number(values.amount))
         : -Math.abs(Number(values.amount)),
@@ -52,6 +53,7 @@ const AddTransactionForm = ({ onClose }) => {
 
   return (
     <Formik
+      validationSchema={schema}
       onSubmit={handleSubmit}
       initialValues={{
         amount: "",
