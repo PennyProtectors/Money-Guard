@@ -16,8 +16,7 @@ import TransactionsList from "../components/TransactionsList/TransactionsList";
 import TransactionsListDesktop from "../components/TransactionsList/TransactionsListDesktop";
 import TransactionsListMobile from "../components/TransactionsList/TransactionsListMobile";
 
-import ModalAddTransaction from "../components/ModalAddTransaction/ModalAddTransaction";
-
+import ModalTransaction from "../components/ModalTransaction/ModalTransaction";
 
 // import { Line } from "react-chartjs-2";
 
@@ -146,9 +145,9 @@ function DashboardPage() {
         </div>
         <ButtonAddTransactions onClick={handleOpenModal} />
         {showModal && (
-          <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
+          <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}
-        <TransactionsList/>
+        <TransactionsList />
       </div>
     );
   }
@@ -207,7 +206,7 @@ function DashboardPage() {
 
         <ButtonAddTransactions onClick={handleOpenModal} />
         {showModal && (
-          <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
+          <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}
       </div>
     );
@@ -286,7 +285,6 @@ function DashboardPage() {
       {showModal && (
         <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
       )}
-
     </div>
   );
 }
