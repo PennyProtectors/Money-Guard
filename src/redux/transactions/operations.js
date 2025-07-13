@@ -53,9 +53,11 @@ export const addTransaction = createAsyncThunk(
 
 export const editTransaction = createAsyncThunk(
   "transactions/editTransaction",
-  async ({ id, body }, thunkAPI) => {
+  async (transaction, thunkAPI) => {
     try {
-      const res = await axios.patch(`/api/transactions/${id}`, body);
+      const { transactionId, ...body } = transaction;
+      const res = await axios.patch(`/api/transactions/${transactionId}`, body);
+      fetchTransaction();
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -94,7 +96,9 @@ export const fetchTransactionStatistics = createAsyncThunk(
   "transactions/fetchStatistics",
   async ({ month, year }, thunkAPI) => {
     try {
-      const res = await axios.get(`/api/transactions/statistics?month=${month}&year=${year}`);
+      const res = await axios.get(
+        `/api/transactions/statistics?month=${month}&year=${year}`
+      );
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
