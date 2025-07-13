@@ -18,7 +18,10 @@ export const fetchTransaction = createAsyncThunk(
       const res = await axios.get("/api/transactions");
 
       const responseData = res.data;
-      return responseData.map((transaction) => {
+      const sorted = responseData.sort(
+        (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
+      );
+      return sorted.map((transaction) => {
         return mapCategoryToTransaction(transaction, thunkAPI);
       });
     } catch (error) {
