@@ -1,30 +1,32 @@
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import LoginPage from "./pages/LoginPage";
-import RegistrationPage from "./pages/RegistrationPage";
-import DashboadPage from "./pages/DashboadPage";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import Loader from "./components/Loader/Loader";
-import { refreshUser } from "./redux/auth/operations";
 import { Toaster } from "react-hot-toast";
+import { lazy, Suspense, useEffect } from "react";
+import { refreshUser } from "./redux/auth/operations";
+
+const PrivateRoute = lazy(() =>
+  import("./components/PrivateRoute/PrivateRoute")
+);
+const RestrictedRoute = lazy(() =>
+  import("./components/RestrictedRoute/RestrictedRoute")
+);
+const DashboadPage = lazy(() => import("./pages/DashboadPage"));
+const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
 
 function App() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
   const loading = useSelector((state) => state?.transactions?.loading);
-  const isRefreshing = useSelector((state) => state?.auth?.isRefreshing);
+  const isRefreshing = useSelector((state) => state.auth.isRefreshing);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/dashboard");
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(refreshUser());
     }
-  }, [isLoggedIn, navigate]);
+  }, [dispatch]);
 
   if (isRefreshing) return <Loader />;
 
@@ -32,14 +34,36 @@ function App() {
     <>
       <Toaster position="top-right" reverseOrder={false} />
       {loading && <Loader />}
-      <Routes>
-        <Route path="/register" element={<RegistrationPage />} />
-        <Route path="/" element={<LoginPage />} />
-        <Route
-          path="/dashboard"
-          element={isLoggedIn ? <DashboadPage /> : <Navigate to="/" />}
-        />
-      </Routes>
+      <Suspense>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute redirectTo="/login">
+                <DashboadPage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/">
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/">
+                <RegistrationPage />
+              </RestrictedRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
     </>
   );
 }

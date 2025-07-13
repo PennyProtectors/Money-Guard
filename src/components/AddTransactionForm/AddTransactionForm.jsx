@@ -114,6 +114,7 @@ const AddTransactionForm = ({ onClose }) => {
         </div>
 
         <div className={css.FormRow}>
+
           <div className={css.FormRow}>
             {income === false ? (
               <Field
@@ -133,6 +134,7 @@ const AddTransactionForm = ({ onClose }) => {
               </Field>
             ) : null}
           </div>
+
           <ErrorMessage name="categoryId" component="div" />
 
           <div className={css.amountDateGroup}>

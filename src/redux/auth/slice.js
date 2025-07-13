@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logIn, logOut, refreshUser, register } from "../auth/operations";
+import {
+  clearAuthHeader,
+  logIn,
+  logOut,
+  refreshUser,
+  register,
+} from "../auth/operations";
+
+const tokenFromStorage = localStorage.getItem("token");
 
 const initialState = {
   user: {
@@ -8,7 +16,7 @@ const initialState = {
   },
   isLoggedIn: false,
   isRefreshing: false,
-  token: null,
+  token: tokenFromStorage || null,
 };
 
 export const authSlice = createSlice({
@@ -43,7 +51,11 @@ export const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(refreshUser.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.token = null;
+        state.user = { name: null, email: null };
         state.isRefreshing = false;
+        clearAuthHeader(); // axios header temizle
       });
   },
 });

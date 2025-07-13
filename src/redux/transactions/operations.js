@@ -36,17 +36,31 @@ export const addTransaction = createAsyncThunk(
   }
 );
 
+// export const editTransaction = createAsyncThunk(
+//   "transactions/editTransaction",
+//   async (transactionId, thunkAPI) => {
+//     try {
+//       const res = await axios.patch(
+//         "/api/transactions/${transactionId}",
+//         transactionId
+//       );
+//       return res.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
 export const editTransaction = createAsyncThunk(
   "transactions/editTransaction",
-  async (transactionId, thunkAPI) => {
+  async ({ id, body }, thunkAPI) => {
     try {
-      const res = await axios.patch(
-        "/api/transactions/{transactionId}",
-        transactionId
-      );
+      const res = await axios.patch(`/api/transactions/${id}`, body);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
     }
   }
 );
@@ -55,11 +69,9 @@ export const deleteTransaction = createAsyncThunk(
   "transactions/deleteTransaction",
   async (transactionId, thunkAPI) => {
     try {
-      const res = await axios.delete(
-        "/api/transactions/{transactionId}",
-        transactionId
-      );
-      return;
+      const res = await axios.delete(`/api/transactions/${transactionId}`);
+      console.log(transactionId);
+      return transactionId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -71,6 +83,18 @@ export const fetchTransactionCategory = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get("/api/transaction-categories");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchTransactionStatistics = createAsyncThunk(
+  "transactions/fetchStatistics",
+  async ({ month, year }, thunkAPI) => {
+    try {
+      const res = await axios.get(`/api/transactions/statistics?month=${month}&year=${year}`);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
