@@ -36,7 +36,7 @@ const EditTransactionForm = ({ data, onClose }) => {
 
   const handleSubmit = (values, actions) => {
     const transaction = {
-      transactionDate: new Date().toISOString().split("T")[0],
+      transactionDate: values.transactionDate,
       amount: income
         ? Math.abs(Number(values.amount))
         : -Math.abs(Number(values.amount)),
@@ -45,6 +45,7 @@ const EditTransactionForm = ({ data, onClose }) => {
       categoryId: income
         ? "063f1132-ba5d-42b4-951d-44011ca46262"
         : values.categoryId,
+      transactionId: data.id,
     };
 
     dispatch(editTransaction(transaction));
@@ -59,9 +60,11 @@ const EditTransactionForm = ({ data, onClose }) => {
       onSubmit={handleSubmit}
       initialValues={{
         amount: data ? Math.abs(Number(data.amount)) : "",
-        transactionDate: new Date().toISOString().split("T")[0],
-        comment: "",
-        type: income ? "INCOME" : "EXPENSE",
+        transactionDate: data
+          ? data.transactionDate
+          : new Date().toISOString().split("T")[0],
+        comment: data ? data.comment : "",
+        type: data ? (data.type === "INCOME" ? "INCOME" : "EXPENSE") : "INCOME",
         categoryId: data ? data.categoryId : "",
       }}
     >
