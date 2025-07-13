@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ChevronDown } from 'lucide-react';
-import './StatisticsDashboard.css';
-
-// Import your actual Redux action - replace with your actual import
-// import { fetchTransactionStatistics } from '../../redux/finance/financeOperations';
-
-// Mock Redux action - replace with your actual action
-const fetchTransactionStatistics = (month, year) => ({
-  type: 'FETCH_TRANSACTION_STATISTICS',
-  payload: { month, year }
-});
+import { fetchTransactionStatistics } from '../../redux/transactions/operations';
+import './StatisticsDahsboard.css';
 
 const StatisticsDashboard = () => {
   const dispatch = useDispatch();
@@ -20,8 +12,8 @@ const StatisticsDashboard = () => {
   const [showMonthDropdown, setShowMonthDropdown] = useState(false);
   const [showYearDropdown, setShowYearDropdown] = useState(false);
   
-  // Replace with your actual Redux selector
-  const statistics = useSelector(state => state.finance?.statistics || {});
+  // Get statistics from Redux store
+  const statistics = useSelector(state => state.transaction?.statistics || {});
   const totalExpenses = statistics.totalExpenses || 0;
   const totalIncome = statistics.totalIncome || 0;
 
@@ -43,7 +35,7 @@ const StatisticsDashboard = () => {
   const years = Array.from({ length: 10 }, (_, i) => currentDate.getFullYear() - 5 + i);
 
   useEffect(() => {
-    dispatch(fetchTransactionStatistics(selectedMonth, selectedYear));
+    dispatch(fetchTransactionStatistics({ month: selectedMonth, year: selectedYear }));
   }, [selectedMonth, selectedYear, dispatch]);
 
   const handleMonthChange = (monthValue) => {

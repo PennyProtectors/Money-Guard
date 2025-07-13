@@ -37,16 +37,10 @@ const StatisticsTable = ({ statistics, period = 'This Month' }) => {
               <tr key={index}>
                 <td className={styles.categoryCell}>{stat.category}</td>
                 <td className={styles.amount}>
-                  {stat.total.toLocaleString('tr-TR', {
-                    style: 'currency',
-                    currency: 'TRY'
-                  })}
+                  ${stat.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </td>
                 <td className={styles.amount}>
-                  {stat.average.toLocaleString('tr-TR', {
-                    style: 'currency',
-                    currency: 'TRY'
-                  })}
+                  ${stat.average.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </td>
                 <td className={styles.countCell}>{stat.count}</td>
               </tr>
@@ -58,18 +52,12 @@ const StatisticsTable = ({ statistics, period = 'This Month' }) => {
               </td>
               <td className={styles.amount}>
                 <strong>
-                  {totalAmount.toLocaleString('tr-TR', {
-                    style: 'currency',
-                    currency: 'TRY'
-                  })}
+                  ${totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </strong>
               </td>
               <td className={styles.amount}>
                 <strong>
-                  {averageAmount.toLocaleString('tr-TR', {
-                    style: 'currency',
-                    currency: 'TRY'
-                  })}
+                  ${averageAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                 </strong>
               </td>
               <td className={styles.countCell}>
