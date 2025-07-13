@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Balance from "../components/Balance/Balance";
 import Currency from "../components/Currency/Currency";
 import Dashboard from "../components/Dashboard";
+import StatisticsTab from "./StatisticsTab";
 import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAddTransactions";
 import { useMediaQuery } from "react-responsive";
 import home from "../assets/images/baseline-home-24px 3.png";
@@ -192,7 +193,7 @@ function DashboardPage() {
 
         {activeTab === "stats" && (
           <div className={css.mobileContent}>
-            <Dashboard />
+            <StatisticsTab />
           </div>
         )}
 
@@ -273,7 +274,7 @@ function DashboardPage() {
             </div>
           ) : (
             <div className={css.statisticsContent}>
-              <Dashboard />
+              <StatisticsTab />
             </div>
           )}
         </div>

@@ -67,3 +67,15 @@ export const fetchTransactionCategory = createAsyncThunk(
     }
   }
 );
+
+export const fetchTransactionStatistics = createAsyncThunk(
+  "transactions/fetchStatistics",
+  async ({ month, year }, thunkAPI) => {
+    try {
+      const res = await axios.get(`/api/transactions/statistics?month=${month}&year=${year}`);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

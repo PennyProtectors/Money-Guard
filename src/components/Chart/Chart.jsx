@@ -8,8 +8,8 @@ import './Chart.css';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart = () => {
-  // Replace with your actual Redux selector
-  const statistics = useSelector(state => state.finance?.statistics || {});
+  // Get statistics from Redux store
+  const statistics = useSelector(state => state.transaction?.statistics || {});
   const categoryExpenses = statistics.categoryExpenses || [];
   
   // Mock data for demonstration - replace with actual data from Redux
