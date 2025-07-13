@@ -1,4 +1,5 @@
-.registerContainer {
+/* .registerContainer {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background-image: url("../../assets/images/Mobil_login_register_bckgrnd.png");
@@ -30,6 +31,7 @@
 }
 
 .registerForm {
+  padding-block: 100px;
   padding-left: 20px;
   padding-right: 20px;
   align-items: center;
@@ -38,6 +40,8 @@
   justify-content: center;
   justify-items: center;
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
 .registerInputGroup {
@@ -49,7 +53,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid #ffffff66;
-  width: 280px; /* Veya ihtiyaca göre */
+  width: 280px;
   padding: 5px 0;
 }
 
@@ -81,12 +85,10 @@
 
 .registerButon {
   box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    96.76deg,
-    #ffc727 -16.42%,
-    #9e40ba 97.04%,
-    #7000ff 150.71%
-  );
+  background: linear-gradient(96.76deg,
+      #ffc727 -16.42%,
+      #9e40ba 97.04%,
+      #7000ff 150.71%);
   border-radius: 20px;
   width: 280px;
   height: 50px;
@@ -114,6 +116,7 @@
   text-align: center;
   margin-bottom: 23px;
 }
+
 .registerPasswordBar {
   margin: 0 !important;
   padding: 0 !important;
@@ -124,19 +127,21 @@
 .registerPasswordBar p {
   display: none;
 }
-.registerPasswordBar > div > div:nth-child(2),
-.registerPasswordBar > div > div:nth-child(4),
-.registerPasswordBar > div > div:nth-child(6) {
+
+.registerPasswordBar>div>div:nth-child(2),
+.registerPasswordBar>div>div:nth-child(4),
+.registerPasswordBar>div>div:nth-child(6) {
   width: 0px !important;
   padding: 0 !important;
   margin: 0 !important;
-  background-color: transparent !important; /* Renk de gizlensin istersen */
+  background-color: transparent !important;
 }
 
 .registerErrorMessage {
   color: aqua;
 }
-@media (min-width: 768px) and (max-width: 1279px) {
+ */
+/* @media (min-width: 768px) and (max-width: 1279px) {
   .registerContainer {
     background-image: url("../../assets/images/RegisterTablet_bckgrnd.png");
     background-repeat: no-repeat;
@@ -158,18 +163,262 @@
   .registerButon .registerLogInButon {
     width: 300px;
   }
-}
-@media (min-width: 1280px) {
+} */
+
+/* @media (min-width: 1280px) {
   .registerContainer {
     background-image: url("../../assets/images/RegisterDesktop_bckgrnd.png");
     min-width: 1280px;
     align-items: center;
     justify-content: center;
   }
+
   .registerForm {
     width: 533px;
     height: 624px;
     background-image: url("../../assets/images/Tablet_loginForm_bckgrnd.png");
     box-sizing: border-box;
+  }
+} */
+
+@media (max-width: 767px) {
+  .registerContainer {
+    background-image: url("../../assets/images/Mobil_login_register_bckgrnd.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* align-self: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* padding: 20px; */
+    height: 100vh;
+  }
+
+  .registerForm {
+    height: 100%;
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .registerForm .registerTitle {
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 19.11px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #fbfbfb;
+    text-align: center;
+  }
+
+  .registerForm .registerInputGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+  }
+
+  .registerForm .registerInputGroup .registerInput {
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-inline: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ffffff66;
+  }
+
+  .registerForm .registerInputGroup .registerInput .registerInputIcon {
+    width: 24px;
+    height: 24px;
+    color: #FFFFFF66;
+  }
+
+  .registerForm .registerInputGroup .registerInput .registerInputField {
+    width: 80%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+
+  .registerForm .registerInputGroup .registerErrorMessage {
+    color: lightcoral;
+    text-align: left;
+    padding: 0px 45px;
+  }
+
+  .registerForm .registerButonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+
+  }
+
+  .registerForm .registerButonGroup .registerButon,
+  .registerForm .registerButonGroup .registerLogInButon {
+    /* background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%); */
+    /* color: #FBFBFB; */
+    width: 100%;
+    padding: 15px 60px;
+    border-radius: 20px;
+    border: none;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 10%;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 1px 9px 15px 0px #00000033;
+    cursor: pointer;
+  }
+
+  .registerForm .registerButonGroup .registerButon {
+    background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%);
+    color: #FBFBFB;
+  }
+
+  .registerForm .registerButonGroup .registerLogInButon {
+    color: #623F8B;
+    background: #FCFCFC;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .registerContainer {
+    background-image: url("../../assets/images/RegisterTablet_bckgrnd.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .registerForm {
+    background-image: url("../../assets/images/Mobil_login_register_bckgrnd.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    gap: 30px;
+    box-sizing: border-box;
+    padding: 40px 65px;
+    max-width: 533px;
+    width: 100%;
+    border-radius: 3%;
+    color: #fbfbfb;
+  }
+
+  .registerForm .registerTitle {
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 26.96px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+  }
+
+  .registerForm .registerInputGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .registerForm .registerInputGroup .registerInput {
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-inline: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ffffff66;
+  }
+
+  .registerForm .registerInputGroup .registerInput .registerInputIcon {
+    width: 24px;
+    height: 24px;
+    color: #FFFFFF66;
+  }
+
+  .registerForm .registerInputGroup .registerInput .registerInputField {
+    width: 80%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+
+  .registerForm .registerInputGroup .registerErrorMessage {
+    color: lightcoral;
+    text-align: left;
+    padding: 0px 45px;
+  }
+
+  .registerForm .registerButonGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+
+  }
+
+  .registerForm .registerButonGroup .registerButon,
+  .registerForm .registerButonGroup .registerLogInButon {
+    /* background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%); */
+    /* color: #FBFBFB; */
+    width: calc(100% - 110px);
+    padding: 15px 60px;
+    border-radius: 20px;
+    border: none;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 10%;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 1px 9px 15px 0px #00000033;
+    cursor: pointer;
+  }
+
+  .registerForm .registerButonGroup .registerButon {
+    background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%);
+    color: #FBFBFB;
+  }
+
+  .registerForm .registerButonGroup .registerLogInButon {
+    color: #623F8B;
+    background: #FCFCFC;
   }
 }

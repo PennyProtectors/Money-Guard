@@ -1,153 +1,144 @@
-.loginContainer {
+.LoginPage {
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  background-image: url("../../assets/images/Mobil_login_register_bckgrnd.png");
+
+  align-items: center;
+  justify-content: center;
+  background: url("../../assets/images/Mobil_login_register_bckgrnd.png");
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.loginForm {
-  padding-left: 20px;
-  padding-right: 20px;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.loginTitle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 97px 96px 52px 96px;
-  gap: 0px;
-}
-
-.loginTitle p {
-  width: 129px;
-  height: 28.86px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 19.1111px;
-  line-height: 29px;
-  color: #fbfbfb;
-}
-
-.loginInputGroup {
-  align-items: center;
-  padding-bottom: 40px;
-}
-
-.loginInput {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #ffffff66;
-  width: 280px;
-  padding: 5px 0;
-}
-
-.loginInputField {
-  border: none;
-  outline: none;
-  background: transparent;
   color: white;
-  font-size: 16px;
-  flex: 1;
-  padding: 5px 0;
 }
 
-.loginInputIcon {
-  width: 24px;
-  height: 24px;
-  color: #ffffff66;
-  margin-right: 10px;
+.LoginPage_Area {
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+
+  width: 100%;
+  padding: 0px 40px
 }
 
-.loginButonGroup {
+
+.LoginPage_Area .LoginPage_Header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LoginPage_Header .LoginPage_Logo {
+  width: 25px;
+  height: 25px;
+}
+
+.LoginPage_Header .LoginPage_Title {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.LoginPage_Area .LoginPage_Form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.LoginPage_Form .LoginPage_Form_Group {
+  width: 100%;
+  display: flex;
   align-items: center;
+  gap: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #FFFFFF66;
 }
 
-.loginButon {
-  box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    96.76deg,
-    #ffc727 -16.42%,
-    #9e40ba 97.04%,
-    #7000ff 150.71%
-  );
-  border-radius: 20px;
-  width: 280px;
-  height: 50px;
+.LoginPage_Form .LoginPage_Form_Group .LoginPage_Icon {
+  width: 24px;
+  height: 24px;
+}
+
+.LoginPage_Form .LoginPage_Form_Group .LoginPage_Input {
+  width: 100%;
+  background: transparent;
   border: none;
-  color: #fbfbfb;
   font-weight: 400;
   font-size: 18px;
   line-height: 100%;
-  letter-spacing: 10%;
-  text-align: center;
+  letter-spacing: 0%;
+  outline: none;
+  color: #FFFFFF99;
 }
 
-.loginRegisterButon {
-  box-shadow: 1px 9px 15px rgba(0, 0, 0, 0.2);
-  background: #fcfcfc;
+.LoginPage_Form .LoginPage_Button {
+  padding: 13px 98px;
   border-radius: 20px;
-  width: 280px;
-  height: 50px;
-  border: none;
-  color: #623f8b;
   font-weight: 400;
   font-size: 18px;
   line-height: 100%;
-  letter-spacing: 10%;
+  letter-spacing: 3px;
   text-align: center;
-  margin-bottom: 23px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  color: #623F8B;
+  box-shadow: 1px 9px 15px 0px #00000033;
+  background: #FCFCFC;
+  cursor: pointer;
 }
 
-.loginErrorMessage {
-  color: aqua;
+.LoginPage_Form .LoginPage_Button.LoginPage_Button_Submit {
+  margin-top: 40px;
+  background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%);
+  color: #FBFBFB;
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
-  .loginContainer {
-    background-image: url("../../assets/images/Tablet_login_bckgrnd.png");
+.LoginPage_Form .LoginPage_Form_ErrorMessage {
+  color: red;
+}
+
+
+@media (min-width: 768px) {
+  .LoginPage {
+    background: linear-gradient(219.62deg, rgba(109, 84, 235, 0.73) 28.31%, rgba(101, 35, 146, 0.73) 66.76%), url("../../assets/images/Tablet_login_bckgrnd.png");
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-width: 768px;
+    backdrop-filter: blur(40px);
+    padding: 0;
+  }
+
+  .LoginPage_Area {
+    width: 100%;
+    max-width: 550px;
+    padding: 80px 62px;
+    background: url("../../assets/images/Tablet_loginForm_bckgrnd.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5%;
     align-items: center;
   }
 
-  .loginForm {
-    width: 533px;
-    height: 570px;
-    background-image: url("../../assets/images/Tablet_loginForm_bckgrnd.png");
-    background-size: cover;
-    background-repeat: no-repeat;
+  .LoginPage_Area .LoginPage_Header {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
   }
 
-  .loginButon,
-  .loginRegisterButon {
-    width: 300px;
-  }
-}
-
-/* Desktop görünümü */
-@media (min-width: 1280px) {
-  .loginContainer {
-    background-image: url("../../assets/images/Desktop_login_bckgrnd.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-width: 1280px;
-    align-items: center;
-    height: 100vh;
+  .LoginPage_Area .LoginPage_Form {
+    width: 100%;
+    max-width: 410px;
   }
 
-  .loginForm {
-    width: 533px;
-    height: 570px;
-    background-image: url("../../assets/images/Tablet_loginForm_bckgrnd.png");
-    background-size: cover;
-    background-repeat: no-repeat;
+  .LoginPage_Form .LoginPage_Button {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
   }
+
 }
