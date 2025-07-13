@@ -5,17 +5,11 @@ import {
   editTransaction,
   fetchTransaction,
   fetchTransactionCategory,
-  fetchTransactionStatistics,
 } from "./operations";
 
 const initialState = {
   transactions: [],
   category: [],
-  statistics: {
-    totalExpenses: 0,
-    totalIncome: 0,
-    categoryExpenses: []
-  },
   loading: false,
   error: null,
 };
@@ -67,17 +61,6 @@ const transactionSlice = createSlice({
       })
       .addCase(fetchTransactionCategory.rejected, (state, action) => {
         state.error = action.payload.message;
-      })
-      .addCase(fetchTransactionStatistics.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchTransactionStatistics.fulfilled, (state, action) => {
-        state.statistics = action.payload;
-        state.loading = false;
-      })
-      .addCase(fetchTransactionStatistics.rejected, (state, action) => {
-        state.error = action.payload.message;
-        state.loading = false;
       });
   },
 });

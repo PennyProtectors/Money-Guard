@@ -1,41 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ChevronDown } from 'lucide-react';
-import { fetchTransactionStatistics } from '../../redux/transactions/operations';
-import './StatisticsDahsboard.css';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { ChevronDown } from "lucide-react";
+import { fetchTransactionSummary } from "../../redux/statics/operations";
+import "./StatisticsDahsboard.css";
 
 const StatisticsDashboard = () => {
   const dispatch = useDispatch();
   const currentDate = new Date();
-  const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth() + 1);
+  const [selectedMonth, setSelectedMonth] = useState(
+    currentDate.getMonth() + 1
+  );
   const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
   const [showMonthDropdown, setShowMonthDropdown] = useState(false);
   const [showYearDropdown, setShowYearDropdown] = useState(false);
-  
+
   // Get statistics from Redux store
-  const statistics = useSelector(state => state.transaction?.statistics || {});
-  const totalExpenses = statistics.totalExpenses || 0;
-  const totalIncome = statistics.totalIncome || 0;
+  const statics = useSelector((state) => state.statics?.data || {});
+  // const totalExpenses = statics.totalExpenses || 0;
+  // const totalIncome = statics.totalIncome || 0;
+
+  const totalExpenses = Math.abs(statics.expenseSummary || 0);
+  const totalIncome = statics.incomeSummary || 0;
 
   const months = [
-    { value: 1, label: 'January' },
-    { value: 2, label: 'February' },
-    { value: 3, label: 'March' },
-    { value: 4, label: 'April' },
-    { value: 5, label: 'May' },
-    { value: 6, label: 'June' },
-    { value: 7, label: 'July' },
-    { value: 8, label: 'August' },
-    { value: 9, label: 'September' },
-    { value: 10, label: 'October' },
-    { value: 11, label: 'November' },
-    { value: 12, label: 'December' }
+    { value: 1, label: "January" },
+    { value: 2, label: "February" },
+    { value: 3, label: "March" },
+    { value: 4, label: "April" },
+    { value: 5, label: "May" },
+    { value: 6, label: "June" },
+    { value: 7, label: "July" },
+    { value: 8, label: "August" },
+    { value: 9, label: "September" },
+    { value: 10, label: "October" },
+    { value: 11, label: "November" },
+    { value: 12, label: "December" },
   ];
 
-  const years = Array.from({ length: 10 }, (_, i) => currentDate.getFullYear() - 5 + i);
+  const years = Array.from(
+    { length: 10 },
+    (_, i) => currentDate.getFullYear() - 5 + i
+  );
 
   useEffect(() => {
-    dispatch(fetchTransactionStatistics({ month: selectedMonth, year: selectedYear }));
+    console.log("Fetched statics:", statics);
+  }, [statics]);
+
+  useEffect(() => {
+    dispatch(
+      fetchTransactionSummary({ month: selectedMonth, year: selectedYear })
+    );
   }, [selectedMonth, selectedYear, dispatch]);
 
   const handleMonthChange = (monthValue) => {
@@ -49,14 +63,17 @@ const StatisticsDashboard = () => {
   };
 
   const getSelectedMonthLabel = () => {
-    return months.find(month => month.value === selectedMonth)?.label || 'Select Month';
+    return (
+      months.find((month) => month.value === selectedMonth)?.label ||
+      "Select Month"
+    );
   };
 
   return (
     <div className="statistics-dashboard">
       <div className="dashboard-header">
         <h2 className="dashboard-title">Statistics</h2>
-        
+
         <div className="selector-container">
           {/* Month Selector */}
           <div className="dropdown-container">
@@ -67,13 +84,15 @@ const StatisticsDashboard = () => {
               {getSelectedMonthLabel()}
               <ChevronDown className="dropdown-icon" />
             </button>
-            
+
             {showMonthDropdown && (
               <div className="dropdown-months">
-                {months.map((month, index) => (
+                {months.map((month) => (
                   <div
                     key={month.value}
-                    className={`dropdown-item ${selectedMonth === month.value ? 'selected' : ''}`}
+                    className={`dropdown-item ${
+                      selectedMonth === month.value ? "selected" : ""
+                    }`}
                     onClick={() => handleMonthChange(month.value)}
                   >
                     {month.label}
@@ -92,13 +111,15 @@ const StatisticsDashboard = () => {
               {selectedYear}
               <ChevronDown className="dropdown-icon" />
             </button>
-            
+
             {showYearDropdown && (
               <div className="dropdown-years">
-                {years.map((year, index) => (
+                {years.map((year) => (
                   <div
                     key={year}
-                    className={`dropdown-item ${selectedYear === year ? 'selected' : ''}`}
+                    className={`dropdown-item ${
+                      selectedYear === year ? "selected" : ""
+                    }`}
                     onClick={() => handleYearChange(year)}
                   >
                     {year}
@@ -115,13 +136,16 @@ const StatisticsDashboard = () => {
         <div className="income-card">
           <h3 className="card-title">Total Income</h3>
           <p className="card-amount income-amount">
-            ${totalIncome.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            ${totalIncome.toLocaleString("en-US", { minimumFractionDigits: 2 })}
           </p>
         </div>
         <div className="expense-card">
           <h3 className="card-title">Total Expenses</h3>
           <p className="card-amount expense-amount">
-            ${totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            $
+            {totalExpenses.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+            })}
           </p>
         </div>
       </div>
