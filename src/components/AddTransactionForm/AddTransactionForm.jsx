@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 // import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 // Styles
 import css from "./AddTransactionForm.module.css";
@@ -16,18 +16,18 @@ import { addTransaction } from "../../redux/transactions/operations";
 const schema = Yup.object().shape({
   amount: Yup.number()
     .typeError("Please enter the number")
-    .required("Amaount required"),
-  transactionDate: Yup.date().required("Date required"),
-  comment: Yup.string().required("Comment required"),
+    .required("Amount is required"),
+  transactionDate: Yup.date().required("Date is required"),
+  comment: Yup.string().required("Comment is required"),
   type: Yup.string().required(),
-  categoryId: Yup.string(),
+  categoryId: Yup.string().required("Category is required"),
 });
 
 const AddTransactionForm = ({ onClose }) => {
   const categories = useSelector((state) => state.transaction.category);
   const dispatch = useDispatch();
 
-  const [income, setIncome] = useState(true);
+  const [income, setIncome] = useState(false);
   // const handleSubmit = (values) => {
   //   console.log("Form submitted with values:", values);
   //   dispatch(addTransaction());
@@ -125,6 +125,7 @@ const AddTransactionForm = ({ onClose }) => {
               ))}
             </Field>
           )}
+          <ErrorMessage name="categoryId" component="div" />
 
           <div className={css.amountDateGroup}>
             <Field
@@ -133,12 +134,14 @@ const AddTransactionForm = ({ onClose }) => {
               className={css.FormInput}
               placeholder={"0.00"}
             />
+            <ErrorMessage name="amount" component="div" />
             <Field
               type="date"
               name="transactionDate"
               className={css.FormInput}
               placeholder={"07.07.2023"}
             />
+            <ErrorMessage name="transactionDate" component="div" />
           </div>
         </div>
         <div className={css.FormRow}>
@@ -149,6 +152,7 @@ const AddTransactionForm = ({ onClose }) => {
             placeholder="Comment"
             rows={4}
           />
+          <ErrorMessage name="comment" component="div" />
         </div>
         <div className={css.FormRow}>
           <button
