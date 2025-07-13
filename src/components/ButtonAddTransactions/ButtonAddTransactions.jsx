@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./ButtonAddTransactions.module.css";
-import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
+import ModalTransaction from "../ModalTransaction/ModalTransaction";
 const ButtonAddTransactions = () => {
   const [isModaAddTransactionOpen, setIsModalAddTransactionOpen] =
     React.useState(false);
@@ -9,7 +9,7 @@ const ButtonAddTransactions = () => {
 
   return (
     <>
-      <ModalAddTransaction
+      <ModalTransaction
         show={isModaAddTransactionOpen}
         onClose={toggleModalHandler}
       />
