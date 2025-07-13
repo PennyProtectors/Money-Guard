@@ -70,7 +70,7 @@ const AddTransactionForm = ({ onClose }) => {
             htmlFor="incomeTrans"
             className={
               income === true
-                ? [css.switchLabel, css.incomeLabel]
+                ? [css.switchLabel, css.incomeLabel].join(" ")
                 : css.switchLabel
             }
           >
@@ -97,7 +97,7 @@ const AddTransactionForm = ({ onClose }) => {
             htmlFor="expenseTrans"
             className={
               income === false
-                ? [css.switchLabel, css.expenseLabel]
+                ? [css.switchLabel, css.expenseLabel].join(" ")
                 : css.switchLabel
             }
           >

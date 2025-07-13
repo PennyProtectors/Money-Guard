@@ -11,6 +11,7 @@ const ButtonAddTransactions = () => {
     <>
       <ModalTransaction
         show={isModaAddTransactionOpen}
+        type={"add"}
         onClose={toggleModalHandler}
       />
       <button onClick={toggleModalHandler} className={css.buttonAddTransaction}>

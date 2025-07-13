@@ -3,49 +3,61 @@ import css from "./TransactionsList.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
 import { deleteTransaction } from "../../redux/transactions/operations";
+import ModalTransaction from "../ModalTransaction/ModalTransaction";
 const TransactionsListDesktop = () => {
   const data = useSelector((state) => state.transaction.transactions);
-
+  const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] =
+    useState(false);
+  const [editTransactionData, setEditTransactionData] = useState(null);
+  const openEditTransModal = (data) => {
+    console.log("openEditTransModal", data);
+    setEditTransactionData(data);
+    setIsEditTransactionModalOpen(true);
+  };
   return (
-    <table className={css.transactionsList_Table}>
-      <thead>
-        <tr
-          className={[
-            css.transactionsList_Table_Row,
-            css.transactionsList_Table_Header,
-          ].join(" ")}
-        >
-          <th className={css.column}>Date</th>
-          <th className={css.column}>Type</th>
-          <th className={css.column}>Category</th>
-          <th className={css.column}>Comment</th>
-          <th colSpan="1" className={css.column}>
-            Sum
-          </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {data && data.length > 0
-          ? data.map((transaction) => (
-              <TransactionsListDesktop_Item
-                key={transaction.id}
-                transaction={transaction}
-              />
-            ))
-          : null}
-      </tbody>
-    </table>
+    <>
+      <ModalTransaction
+        show={isEditTransactionModalOpen}
+        type={"edit"}
+        data={editTransactionData}
+        onClose={() => setIsEditTransactionModalOpen(false)}
+      />
+      <table className={css.transactionsList_Table}>
+        <thead>
+          <tr
+            className={[
+              css.transactionsList_Table_Row,
+              css.transactionsList_Table_Header,
+            ].join(" ")}
+          >
+            <th className={css.column}>Date</th>
+            <th className={css.column}>Type</th>
+            <th className={css.column}>Category</th>
+            <th className={css.column}>Comment</th>
+            <th colSpan="1" className={css.column}>
+              Sum
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {data && data.length > 0
+            ? data.map((transaction) => (
+                <TransactionsListDesktop_Item
+                  key={transaction.id}
+                  transaction={transaction}
+                  openEditTransModal={openEditTransModal}
+                />
+              ))
+            : null}
+        </tbody>
+      </table>
+    </>
   );
 };
 
-const TransactionsListDesktop_Item = ({ transaction }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isIncome, setIsIncome] = React.useState(false);
+const TransactionsListDesktop_Item = ({ transaction, openEditTransModal }) => {
   const dispatch = useDispatch();
-  React.useEffect(() => {
-    setIsIncome(transaction.type === "INCOME");
-  }, [transaction.type]);
 
   return (
     <tr className={css.transactionsList_Table_Row}>
@@ -66,7 +78,7 @@ const TransactionsListDesktop_Item = ({ transaction }) => {
         <div className={css.buttons}>
           <button
             type="button"
-            onClick={() => setIsOpen(true)}
+            onClick={() => openEditTransModal(transaction)}
             className={`${css.transactionItem_Button}`}
           >
             <svg
@@ -86,12 +98,7 @@ const TransactionsListDesktop_Item = ({ transaction }) => {
               />
             </svg>
           </button>
-          {isOpen && (
-            <ModalEditTransaction
-              transaction={transaction}
-              onClose={() => setIsOpen(false)}
-            />
-          )}
+
           <button
             type="button"
             onClick={() => dispatch(deleteTransaction(transaction.id))}

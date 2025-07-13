@@ -269,7 +269,7 @@ function DashboardPage() {
         <div className={css.rightPanel}>
           {activeTab === "home" ? (
             <div className={css.transactionsTable}>
-              {/* Transactions table content */}
+              <TransactionsListDesktop />
             </div>
           ) : (
             <div className={css.statisticsContent}>
@@ -278,8 +278,6 @@ function DashboardPage() {
           )}
         </div>
       </div>
-
-      <TransactionsListDesktop />
 
       <ButtonAddTransactions onClick={handleOpenModal} />
       {showModal && (
