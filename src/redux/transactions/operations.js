@@ -57,7 +57,7 @@ export const editTransaction = createAsyncThunk(
     try {
       const { transactionId, ...body } = transaction;
       const res = await axios.patch(`/api/transactions/${transactionId}`, body);
-      fetchTransaction();
+      thunkAPI.dispatch(fetchTransaction());
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
