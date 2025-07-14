@@ -13,6 +13,7 @@ const ButtonAddTransactions = () => {
         show={isModaAddTransactionOpen}
         type={"add"}
         onClose={toggleModalHandler}
+        style={{ zIndex: 9999 }}
       />
       <button onClick={toggleModalHandler} className={css.buttonAddTransaction}>
         <svg

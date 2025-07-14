@@ -4,14 +4,15 @@
       left: 0;
       width: 100%;
       height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      z-index: 2;
+      z-index: 10000;
+  }
 
+  .ModalArea {
+      z-index: 10001;
   }
 
   @media (max-width: 767px) {
