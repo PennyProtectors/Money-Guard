@@ -325,3 +325,98 @@
   box-shadow: none;
   border-radius: 0;
 }
+
+/* Desktop Statistics Styles */
+.desktopStatistics {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2b145f, #34084b);
+}
+
+.desktopContent {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.leftPanel {
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  gap: 32px;
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.menuItem img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  filter: brightness(0) invert(1);
+}
+
+.menuItem.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.menuItem.active img {
+  opacity: 1;
+}
+
+.balanceSection {
+  flex: 1;
+}
+
+.currencySection {
+  height: 350px;
+}
+
+.rightPanel {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+.statisticsContent {
+  height: 100%;
+}
+
+.desktopMainContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  height: 100%;
+  align-items: start;
+}
+
+.desktopChartSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.desktopFiltersSection {
+  background: transparent;
+  padding: 0;
+}

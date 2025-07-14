@@ -7,6 +7,7 @@ import StatisticsDashboard from "../components/StatisticsDashboard/StatisticsDas
 import Chart from "../components/Chart/Chart";
 import StatisticsTable from "../components/StatisticsTable/StatisticsTable";
 import Currency from "../components/Currency/Currency";
+import Balance from "../components/Balance/Balance";
 import { fetchTransactionSummary } from "../redux/statics/operations";
 import styles from "./StatisticsTab.module.css";
 import home from "../assets/images/baseline-home-24px 3.png";
@@ -17,6 +18,7 @@ const StatisticsTab = () => {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 769, maxWidth: 1280 });
+  const isDesktop = useMediaQuery({ minWidth: 1281 });
   const location = useLocation();
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
@@ -25,6 +27,7 @@ const StatisticsTab = () => {
   // Get statistics from Redux store
   const statistics = useSelector((state) => state.statics?.data || {});
   const loading = useSelector((state) => state.statics?.loading || false);
+  const transactions = useSelector((state) => state.transaction.transactions);
 
   useEffect(() => {
     // Fetch statistics for current month and year on component mount
@@ -32,6 +35,13 @@ const StatisticsTab = () => {
       fetchTransactionSummary({ month: currentMonth, year: currentYear })
     );
   }, [dispatch, currentMonth, currentYear]);
+
+  // Refetch statistics when transactions change
+  useEffect(() => {
+    dispatch(
+      fetchTransactionSummary({ month: currentMonth, year: currentYear })
+    );
+  }, [transactions, dispatch, currentMonth, currentYear]);
 
   // Prepare data for StatisticsTable
   const tableData =
@@ -41,6 +51,26 @@ const StatisticsTab = () => {
       average: category.amount / (category.count || 1),
       count: category.count || 0,
     })) || [];
+
+  if (isDesktop) {
+    return (
+      <div className={styles.desktopStatistics}>
+        
+        <div className={styles.desktopContent}>
+          <div className={styles.rightPanel}>
+            <div className={styles.desktopMainContent}>
+              <div className={styles.desktopChartSection}>
+                <Chart />
+              </div>
+              <div className={styles.desktopFiltersSection}>
+                <StatisticsDashboard />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isTablet) {
     return (
@@ -117,26 +147,7 @@ const StatisticsTab = () => {
     );
   }
 
-  return (
-    <div className={styles.statisticsTab}>
-      <div className={styles.statisticsContainer}>
-        <StatisticsDashboard />
-
-        <div className={styles.statisticsContent}>
-          <div className={styles.chartSection}>
-            <Chart />
-          </div>
-
-          <div className={styles.tableSection}>
-            <StatisticsTable
-              statistics={tableData}
-              period={`${currentMonth}/${currentYear}`}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  // This default return is now removed
 };
 
 export default StatisticsTab;

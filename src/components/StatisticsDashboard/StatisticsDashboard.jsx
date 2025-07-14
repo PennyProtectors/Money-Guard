@@ -73,7 +73,109 @@ const StatisticsDashboard = () => {
 
   // Tablet görünümü için özel render
   const isTabletView = useMediaQuery({ minWidth: 769, maxWidth: 1280 });
-  
+  const isDesktop = useMediaQuery({ minWidth: 1281 });
+
+  // Add desktop view before tablet view
+  if (isDesktop) {
+    return (
+      <div className={styles["statistics-dashboard"]}>
+        <div className={styles["filter-section"]}>
+          {/* Month Dropdown */}
+          <div className={styles["dropdown-container"]}>
+            <button 
+              className={`${styles["dropdown-button"]} ${showMonthDropdown ? styles.open : ''}`}
+              onClick={() => setShowMonthDropdown(!showMonthDropdown)}
+            >
+              <span>{selectedMonth}</span>
+              <div className={styles["dropdown-arrow"]}></div>
+            </button>
+            {showMonthDropdown && (
+              <div className={styles["dropdown-menu"]}>
+                {months.map((month) => (
+                  <div
+                    key={month}
+                    className={`${styles["dropdown-item"]} ${selectedMonth === month ? styles.selected : ''}`}
+                    onClick={() => handleMonthChange(month)}
+                  >
+                    {month}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Year Dropdown */}
+          <div className={styles["dropdown-container"]}>
+            <button 
+              className={`${styles["dropdown-button"]} ${showYearDropdown ? styles.open : ''}`}
+              onClick={() => setShowYearDropdown(!showYearDropdown)}
+            >
+              <span>{selectedYear}</span>
+              <div className={styles["dropdown-arrow"]}></div>
+            </button>
+            {showYearDropdown && (
+              <div className={styles["dropdown-menu"]}>
+                {years.map((year) => (
+                  <div
+                    key={year}
+                    className={`${styles["dropdown-item"]} ${selectedYear === year ? styles.selected : ''}`}
+                    onClick={() => handleYearChange(year)}
+                  >
+                    {year}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Categories List */}
+        <div className={styles["categories-section"]}>
+          <div className={styles["categories-header"]}>
+            <span className={styles["header-category"]}>Category</span>
+            <span className={styles["header-sum"]}>Sum</span>
+          </div>
+          
+          <div className={styles["categories-list"]}>
+            {categoriesSummary.length > 0 ? (
+              categoriesSummary.map((category, index) => (
+                <div key={index} className={styles["category-item"]}>
+                  <div className={styles["category-info"]}>
+                    <div className={`${styles["category-color"]} ${styles[`color-${index % 9}`]}`}></div>
+                    <span className={styles["category-name"]}>{category.name}</span>
+                  </div>
+                  <span className={styles["category-amount"]}>
+                    {Math.abs(category.total).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                  </span>
+                </div>
+              ))
+            ) : (
+              <div className={styles["no-data"]}>
+                <p>No data available for this period</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Summary Section */}
+        <div className={styles["desktop-summary"]}>
+          <div className={styles["summary-row"]}>
+            <span className={styles["summary-label"]}>Expenses:</span>
+            <span className={`${styles["summary-amount"]} ${styles.expense}`}>
+              {totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            </span>
+          </div>
+          <div className={styles["summary-row"]}>
+            <span className={styles["summary-label"]}>Income:</span>
+            <span className={`${styles["summary-amount"]} ${styles.income}`}>
+              {totalIncome.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (isTabletView) {
     return (
       <div className={styles["statistics-dashboard"]}>
