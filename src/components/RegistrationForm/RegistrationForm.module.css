@@ -225,7 +225,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
   }
 
   .registerForm .registerInputGroup .registerInput {
@@ -241,7 +240,7 @@
   .registerForm .registerInputGroup .registerInput .registerInputIcon {
     width: 24px;
     height: 24px;
-    color: #FFFFFF66;
+    color: #ffffff66;
   }
 
   .registerForm .registerInputGroup .registerInput .registerInputField {
@@ -267,7 +266,6 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-
   }
 
   .registerForm .registerButonGroup .registerButon,
@@ -290,16 +288,29 @@
   }
 
   .registerForm .registerButonGroup .registerButon {
-    background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%);
-    color: #FBFBFB;
+    background: linear-gradient(
+      96.76deg,
+      #ffc727 -16.42%,
+      #9e40ba 97.04%,
+      #7000ff 150.71%
+    );
+    color: #fbfbfb;
   }
 
   .registerForm .registerButonGroup .registerLogInButon {
-    color: #623F8B;
-    background: #FCFCFC;
+    color: #623f8b;
+    background: #fcfcfc;
+  }
+
+  .registerPasswordBar > div > div:nth-child(2),
+  .registerPasswordBar > div > div:nth-child(4),
+  .registerPasswordBar > div > div:nth-child(6) {
+    width: 0px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: transparent !important;
   }
 }
-
 
 @media (min-width: 768px) {
   .registerContainer {
@@ -362,7 +373,7 @@
   .registerForm .registerInputGroup .registerInput .registerInputIcon {
     width: 24px;
     height: 24px;
-    color: #FFFFFF66;
+    color: #ffffff66;
   }
 
   .registerForm .registerInputGroup .registerInput .registerInputField {
@@ -390,7 +401,6 @@
     justify-content: center;
     gap: 20px;
     width: 100%;
-
   }
 
   .registerForm .registerButonGroup .registerButon,
@@ -413,12 +423,26 @@
   }
 
   .registerForm .registerButonGroup .registerButon {
-    background: linear-gradient(96.76deg, #FFC727 -16.42%, #9E40BA 97.04%, #7000FF 150.71%);
-    color: #FBFBFB;
+    background: linear-gradient(
+      96.76deg,
+      #ffc727 -16.42%,
+      #9e40ba 97.04%,
+      #7000ff 150.71%
+    );
+    color: #fbfbfb;
   }
 
   .registerForm .registerButonGroup .registerLogInButon {
-    color: #623F8B;
-    background: #FCFCFC;
+    color: #623f8b;
+    background: #fcfcfc;
+  }
+
+  .registerPasswordBar > div > div:nth-child(2),
+  .registerPasswordBar > div > div:nth-child(4),
+  .registerPasswordBar > div > div:nth-child(6) {
+    width: 0px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: transparent !important;
   }
 }
