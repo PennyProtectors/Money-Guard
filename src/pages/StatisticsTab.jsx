@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import StatisticsDashboard from "../components/StatisticsDashboard/StatisticsDashboard";
 import Chart from "../components/Chart/Chart";
 import StatisticsTable from "../components/StatisticsTable/StatisticsTable";
@@ -8,6 +9,7 @@ import styles from "./StatisticsTab.module.css";
 
 const StatisticsTab = () => {
   const dispatch = useDispatch();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
   const currentYear = currentDate.getFullYear();
@@ -31,6 +33,24 @@ const StatisticsTab = () => {
       average: category.amount / (category.count || 1),
       count: category.count || 0,
     })) || [];
+
+  if (isMobile) {
+    return (
+      <div className={styles.statisticsTab}>
+        <div className={styles.statisticsContainer}>
+          <h2 className={styles.mobileStatsTitle}>Statistics</h2>
+          
+          <div className={styles.chartSection}>
+            <Chart />
+          </div>
+
+          <div className={styles.mobileDashboard}>
+            <StatisticsDashboard />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.statisticsTab}>

@@ -56,8 +56,8 @@
 .tabletContent {
   display: flex;
   padding: 0;
-  height: calc(100vh - 80px);
   align-items: flex-start;
+  margin: 2% 0;
 }
 
 .leftSidebar {
