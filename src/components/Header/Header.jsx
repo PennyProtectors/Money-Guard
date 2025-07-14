@@ -1,9 +1,9 @@
 import React from "react";
 import css from "./Header.module.css";
-import logo from "../assets/images/TabletLogo.png";
-import exit from "../assets/images/exit.png";
+import logo from "../../assets/images/TabletLogo.png";
+import exit from "../../assets/images/exit.png";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../redux/auth/operations";
+import { logOut } from "../../redux/auth/operations";
 import { useMediaQuery } from "react-responsive";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";

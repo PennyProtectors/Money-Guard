@@ -1,34 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./TransactionsList.module.css";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
+import { deleteTransaction } from "../../redux/transactions/operations";
+import ModalTransaction from "../ModalTransaction/ModalTransaction";
 
 const TransactionsListMobile = () => {
-  const data = useSelector((state) => state.transaction.transactions);
-  // const data = [];
+  let transactionsData = useSelector((state) => state.transaction.transactions);
+  const sorted = (transactionsData = [...transactionsData].sort(
+    (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
+  ));
+
+  const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] =
+    useState(false);
+
+  const [editTransactionData, setEditTransactionData] = useState(null);
+
+  const openEditTransModal = (data) => {
+    console.log("openEditTransModal", data);
+    setEditTransactionData(data);
+    setIsEditTransactionModalOpen(true);
+  };
 
   return (
-    <div className={css.transactionsList_Area}>
-      {data && data.length > 0 ? (
-        data.map((transaction) => (
-          <TransactionsListMobileItem
-            key={transaction.id}
-            transaction={transaction}
-          />
-        ))
-      ) : (
-        <p className={css.errorMessage}>No transactions found !</p>
-      )}
-    </div>
+    <>
+      <ModalTransaction
+        show={isEditTransactionModalOpen}
+        type={"edit"}
+        data={editTransactionData}
+        onClose={() => setIsEditTransactionModalOpen(false)}
+      />
+      <div className={css.transactionsList_Area}>
+        {sorted && sorted.length > 0 ? (
+          sorted.map((transaction) => (
+            <TransactionsListMobileItem
+              key={transaction.id}
+              transaction={transaction}
+              openEditTransModal={openEditTransModal}
+            />
+          ))
+        ) : (
+          <p className={css.errorMessage}>No transactions found !</p>
+        )}
+      </div>
+    </>
   );
 };
 
-const TransactionsListMobileItem = ({ transaction }) => {
+const TransactionsListMobileItem = ({ transaction, openEditTransModal }) => {
   const [isIncome, setIsIncome] = React.useState(false);
+
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     setIsIncome(transaction.type === "INCOME");
   }, [transaction.type]);
-  const categoriesData = useSelector((state) => state.transaction.category);
+
   return (
     <div
       className={
@@ -49,11 +77,7 @@ const TransactionsListMobileItem = ({ transaction }) => {
       </div>
       <div className={css.transactionItem_Row}>
         <h6 className={css.Key}>Category</h6>
-        <span className={css.Value}>
-          {categoriesData.find(
-            (category) => category.id === transaction.categoryId
-          ).name || "Uncategorized"}
-        </span>
+        <span className={css.Value}>{transaction.category}</span>
       </div>
       <div className={css.transactionItem_Row}>
         <h6 className={css.Key}>Comment</h6>
@@ -72,8 +96,16 @@ const TransactionsListMobileItem = ({ transaction }) => {
         </span>
       </div>
       <div className={[css.transactionItem_Row, css.buttons].join(" ")}>
-        <button className={[css.delete, css.btn].join(" ")}>Delete</button>
-        <button className={[css.edit, css.btn].join(" ")}>
+        <button
+          className={[css.delete, css.btn].join(" ")}
+          onClick={() => dispatch(deleteTransaction(transaction.id))}
+        >
+          Delete
+        </button>
+        <button
+          className={[css.edit, css.btn].join(" ")}
+          onClick={() => openEditTransModal(transaction)}
+        >
           <svg
             width="14"
             height="13"
@@ -90,7 +122,6 @@ const TransactionsListMobileItem = ({ transaction }) => {
               strokeLinejoin="round"
             />
           </svg>
-         
         </button>
       </div>
     </div>

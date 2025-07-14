@@ -1,0 +1,700 @@
+/* StatisticsDashboard Component Styles */
+.statistics-dashboard {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .dashboard-header {
+    flex-direction: row;
+  }
+}
+
+.dashboard-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .selector-container {
+    flex-direction: row;
+  }
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-trigger {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 16px;
+  padding-right: 32px;
+  min-width: 120px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.dropdown-trigger:hover {
+  border-color: #9ca3af;
+}
+
+.dropdown-trigger:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  border-color: transparent;
+}
+
+.dropdown-icon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+/* Custom Dropdown Styles - Months */
+.dropdown-months {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  width: 160px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: linear-gradient(0deg, rgba(83, 61, 186, 0.7) 0%, rgba(80, 48, 154, 0.7) 43.14%, rgba(106, 70, 165, 0.525) 73.27%, rgba(133, 93, 175, 0.133) 120.03%);
+  box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(50px);
+  border-radius: 8px;
+  padding: 8px 0;
+}
+
+.dropdown-months .dropdown-item {
+  padding: 8px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #FBFBFB;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dropdown-months .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-months .dropdown-item.selected {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FF868D;
+  position: relative;
+}
+
+.dropdown-months .dropdown-item.selected::after {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: #FFFFFF;
+  border-radius: 50%;
+}
+
+/* Custom Dropdown Styles - Years */
+.dropdown-years {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  width: 160px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: linear-gradient(0deg, rgba(83, 61, 186, 0.7) 0%, rgba(80, 48, 154, 0.7) 43.14%, rgba(106, 70, 165, 0.525) 73.27%, rgba(133, 93, 175, 0.133) 120.03%);
+  box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(50px);
+  border-radius: 8px;
+  padding: 8px 0;
+}
+
+.dropdown-years .dropdown-item {
+  padding: 8px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #FBFBFB;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dropdown-years .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-years .dropdown-item.selected {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FF868D;
+  position: relative;
+}
+
+.dropdown-years .dropdown-item.selected::after {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: #FFFFFF;
+  border-radius: 50%;
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.income-card {
+  background: #f0fdf4;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.expense-card {
+  background: #fef2f2;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+
+.income-card .card-title {
+  color: #166534;
+}
+
+.expense-card .card-title {
+  color: #991b1b;
+}
+
+.card-amount {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.income-amount {
+  color: #16a34a;
+}
+
+.expense-amount {
+  color: #dc2626;
+}
+
+/* Mobile Dropdown Styles (max-width: 480px) */
+@media (max-width: 480px) {
+  .dropdown-months {
+    width: 280px;
+    max-height: 400px;
+    padding: 0;
+  }
+
+  .dropdown-months .dropdown-item {
+    padding: 12px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #FBFBFB;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .dropdown-months .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-months .dropdown-item.selected {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FF868D;
+  }
+
+  .dropdown-months .dropdown-item.selected::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #FFFFFF;
+    border-radius: 50%;
+  }
+
+  .dropdown-years {
+    width: 280px;
+    max-height: 300px;
+    padding: 0;
+  }
+
+  .dropdown-years .dropdown-item {
+    padding: 12px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #FBFBFB;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .dropdown-years .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-years .dropdown-item.selected {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FF868D;
+  }
+
+  .dropdown-years .dropdown-item.selected::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #FFFFFF;
+    border-radius: 50%;
+  }
+
+  /* Mobile dropdown selection indicator */
+  .dropdown-months .dropdown-item.selected::before,
+  .dropdown-years .dropdown-item.selected::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #FF868D;
+  }
+}
+
+/* Responsive adjustments */
+
+/* Phone styles (max-width: 480px) */
+@media (max-width: 480px) {
+  .statistics-dashboard {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .dashboard-header {
+    gap: 12px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .dashboard-title {
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .selector-container {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .dropdown-trigger {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 16px;
+    min-height: 44px; /* Better touch target */
+  }
+  
+  .summary-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .income-card,
+  .expense-card {
+    padding: 12px;
+  }
+  
+  .card-title {
+    font-size: 13px;
+  }
+  
+  .card-amount {
+    font-size: 20px;
+  }
+}
+
+/* Tablet styles (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .statistics-dashboard {
+    padding: 20px;
+  }
+  
+  .dashboard-header {
+    gap: 16px;
+  }
+  
+  .selector-container {
+    flex-direction: row;
+    gap: 12px;
+  }
+  
+  .dropdown-trigger {
+    min-width: 140px;
+    padding: 9px 16px;
+  }
+  
+  .dropdown-months,
+  .dropdown-years {
+    width: 160px;
+  }
+  
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+  }
+  
+  .income-card,
+  .expense-card {
+    padding: 14px;
+  }
+  
+  .card-title {
+    font-size: 14px;
+  }
+  
+  .card-amount {
+    font-size: 22px;
+  }
+}
+
+/* Small tablet and large phone landscape (max-width: 639px) */
+@media (max-width: 639px) {
+  .statistics-dashboard {
+    padding: 16px;
+  }
+  
+  .dashboard-header {
+    gap: 12px;
+  }
+  
+  .selector-container {
+    width: 100%;
+  }
+  
+  .dropdown-trigger {
+    width: 100%;
+  }
+}
+
+/* iMac/Desktop styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .statistics-dashboard {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 40px 0;
+    margin-bottom: 40px;
+  }
+  
+  .dashboard-header {
+    gap: 32px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+  
+  .dashboard-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+  }
+  
+  .selector-container {
+    gap: 24px;
+    flex-direction: row;
+  }
+  
+  .dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown-trigger {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 16px 24px;
+    min-width: 180px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown-trigger:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+  
+  .dropdown-trigger:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #FF868D;
+    border-color: #FF868D;
+  }
+  
+  .dropdown-icon {
+    width: 20px;
+    height: 20px;
+    color: #FFFFFF;
+  }
+  
+  /* Desktop Dropdown Styles */
+  .dropdown-months,
+  .dropdown-years {
+    width: 220px;
+    max-height: 350px;
+    background: linear-gradient(0deg, rgba(83, 61, 186, 0.85) 0%, rgba(80, 48, 154, 0.85) 43.14%, rgba(106, 70, 165, 0.7) 73.27%, rgba(133, 93, 175, 0.4) 120.03%);
+    box-shadow: 0px 8px 80px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(60px);
+    border-radius: 12px;
+    padding: 12px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .dropdown-months .dropdown-item,
+  .dropdown-years .dropdown-item {
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #FBFBFB;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .dropdown-months .dropdown-item:hover,
+  .dropdown-years .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(4px);
+  }
+  
+  .dropdown-months .dropdown-item.selected,
+  .dropdown-years .dropdown-item.selected {
+    background: rgba(255, 255, 255, 0.15);
+    color: #FF868D;
+    font-weight: 500;
+  }
+  
+  .dropdown-months .dropdown-item.selected::after,
+  .dropdown-years .dropdown-item.selected::after {
+    content: '';
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown-months .dropdown-item.selected::before,
+  .dropdown-years .dropdown-item.selected::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #FF868D;
+    border-radius: 0 2px 2px 0;
+  }
+  
+  /* Desktop Summary Cards */
+  .summary-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+  
+  .income-card,
+  .expense-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+  }
+  
+  .income-card:hover,
+  .expense-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    margin-top: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .income-card .card-title {
+    color: #10B981;
+  }
+  
+  .expense-card .card-title {
+    color: #EF4444;
+  }
+  
+  .card-amount {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .income-amount {
+    color: #10B981;
+  }
+  
+  .expense-amount {
+    color: #EF4444;
+  }
+}
+
+/* Extra Large Desktop styles (min-width: 1440px) */
+@media (min-width: 1440px) {
+  .statistics-dashboard {
+    padding: 48px 0;
+    margin-bottom: 48px;
+  }
+  
+  .dashboard-header {
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .dashboard-title {
+    font-size: 36px;
+  }
+  
+  .selector-container {
+    gap: 32px;
+  }
+  
+  .dropdown-trigger {
+    padding: 18px 28px;
+    min-width: 200px;
+    font-size: 20px;
+  }
+  
+  .dropdown-months,
+  .dropdown-years {
+    width: 240px;
+    max-height: 400px;
+  }
+  
+  .dropdown-months .dropdown-item,
+  .dropdown-years .dropdown-item {
+    padding: 14px 28px;
+    font-size: 18px;
+    min-height: 52px;
+  }
+  
+  .summary-cards {
+    gap: 32px;
+    margin-top: 48px;
+  }
+  
+  .income-card,
+  .expense-card {
+    padding: 32px;
+    border-radius: 20px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .card-amount {
+    font-size: 36px;
+  }
+}

@@ -1,54 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./TransactionsList.module.css";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTransaction } from "../../redux/transactions/operations";
+import ModalTransaction from "../ModalTransaction/ModalTransaction";
 const TransactionsListDesktop = () => {
-  const data = useSelector((state) => state.transaction.transactions);
-
+  let transactionsData = useSelector((state) => state.transaction.transactions);
+  const sorted = (transactionsData = [...transactionsData].sort(
+    (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
+  ));
+  const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] =
+    useState(false);
+  const [editTransactionData, setEditTransactionData] = useState(null);
+  const openEditTransModal = (data) => {
+    console.log("openEditTransModal", data);
+    setEditTransactionData(data);
+    setIsEditTransactionModalOpen(true);
+  };
   return (
-    <table className={css.transactionsList_Table}>
-      <tr
-        className={[
-          css.transactionsList_Table_Row,
-          css.transactionsList_Table_Header,
-        ].join(" ")}
-      >
-        <th className={css.column}>Date</th>
-        <th className={css.column}>Type</th>
-        <th className={css.column}>Category</th>
-        <th className={css.column}>Comment</th>
-        <th colSpan="1" className={css.column}>
-          Sum
-        </th>
-        <th></th>
-      </tr>
-      {data && data.length > 0
-        ? data.map((transaction) => (
-            <TransactionsListDesktop_Item
-              key={transaction.id}
-              transaction={transaction}
-            />
-          ))
-        : null}
-    </table>
+    <>
+      <ModalTransaction
+        show={isEditTransactionModalOpen}
+        type={"edit"}
+        data={editTransactionData}
+        onClose={() => setIsEditTransactionModalOpen(false)}
+      />
+      <table className={css.transactionsList_Table}>
+        <thead>
+          <tr
+            className={[
+              css.transactionsList_Table_Row,
+              css.transactionsList_Table_Header,
+            ].join(" ")}
+          >
+            <th className={css.column}>Date</th>
+            <th className={css.column}>Type</th>
+            <th className={css.column}>Category</th>
+            <th className={css.column}>Comment</th>
+            <th colSpan="1" className={css.column}>
+              Sum
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {sorted && sorted.length > 0
+            ? sorted.map((transaction) => (
+                <TransactionsListDesktop_Item
+                  key={transaction.id}
+                  transaction={transaction}
+                  openEditTransModal={openEditTransModal}
+                />
+              ))
+            : null}
+        </tbody>
+      </table>
+    </>
   );
 };
 
-const TransactionsListDesktop_Item = ({ transaction }) => {
-  const [isIncome, setIsIncome] = React.useState(false);
-  React.useEffect(() => {
-    setIsIncome(transaction.type === "INCOME");
-  }, [transaction.type]);
-  const categoriesData = useSelector((state) => state.transaction.category);
+const TransactionsListDesktop_Item = ({ transaction, openEditTransModal }) => {
+  const dispatch = useDispatch();
+
   return (
     <tr className={css.transactionsList_Table_Row}>
       <td className={css.date}>{transaction.transactionDate}</td>
       <td className={css.type}>{transaction.type === "INCOME" ? "+" : "-"}</td>
-      <td className={css.category}>
-        {categoriesData.find(
-          (category) => category.id === transaction.categoryId
-        ).name || "Uncategorized"}
-      </td>
+      <td className={css.category}>{transaction.category}</td>
       <td className={css.comment}>{transaction.comment}</td>
       <td>
         <span className={css.sum}>
@@ -63,7 +80,7 @@ const TransactionsListDesktop_Item = ({ transaction }) => {
         <div className={css.buttons}>
           <button
             type="button"
-            onClick={() => {}}
+            onClick={() => openEditTransModal(transaction)}
             className={`${css.transactionItem_Button}`}
           >
             <svg
@@ -83,9 +100,10 @@ const TransactionsListDesktop_Item = ({ transaction }) => {
               />
             </svg>
           </button>
+
           <button
             type="button"
-            onClick={() => {}}
+            onClick={() => dispatch(deleteTransaction(transaction.id))}
             className={[css.transactionItem_Button, css.delete].join(" ")}
           >
             Delete

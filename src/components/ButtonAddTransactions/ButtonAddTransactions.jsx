@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./ButtonAddTransactions.module.css";
-import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
+import ModalTransaction from "../ModalTransaction/ModalTransaction";
 const ButtonAddTransactions = () => {
   const [isModaAddTransactionOpen, setIsModalAddTransactionOpen] =
     React.useState(false);
@@ -9,10 +9,11 @@ const ButtonAddTransactions = () => {
 
   return (
     <>
-      {/* <ModalAddTransaction
+      <ModalTransaction
         show={isModaAddTransactionOpen}
+        type={"add"}
         onClose={toggleModalHandler}
-      /> */}
+      />
       <button onClick={toggleModalHandler} className={css.buttonAddTransaction}>
         <svg
           width="20"
@@ -21,8 +22,8 @@ const ButtonAddTransactions = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M10 0V20" stroke="white" stroke-width="2" />
-          <path d="M0 10L20 10" stroke="white" stroke-width="2" />
+          <path d="M10 0V20" stroke="white" strokeWidth="2" />
+          <path d="M0 10L20 10" stroke="white" strokeWidth="2" />
         </svg>
       </button>
     </>

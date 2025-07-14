@@ -1,116 +1,173 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import DatePicker from 'react-datepicker';
+import React, { useState } from "react";
+import * as yup from "yup";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Formik, Form, Field } from "formik";
 
-// Validation schema
-const schema = yup.object().shape({
-    amount: yup.number().typeError('Please enter the number').required('Amaount required'),
-    date: yup.date().required('Date required'),
-    comment: yup.string().required('Comment required'),
-    type: yup.string().required(),
-    category: yup.string(),
-});
+// Styles
+import css from "./AddTransactionForm.module.css";
+
+// Icons
+import { FaPlus, FaMinus } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+
+// Operations
+import { addTransaction } from "../../redux/transactions/operations";
 
 const AddTransactionForm = ({ onClose }) => {
-    const [transactionType, setTransactionType] = useState('Income');
+  const dispatch = useDispatch();
+  const [income, setIncome] = useState(false);
 
-    const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm({
-        resolver: yupResolver(schema),
-        defaultValues: {
-            type: 'Income',
-            amount: '',
-            date: new Date(),
-            comment: '',
-        }
-    });
+  // Validation schema
+  const schema = yup.object().shape({
+    amount: yup
+      .number()
+      .typeError("Please enter the number")
+      .required("Amaount required"),
+    transactionDate: yup.date().required("Date required"),
+    comment: yup.string().required("Comment required"),
+    type: yup.string().required(),
+    categoryId: yup.string(),
+  });
 
-    const onSubmit = (data) => {
-        console.log('Gönderilen veri:', data);
-        onClose();
+  const handleSubmit = (values, actions) => {
+    const transaction = {
+      transactionDate:
+        values.transactionDate || new Date().toISOString().split("T")[0],
+      amount: income
+        ? Math.abs(Number(values.amount))
+        : -Math.abs(Number(values.amount)),
+      comment: values.comment,
+      type: income ? "INCOME" : "EXPENSE",
+      categoryId: income
+        ? "063f1132-ba5d-42b4-951d-44011ca46262"
+        : values.categoryId,
     };
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+    dispatch(addTransaction(transaction));
+    actions.resetForm();
+    onClose();
+  };
 
-            {/* Toggle butonlar */}
-            <div>
-                {/* Income butonu */}
-                <button
-                    type="button"
-                    onClick={() => {
-                        setValue('type', 'Income');
-                        setTransactionType('Income');
-                    }}
-                >
-                    + Income
-                </button>
+  const categoriesData = useSelector((state) => state.transaction.category);
 
-                {/* Expense butonu */}
-                <button
-                    type="button"
-                    onClick={() => {
-                        setValue('type', 'Expense');
-                        setTransactionType('Expense');
-                    }}
-                >
-                    - Expense
-                </button>
-            </div>
-
-            {/* Gider veya gelir kategori */}
-            {transactionType === 'Expense' && (
-                <div>
-                    <label>Category</label>
-                    <select {...register('category')}>
-                        <option value="">Main expenses</option>
-                        <option value="Food">Products</option>
-                        <option value="Rent">Car</option>
-                        <option value="SelfCare">Self care</option>
-                        <option value="ChildCare">Child care</option>
-                        <option value="HouseholdProducts">Household products</option>
-                        <option value="Education">Education</option>
-                        <option value="Leisure">Leisure</option>
-                        <option value="OtherExpenses">Other expenses</option>
-                        <option value="Entertainment">Entertainment</option>
-                    </select>
-                    {errors.category && <p>{errors.category.message}</p>}
-                </div>
+  return (
+    <Formik
+      validationSchema={schema}
+      onSubmit={handleSubmit}
+      initialValues={{
+        amount: "",
+        transactionDate: new Date().toISOString().split("T")[0],
+        comment: "",
+        type: income ? "INCOME" : "EXPENSE",
+        categoryId: "",
+      }}
+    >
+      <Form className={css.TransactionForm}>
+        <div className={css.FormRow}>
+          <h3 className={css.FormTitle}>Add Transaction</h3>
+        </div>
+        <div className={css.FormRow}>
+          <label
+            htmlFor="incomeTrans"
+            className={
+              income === true
+                ? [css.switchLabel, css.incomeLabel].join(" ")
+                : css.switchLabel
+            }
+          >
+            Income
+          </label>
+          <div className={css.switchBox}>
+            {income === true ? (
+              <div
+                onClick={() => setIncome(false)}
+                className={[css.incomeSwitch, css.switchIcon].join(" ")}
+              >
+                <FaPlus className={css.icon} />
+              </div>
+            ) : (
+              <div
+                onClick={() => setIncome(true)}
+                className={[css.expenseSwitch, css.switchIcon].join(" ")}
+              >
+                <FaMinus className={css.icon} />
+              </div>
             )}
-
-            {/* Tutar */}
-            <div>
-                {/* <label>Tutar</label> */}
-                <input type="number" {...register('amount')} />
-                {errors.amount && <p>{errors.amount.message}</p>}
-            </div>
-
-            {/* Tarih */}
-            <div>
-                {/* <label>Tarih</label> */}
-                <DatePicker
-                    selected={getValues('date')}
-                    onChange={(date) => setValue('date', date)}
-                />
-                {errors.date && <p>{errors.date.message}</p>}
-            </div>
-
-            {/* Yorum */}
-            <div>
-                {/* <label>Yorum</label> */}
-                <input {...register('comment')} />
-                {errors.comment && <p>{errors.comment.message}</p>}
-            </div>
-
-            {/* İşlem ve iptal */}
-            <div>
-                <button type="submit">Add</button>
-                <button type="button" onClick={onClose}>Cancel</button>
-            </div>
-        </form>
-    );
+          </div>
+          <label
+            htmlFor="expenseTrans"
+            className={
+              income === false
+                ? [css.switchLabel, css.expenseLabel].join(" ")
+                : css.switchLabel
+            }
+          >
+            expense
+          </label>
+        </div>
+        <div className={css.FormRow}>
+          {income === false ? (
+            <Field
+              as="select"
+              name="categoryId"
+              className={[css.FormInput, css.selectInput].join(" ")}
+              placeholder="Select Category"
+            >
+              <option value="" disabled>
+                Select Category
+              </option>
+              {categoriesData.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </Field>
+          ) : null}
+        </div>
+        <div className={css.FormRow}>
+          <Field
+            type="number"
+            name="amount"
+            className={css.FormInput}
+            placeholder={"0.00"}
+          />
+          <Field
+            type="date"
+            name="transactionDate"
+            className={css.FormInput}
+            placeholder={"07.07.2023"}
+          />
+        </div>
+        <div className={css.FormRow}>
+          <Field
+            as="textarea"
+            name="comment"
+            className={[css.FormInput, css.FormInputText].join(" ")}
+            placeholder="Comment"
+            rows={4}
+          ></Field>
+        </div>
+        <div className={css.FormRow}>
+          <button
+            type="submit"
+            className={[css.FormButton, css.submitButton].join(" ")}
+          >
+            ADD
+          </button>
+        </div>
+        <div className={css.FormRow}>
+          <button
+            type="button"
+            onClick={() => onClose()}
+            className={css.FormButton}
+          >
+            CANCEL
+          </button>
+        </div>
+      </Form>
+    </Formik>
+  );
 };
 
 export default AddTransactionForm;

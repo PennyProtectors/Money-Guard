@@ -1,0 +1,22 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* karartma efekti */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* diğer her şeyin üstünde */
+}
+
+.modal {
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}

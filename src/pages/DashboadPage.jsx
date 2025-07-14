@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import css from "./DashboardPage.module.css";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import Balance from "../components/Balance/Balance";
 import Currency from "../components/Currency/Currency";
-import Dashboard from "../components/Dashboard";
+
+import StatisticsTab from "./StatisticsTab";
 import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAddTransactions";
 import { useMediaQuery } from "react-responsive";
 import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
-import ModalAddTransaction from "../components/ModalAddTransaction/ModalAddTransaction";
 
-import { Line } from "react-chartjs-2";
+import TransactionsList from "../components/TransactionsList/TransactionsList";
+import TransactionsListDesktop from "../components/TransactionsList/TransactionsListDesktop";
+import TransactionsListMobile from "../components/TransactionsList/TransactionsListMobile";
+
+import ModalTransaction from "../components/ModalTransaction/ModalTransaction";
+
+// import { Line } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,6 +30,8 @@ import {
   Legend,
   Filler,
 } from "chart.js";
+import { Line } from "react-chartjs-2";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 // Chart.js bileşenlerini kaydet
 ChartJS.register(
@@ -36,14 +45,12 @@ ChartJS.register(
   Filler
 );
 
-
 function DashboardPage() {
   const [activeTab, setActiveTab] = useState("home");
   const [showModal, setShowModal] = useState(false);
 
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
   const isMobile = useMediaQuery({ maxWidth: 767 });
-
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -101,8 +108,7 @@ function DashboardPage() {
       },
     },
   };
-
-
+  const location = useLocation();
   if (isTablet) {
     return (
       <div className={css.tabletDashboard}>
@@ -111,23 +117,22 @@ function DashboardPage() {
           <div className={css.leftSidebar}>
             <div className={css.menuItems}>
               <div
-                className={`${css.menuItem} ${activeTab === "home" ? css.active : ""
-                  }`}
-                onClick={() => setActiveTab("home")}
+                className={`${css.menuItem}`}
+                // className={`${css.menuItem} ${
+                //   activeTab === "home" ? css.active : ""
+                // }`}
               >
                 <img src={home} alt="Home" />
                 <span>Home</span>
               </div>
-              <div
-                className={`${css.menuItem} ${activeTab === "stats" ? css.active : ""
-                  }`}
-                onClick={() => setActiveTab("stats")}
-              >
-                <img src={stats} alt="Statistics" />
-                <span>Statistics</span>
+              <div className={`${css.menuItem} ${css.location === "/statics"}`}>
+                <Link to="statics" className={css.menuItem}>
+                  <img src={stats} alt="Statistics" />
+                  <span>Statistics</span>
+                </Link>
               </div>
             </div>
-            <div className={css.balanceContainer}>
+            <div className={`${css.balanceContainer} `}>
               <Balance />
             </div>
           </div>
@@ -137,8 +142,10 @@ function DashboardPage() {
         </div>
         <ButtonAddTransactions onClick={handleOpenModal} />
         {showModal && (
-          <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
+          <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}
+        <TransactionsList />
+        <Outlet />
       </div>
     );
   }
@@ -149,26 +156,22 @@ function DashboardPage() {
       <div className={css.mobileDashboard}>
         <Header />
         <div className={css.mobileNavigation}>
-          <div
-            className={`${css.navItem} ${activeTab === "home" ? css.activeNavItem : ""
-              }`}
-            onClick={() => setActiveTab("home")}
-          >
-            <img src={home} alt="Home" />
+          <div className={`${css.navItem} ${location.pathname === "/"}`}>
+            <Link to="/">
+              <img src={home} alt="Home" />
+            </Link>
+          </div>
+          <div className={`${css.navItem} ${location.pathname === "/statics"}`}>
+            <Link to="statics">
+              <img src={stats} alt="Statistics" />
+            </Link>
           </div>
           <div
-            className={`${css.navItem} ${activeTab === "stats" ? css.activeNavItem : ""
-              }`}
-            onClick={() => setActiveTab("stats")}
+            className={`${css.navItem} ${location.pathname === "/currency"}`}
           >
-            <img src={stats} alt="Statistics" />
-          </div>
-          <div
-            className={`${css.navItem} ${activeTab === "currency" ? css.activeNavItem : ""
-              }`}
-            onClick={() => setActiveTab("currency")}
-          >
-            <img src={dollar} alt="Currency" />
+            <Link to="currency">
+              <img src={dollar} alt="Currency" />
+            </Link>
           </div>
         </div>
 
@@ -180,7 +183,7 @@ function DashboardPage() {
 
         {activeTab === "stats" && (
           <div className={css.mobileContent}>
-            <Dashboard />
+            <StatisticsTab />
           </div>
         )}
 
@@ -189,10 +192,14 @@ function DashboardPage() {
             <Currency />
           </div>
         )}
+
+        <TransactionsListMobile />
+
         <ButtonAddTransactions onClick={handleOpenModal} />
         {showModal && (
-          <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
+          <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}
+        <Outlet />
       </div>
     );
   }
@@ -254,11 +261,11 @@ function DashboardPage() {
         <div className={css.rightPanel}>
           {activeTab === "home" ? (
             <div className={css.transactionsTable}>
-              {/* Transactions table content */}
+              <TransactionsListDesktop />
             </div>
           ) : (
             <div className={css.statisticsContent}>
-              <Dashboard />
+              <StatisticsTab />
             </div>
           )}
         </div>
@@ -268,7 +275,7 @@ function DashboardPage() {
       {showModal && (
         <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
       )}
-
+      <Outlet />
     </div>
   );
 }
