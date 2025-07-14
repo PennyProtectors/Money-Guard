@@ -105,6 +105,7 @@
   background: rgba(74, 86, 226, 0.1);
   border-radius: 8px;
   overflow: hidden;
+  padding: 20px;
 }
 
 @media (min-width: 768px) {
@@ -262,19 +263,20 @@
 /* Responsive design */
 @media (max-width: 767px) {
   .chart-container {
-    margin: 16px;
-    padding: 16px;
+    /* margin: 16px; */
+    /* padding: 16px; */
+    width: 100%;
   }
-  
+
   .chart-title {
     font-size: 16px;
   }
-  
+
   .total-amount {
     font-size: 24px;
     line-height: 36px;
   }
-  
+
   .legend-grid {
     grid-template-columns: 1fr;
   }
