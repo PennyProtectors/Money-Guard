@@ -189,6 +189,101 @@
   }
 }
 
+/* Tablet styles */
+.tabletStatistics {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2b145f, #34084b);
+  overflow: hidden;
+  position: relative;
+}
+
+.tabletContent {
+  display: flex;
+  padding: 0;
+  align-items: flex-start;
+  margin: 2% 0;
+}
+
+.leftSidebar {
+  max-width: calc(100% - 200px);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px 0 20px;
+  margin-right: 2%;
+}
+
+.rightContent {
+  flex: 1;
+  padding: 40px 20px 0 20px;
+  max-width: calc(100% - 200px);
+}
+
+.menuItems {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.menuItem img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  filter: brightness(0) invert(1);
+}
+
+.menuItem.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.menuItem.active img {
+  opacity: 1;
+}
+
+.balanceContainer {
+  max-width: 100%;
+  margin-top: 0;
+}
+
+.balanceBox {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.balanceLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.balanceAmount {
+  color: white;
+  font-size: 30px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
 /* Desktop styles */
 @media (min-width: 1025px) {
   .statisticsTab {
@@ -204,4 +299,29 @@
   .tableSection {
     padding: 32px;
   }
-} 
+}
+
+.tabletStatisticsSection {
+  padding: 20px 40px 40px 40px;
+}
+
+.tabletStatisticsSection .statisticsContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.tabletStatisticsSection .chartSection {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.tabletStatisticsSection .tableSection {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
