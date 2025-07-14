@@ -30,6 +30,12 @@
   display: flex;
   padding: 12px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: default;
+  transition: background-color 0.2s ease;
+}
+
+.tableRow:hover {
+  background-color: transparent;
 }
 
 .currencyCell {
@@ -52,30 +58,57 @@
   padding: 0 10px 10px;
 }
 
+.lastUpdated {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+  padding: 5px 10px;
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 767px) {
+  .lastUpdated {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+}
+
 /* Mobil görünüm için stiller */
 @media screen and (max-width: 767px) {
   .currencyContainer {
+    background-color: rgba(82, 59, 126, 0.8); /* Daha koyu ve belirgin arka plan */
     border-radius: 20px;
+    margin: 10px;
+    height: auto;
+    width: calc(100% - 20px); /* Kenar boşluklarını hesaba katarak genişlik */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Gölge ekleyerek daha belirgin hale getir */
   }
   
   .tableHeader {
     padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
   }
   
   .headerCell {
     font-size: 14px;
+    color: white;
+    font-weight: 600;
   }
   
   .tableRow {
     padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .currencyCell, .rateCell {
     font-size: 14px;
+    color: white;
   }
   
   .chartContainer {
-    min-height: 150px;
+    min-height: 100px;
+    max-height: 180px;
+    padding: 5px;
   }
 }
 

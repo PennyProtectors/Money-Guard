@@ -64,6 +64,7 @@ function App() {
             }
           />
           <Route path="/statics" element={<StatisticsTab />} />
+          <Route path="/currency" element={<DashboadPage />} />
         </Routes>
       </Suspense>
     </>
