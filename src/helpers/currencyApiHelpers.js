@@ -11,9 +11,9 @@ export const getCurrencyDataFromLocalStorage = () => {
     if (storedData) {
         const parsedStoredData = JSON.parse(storedData);
         const now = Date.now();
-        const oneHourStep = 3600000;
+        const oneHourStep = 60 * 60 * 1000; // 1 saat (milisaniye cinsinden)
         if (now - parsedStoredData.timestamp < oneHourStep) {
-            return parsedStoredData.data;
+            return parsedStoredData; // Tüm nesneyi döndür (timestamp dahil)
         }
     }
     return null;

@@ -156,50 +156,46 @@ function DashboardPage() {
       <div className={css.mobileDashboard}>
         <Header />
         <div className={css.mobileNavigation}>
-          <div className={`${css.navItem} ${location.pathname === "/"}`}>
+          <div className={`${css.navItem} ${location.pathname === "/" ? css.activeNavItem : ""}`}>
             <Link to="/">
               <img src={home} alt="Home" />
             </Link>
           </div>
-          <div className={`${css.navItem} ${location.pathname === "/statics"}`}>
+          <div className={`${css.navItem} ${location.pathname === "/statics" ? css.activeNavItem : ""}`}>
             <Link to="statics">
               <img src={stats} alt="Statistics" />
             </Link>
           </div>
-          <div
-            className={`${css.navItem} ${location.pathname === "/currency"}`}
-          >
+          <div className={`${css.navItem} ${location.pathname === "/currency" ? css.activeNavItem : ""}`}>
             <Link to="currency">
               <img src={dollar} alt="Currency" />
             </Link>
           </div>
         </div>
 
-        {activeTab === "home" && (
+        {location.pathname === "/" && (
           <div className={css.mobileContent}>
             <Balance />
+            <TransactionsListMobile />
           </div>
         )}
 
-        {activeTab === "stats" && (
+        {location.pathname === "/statics" && (
           <div className={css.mobileContent}>
             <StatisticsTab />
           </div>
         )}
-
-        {activeTab === "currency" && (
+      
+        {location.pathname === "/currency" && (
           <div className={css.mobileContent}>
             <Currency />
           </div>
         )}
-
-        <TransactionsListMobile />
-
+      
         <ButtonAddTransactions onClick={handleOpenModal} />
         {showModal && (
           <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}
-        <Outlet />
       </div>
     );
   }
@@ -236,24 +232,7 @@ function DashboardPage() {
           </div>
 
           <div className={css.currencySection}>
-            <div className={css.currencyHeader}>
-              <div className={css.currencyHeaderCell}>Currency</div>
-              <div className={css.currencyHeaderCell}>Purchase</div>
-              <div className={css.currencyHeaderCell}>Sale</div>
-            </div>
-            <div className={css.currencyRow}>
-              <div className={css.currencyCell}>USD</div>
-              <div className={css.currencyCell}>27.55</div>
-              <div className={css.currencyCell}>27.65</div>
-            </div>
-            <div className={css.currencyRow}>
-              <div className={css.currencyCell}>EUR</div>
-              <div className={css.currencyCell}>30.00</div>
-              <div className={css.currencyCell}>30.10</div>
-            </div>
-            <div className={css.currencyChart}>
-              <Line data={chartData} options={chartOptions} />
-            </div>
+            <Currency />
           </div>
         </div>
 
