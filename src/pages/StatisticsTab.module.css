@@ -37,33 +37,96 @@
 /* Mobile styles */
 @media (max-width: 768px) {
   .statisticsTab {
-    padding: 16px;
+    padding: 0;
+    background: linear-gradient(to bottom, #2b145f, #34084b);
+    min-height: 100vh;
+    overflow-x: hidden;
   }
   
   .statisticsContainer {
-    gap: 16px;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
   }
   
   .statisticsContent {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
   }
   
-  .chartSection,
+  .chartSection {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  
   .tableSection {
-    padding: 16px;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .mobileStatsTitle {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    text-align: left;
+  }
+
+  .mobileDashboard {
+    width: 100%;
+    margin-bottom: 20px;
   }
 }
 
-/* Tablet styles */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Tablet styles for Statistics */
+@media (min-width: 769px) and (max-width: 1280px) {
   .statisticsTab {
-    padding: 20px;
+    padding: 0;
+    background: transparent;
+    min-height: auto;
+  }
+  
+  .statisticsContainer {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    height: 100%;
   }
   
   .statisticsContent {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+    height: 100%;
+  }
+  
+  .chartSection {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    flex: 1;
+  }
+  
+  .tableSection {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    flex: 1;
   }
 }
 

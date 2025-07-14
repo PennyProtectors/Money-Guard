@@ -698,3 +698,556 @@
     font-size: 36px;
   }
 }
+
+/* Mobile styles for filters and summary */
+@media (max-width: 768px) {
+  .statistics-dashboard {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+  }
+
+  .filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .dropdown-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .dropdown-button {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .dropdown-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .dropdown-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white;
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown-button.open .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    margin-top: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+  }
+
+  .dropdown-item {
+    padding: 12px 16px;
+    color: #2b145f;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+  }
+
+  .dropdown-item:hover {
+    background: rgba(43, 20, 95, 0.1);
+  }
+
+  .dropdown-item.selected {
+    background: rgba(43, 20, 95, 0.2);
+    color: #2b145f;
+    font-weight: 600;
+  }
+
+  /* Summary section */
+  .mobile-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+  }
+
+  .summary-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .summary-amount {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .summary-amount.expense {
+    color: #FF6B6B;
+  }
+
+  .summary-amount.income {
+    color: #4ECDC4;
+  }
+}
+
+/* Statistics Table Section */
+.statistics-table-section {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 24px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.table-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2b145f;
+  margin: 0;
+}
+
+.table-period {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.table-container {
+  width: 100%;
+}
+
+.table-header-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 12px 0;
+  border-bottom: 2px solid #e0e0e0;
+  font-weight: 600;
+  color: #666;
+  font-size: 14px;
+}
+
+.table-col {
+  text-align: center;
+}
+
+.table-col:first-child {
+  text-align: left;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+.category-name {
+  color: #2b145f;
+  font-weight: 500;
+}
+
+.category-total,
+.category-average {
+  text-align: center;
+  color: #333;
+  font-weight: 500;
+}
+
+.table-total-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 16px 0;
+  border-top: 2px solid #e0e0e0;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.total-label {
+  font-weight: 700;
+  color: #2b145f;
+  font-size: 16px;
+}
+
+.total-amount {
+  text-align: center;
+  font-weight: 700;
+  color: #2b145f;
+  font-size: 16px;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.no-data p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Categories Section */
+.categories-section {
+  margin-top: 24px;
+}
+
+.categories-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px 8px 0 0;
+  backdrop-filter: blur(10px);
+}
+
+.header-category,
+.header-sum {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+.categories-list {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0 0 8px 8px;
+  backdrop-filter: blur(10px);
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.category-item:last-child {
+  border-bottom: none;
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.category-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* Category colors */
+.color-0 { background: #FFB800; }
+.color-1 { background: #FFB3BA; }
+.color-2 { background: #FF6B6B; }
+.color-3 { background: #C8A8E9; }
+.color-4 { background: #87CEEB; }
+.color-5 { background: #4169E1; }
+.color-6 { background: #40E0D0; }
+.color-7 { background: #00CED1; }
+.color-8 { background: #32CD32; }
+
+.category-name {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+.category-amount {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Summary section updates */
+.mobile-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.summary-label {
+  color: white;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+.summary-amount {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+.summary-amount.expense {
+  color: #FF6B6B;
+}
+
+.summary-amount.income {
+  color: #FFB800;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.no-data p {
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Tablet specific styles */
+@media (min-width: 769px) and (max-width: 1280px) {
+  .statistics-dashboard {
+    padding: 0;
+    background: transparent;
+  }
+  
+  .filter-section {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    padding: 12px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 120px;
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .dropdown-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white;
+    margin-left: 10px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(43, 20, 95, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+  }
+  
+  .dropdown-item {
+    padding: 12px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .dropdown-item.selected {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .categories-section {
+    margin-top: 20px;
+  }
+  
+  .categories-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 15px;
+  }
+  
+  .header-category,
+  .header-sum {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .header-sum {
+    text-align: right;
+  }
+  
+  .categories-list {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .category-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    align-items: center;
+  }
+  
+  .category-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .category-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  
+  .category-color.color-0 { background: #FFD93D; }
+  .category-color.color-1 { background: #FF6B6B; }
+  .category-color.color-2 { background: #4ECDC4; }
+  .category-color.color-3 { background: #45B7D1; }
+  .category-color.color-4 { background: #96CEB4; }
+  .category-color.color-5 { background: #FFEAA7; }
+  .category-color.color-6 { background: #DDA0DD; }
+  .category-color.color-7 { background: #98D8C8; }
+  .category-color.color-8 { background: #F7DC6F; }
+  
+  .category-name {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .category-amount {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: right;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .tablet-summary {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  
+  .summary-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .summary-amount {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .summary-amount.expense {
+    color: #FF6B6B;
+  }
+  
+  .summary-amount.income {
+    color: #4CAF50;
+  }
+  
+  .no-data {
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .no-data p {
+    margin: 0;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+  }
+}
