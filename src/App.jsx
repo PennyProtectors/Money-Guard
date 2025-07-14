@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { lazy, Suspense, useEffect } from "react";
 import { refreshUser } from "./redux/auth/operations";
 // import Currency from "./components/Currency/Currency";
+import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 
 const PrivateRoute = lazy(() =>
   import("./components/PrivateRoute/PrivateRoute")
@@ -66,6 +67,7 @@ function App() {
           />
           <Route path="/statics" element={<StatisticsTab />} />
           <Route path="/currency" element={<DashboadPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </>
