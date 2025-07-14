@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Operations
 import { addTransaction } from "../../redux/transactions/operations";
+import toast from "react-hot-toast";
 
 const AddTransactionForm = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -44,9 +45,16 @@ const AddTransactionForm = ({ onClose }) => {
         : values.categoryId,
     };
 
-    dispatch(addTransaction(transaction));
-    actions.resetForm();
-    onClose();
+    dispatch(addTransaction(transaction))
+      .unwrap()
+      .then(() => {
+        actions.resetForm();
+        onClose();
+        toast.success("İşlem başarıyla eklendi");
+      })
+      .catch((error) => {
+        toast.error(error || "İşlem eklenirken bir hata oluştu");
+      });
   };
 
   const categoriesData = useSelector((state) => state.transaction.category);

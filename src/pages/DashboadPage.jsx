@@ -232,8 +232,7 @@ function DashboardPage() {
           </div>
 
           <div className={css.balanceSection}>
-            <p className={css.balanceLabel}>YOUR BALANCE</p>
-            <p className={css.balanceAmount}>₴ 24 000.00</p>
+            <Balance />
           </div>
 
           <div className={css.currencySection}>
@@ -273,7 +272,7 @@ function DashboardPage() {
 
       <ButtonAddTransactions onClick={handleOpenModal} />
       {showModal && (
-        <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
+        <ModalTransaction show={showModal} onClose={handleCloseModal} />
       )}
       <Outlet />
     </div>
