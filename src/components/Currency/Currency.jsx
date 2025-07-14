@@ -137,18 +137,19 @@ export default function Currency() {
         // Gerçek tarihler ve saatler için son 6 saati hesapla
         const dateTimeLabels = generateDateTimeLabels();
         
-        // Son 6 saatlik veri için grafik verilerini güncelle
-        // Gerçek saatlik veriler olmadığı için simüle ediyoruz
+        // Cihaz boyutundan bağımsız olarak aynı simüle edilmiş verileri kullan
+        // Math.random() kullanmak yerine sabit değişim oranları kullan
         const baseRate = usdData.rateBuy;
         const simulatedRates = [
-          baseRate * (1 + (Math.random() * 0.02 - 0.01)),  // 5 saat önce
-          baseRate * (1 + (Math.random() * 0.02 - 0.01)),  // 4 saat önce
-          baseRate * (1 + (Math.random() * 0.02 - 0.01)),  // 3 saat önce
-          baseRate * (1 + (Math.random() * 0.02 - 0.01)),  // 2 saat önce
-          baseRate * (1 + (Math.random() * 0.02 - 0.01)),  // 1 saat önce
-          baseRate                                         // Şu an
+          baseRate * 0.99,     // 5 saat önce
+          baseRate * 0.995,    // 4 saat önce
+          baseRate * 1.002,    // 3 saat önce
+          baseRate * 0.998,    // 2 saat önce
+          baseRate * 1.001,    // 1 saat önce
+          baseRate             // Şu an
         ];
         
+        // Grafik verilerini güncelle - cihaz boyutuna göre sadece görsel özellikleri değiştir
         setChartData({
           labels: dateTimeLabels,
           datasets: [{
@@ -206,6 +207,14 @@ export default function Currency() {
         color: '#ffffff',
         align: 'top',
         offset: 10,
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        borderRadius: 4,
+        padding: {
+          top: 2,
+          bottom: 2,
+          left: 4,
+          right: 4
+        },
         font: {
           weight: 'bold',
           size: isTablet || isMobile ? 8 : 10
@@ -229,7 +238,14 @@ export default function Currency() {
         }
       },
       y: {
-        display: false
+        display: false,
+        // Değerlerin yükselmesi durumunda yeterli alan sağlamak için padding ekleyelim
+        ticks: {
+          padding: 10
+        },
+        grid: {
+          display: false
+        }
       }
     },
     elements: {
@@ -242,6 +258,15 @@ export default function Currency() {
       },
       line: {
         borderWidth: isTablet ? 1.5 : 2
+      }
+    },
+    // Grafik için yeterli boşluk bırakalım
+    layout: {
+      padding: {
+        top: 20,
+        right: 10,
+        bottom: 10,
+        left: 10
       }
     }
   };
