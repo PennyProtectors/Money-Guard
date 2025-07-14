@@ -1,0 +1,92 @@
+
+.react-confirm-alert-overlay {
+    background: rgba(0, 0, 0, 0.3); /* saydam yap */
+    z-index: 999; /* modal içerikten düşük olabilir */
+  }
+  
+  .logout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 375px;
+    height: 691px;
+    background: linear-gradient(270.02deg, #6c2db0 3.2%, #8071b9 99.98%);
+    padding: 60px;
+    top: 60px;
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    z-index:1000;
+    
+  }
+  
+  .logoutLogo {
+    display: none;
+  }
+  
+  .exitMessg {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 100px;
+  }
+  
+  .btnGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .yesBtn {
+    width: 280px;
+    height: 50px;
+    border-radius: 20px;
+    background: linear-gradient(
+      96.76deg,
+      #ffc727 -16.42%,
+      #9e40ba 97.04%,
+      #7000ff 150.71%
+    );
+    border: transparent;
+  }
+  
+  .noBtn {
+    width: 280px;
+    height: 50px;
+    border-radius: 20px;
+    background: rgba(251, 251, 251, 1);
+    border: transparent;
+  }
+
+  @media (min-width:767px){
+    
+
+  
+  .logout {
+   
+   width:533px;
+    height: 447px;
+   border-radius: 8px;
+    padding: 60px;
+    top: 288px;
+  
+    
+  }
+  
+  .logoutLogo {
+    display:flex;
+    width: 182px;
+    height: 76px;
+    
+  }
+  
+  .exitMessg {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 100px;
+  }
+  
+ 
+
+  }
