@@ -8,12 +8,9 @@ import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAdd
 import { useMediaQuery } from "react-responsive";
 import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
-
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
-import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAddTransactions";
 import ModalAddTransaction from "../components/ModalAddTransaction/ModalAddTransaction";
 
-import dollar from "../assets/images/baseline-timeline-24px 3.png";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
