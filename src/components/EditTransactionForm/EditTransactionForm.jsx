@@ -3,6 +3,7 @@ import * as yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Formik, Form, Field } from "formik";
+import { toast } from "react-toastify";
 
 // Styles
 import css from "../AddTransactionForm/AddTransactionForm.module.css";
@@ -48,9 +49,16 @@ const EditTransactionForm = ({ data, onClose }) => {
       transactionId: data.id,
     };
 
-    dispatch(editTransaction(transaction));
-    actions.resetForm();
-    onClose();
+    dispatch(editTransaction(transaction))
+      .unwrap()
+      .then(() => {
+        actions.resetForm();
+        onClose();
+        toast.success("İşlem başarıyla güncellendi");
+      })
+      .catch((error) => {
+        toast.error(error || "İşlem güncellenirken bir hata oluştu");
+      });
   };
 
   // const categoriesData = useSelector((state) => state.transaction.category);

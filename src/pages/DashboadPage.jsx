@@ -9,7 +9,6 @@ import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAdd
 import { useMediaQuery } from "react-responsive";
 import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
-
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
 
 import TransactionsList from "../components/TransactionsList/TransactionsList";
@@ -233,8 +232,7 @@ function DashboardPage() {
           </div>
 
           <div className={css.balanceSection}>
-            <p className={css.balanceLabel}>YOUR BALANCE</p>
-            <p className={css.balanceAmount}>₴ 24 000.00</p>
+            <Balance />
           </div>
 
           <div className={css.currencySection}>
@@ -274,7 +272,7 @@ function DashboardPage() {
 
       <ButtonAddTransactions onClick={handleOpenModal} />
       {showModal && (
-        <ModalAddTransaction show={showModal} onClose={handleCloseModal} />
+        <ModalTransaction show={showModal} onClose={handleCloseModal} />
       )}
       <Outlet />
     </div>
