@@ -156,18 +156,30 @@ function DashboardPage() {
       <div className={css.mobileDashboard}>
         <Header />
         <div className={css.mobileNavigation}>
-          <div className={`${css.navItem} ${location.pathname === "/" ? css.activeNavItem : ""}`}>
+          <div
+            className={`${css.navItem} ${
+              location.pathname === "/" ? css.activeNavItem : ""
+            }`}
+          >
             <Link to="/">
               <img src={home} alt="Home" />
             </Link>
           </div>
-          <div className={`${css.navItem} ${location.pathname === "/statics" ? css.activeNavItem : ""}`}>
-            <Link to="statics">
+          <div
+            className={`${css.navItem} ${
+              location.pathname === "/statics" ? css.activeNavItem : ""
+            }`}
+          >
+            <Link to="/statics">
               <img src={stats} alt="Statistics" />
             </Link>
           </div>
-          <div className={`${css.navItem} ${location.pathname === "/currency" ? css.activeNavItem : ""}`}>
-            <Link to="currency">
+          <div
+            className={`${css.navItem} ${
+              location.pathname === "/currency" ? css.activeNavItem : ""
+            }`}
+          >
+            <Link to="/currency">
               <img src={dollar} alt="Currency" />
             </Link>
           </div>
@@ -185,13 +197,13 @@ function DashboardPage() {
             <StatisticsTab />
           </div>
         )}
-      
+
         {location.pathname === "/currency" && (
           <div className={css.mobileContent}>
             <Currency />
           </div>
         )}
-      
+
         <ButtonAddTransactions onClick={handleOpenModal} />
         {showModal && (
           <ModalTransaction show={showModal} onClose={handleCloseModal} />
