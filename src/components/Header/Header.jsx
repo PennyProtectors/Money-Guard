@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router";
 
-import { logoutModal } from "../Logout/LogOut";
+import { logoutModal } from "../Logout/Logout";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
