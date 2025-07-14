@@ -56,13 +56,14 @@
 .tabletContent {
   display: flex;
   padding: 0;
-  height: calc(100vh - 80px);
+  height: 100%;
   align-items: flex-start;
+  margin-bottom: 20px;
+  
 }
 
 .leftSidebar {
   max-width: calc(100% - 200px);
-
   display: flex;
   flex-direction: column;
   padding: 40px 20px 0 20px;
