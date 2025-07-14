@@ -9,3 +9,10 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
 }
+
+.react-confirm-alert-overlay {
+  background: rgba(0, 0, 0, 0.4) !important;/* transparan siyah arkaplan */
+  backdrop-filter: blur(6px) !important;     /* flu efekt */
+  -webkit-backdrop-filter: blur(6px) !important; /* Safari için destek */
+  z-index: 9999 !important;
+}
