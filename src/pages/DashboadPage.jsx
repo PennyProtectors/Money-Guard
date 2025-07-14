@@ -175,23 +175,17 @@ function DashboardPage() {
           </div>
         </div>
 
-        {activeTab === "home" && (
-          <div className={css.mobileContent}>
-            <Balance />
-          </div>
-        )}
+        <div className={css.mobileContent}>
+          <Balance />
+        </div>
 
-        {activeTab === "stats" && (
-          <div className={css.mobileContent}>
-            <StatisticsTab />
-          </div>
-        )}
+        <div className={css.mobileContent}>
+          <StatisticsTab />
+        </div>
 
-        {activeTab === "currency" && (
-          <div className={css.mobileContent}>
-            <Currency />
-          </div>
-        )}
+        <div className={css.mobileContent}>
+          <Currency />
+        </div>
 
         <TransactionsListMobile />
 

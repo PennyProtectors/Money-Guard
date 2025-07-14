@@ -6,8 +6,10 @@
   align-items: center;
   padding: 0 30px;
   color: white;
+  position: relative;
+  z-index: 1000;
 }
- 
+
 .logo {
   width: 30px;
   height: 30px;
@@ -48,23 +50,18 @@
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   padding-left: 20px;
 }
-
-
-
 @media (max-width: 767px) {
   .header {
     height: 60px;
     padding: 0 15px;
   }
-  
+
   .logoText {
     display: none;
   }
-  
+
   .exitButton {
     border: none;
     padding-left: 0;
   }
-  
-  
 }

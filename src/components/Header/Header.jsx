@@ -1,39 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./Header.module.css";
 import logo from "../../assets/images/TabletLogo.png";
 import exit from "../../assets/images/exit.png";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../redux/auth/operations";
 import { useMediaQuery } from "react-responsive";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import { useNavigate } from "react-router";
 
+import { logoutModal } from "../Logout/LogOut";
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const username = useSelector((state) => state.auth.user?.username);
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1280 });
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    confirmAlert({
-      title: "want to exit?",
-      message: "You are about to log out",
-      buttons: [
-        {
-          label: "yes",
-          onClick: () => {
-            dispatch(logOut());
-            localStorage.removeItem("token");
-            navigate("/login");
-          },
-        },
-        {
-          label: "no",
-          onClick: () => {},
-        },
-      ],
-    });
+
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const handleLogOut = () => {
+    logoutModal({ dispatch, navigate });
   };
+  // const handleLogout = () => {
+  //   confirmAlert({
+  //     customUI: ({ onClose }) => {
+  //       return (
+  //         <div className={css.logout}>
+  //           <img src={logoWithText} className={css.logoutLogo}/>
+  //           <p className={css.exitMessg}>Are You sure you want to log out?</p>
+  //           <div className={css.btnGroup}>
+  //             <button
+  //               className={css.yesBtn}
+  //               onClick={() => {
+  //                 dispatch(logOut());
+  //                 localStorage.removeItem("token");
+  //                 navigate("/login");
+  //                 onClose();
+  //               }}
+  //             >
+  //               LOG OUT
+  //             </button>
+  //             <button className={css.noBtn} onClick={onClose}>
+  //               CANCEL
+  //             </button>
+  //           </div>
+  //         </div>
+  //       );
+  //     },
+  //   });
+  // };
 
   return (
     <div className={css.header}>
@@ -43,9 +55,12 @@ const Header = () => {
       </div>
       <div className={css.user}>
         <p className={css.username}>{username} |</p>
-        <div className={css.exitButton} onClick={handleLogout}>
+        <div className={css.exitButton} onClick={handleLogOut}>
           <img src={exit} alt="altButton" />
         </div>
+        {/* {showLogoutModal && (
+          <logoutModal navigate={navigate} dispatch={dispatch} onClose={() => setShowLogoutModal(false)} />
+        )} */}
       </div>
     </div>
   );
