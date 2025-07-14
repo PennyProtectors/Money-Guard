@@ -128,7 +128,7 @@ const Registrations = () => {
               />
             </div>
             <div className={css.registerButonGroup}>
-              <button type="submit" className={css.registerButon}>
+              <button type="submit" className={[css.registerButon]}>
                 REGİSTER
               </button>
               <button

@@ -32,67 +32,71 @@ const LoginForm = () => {
   const handleSubmit = (values, { resetForm }) => {
     dispatch(logIn(values));
     console.log(values);
-    resetForm;
+    resetForm();
   };
 
   return (
-    <div className={css.loginContainer}>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={logInSchema}
-      >
-        <Form className={css.loginForm}>
-          <div className={css.loginTitle}>
-            <img src={logo} alt="" />
-            <p>Money Guard</p>
-          </div>
-          <div className={css.loginInputGroup}>
-            <div className={css.loginInput}>
-              <MdEmail className={css.loginInputIcon} />
+    <div className={css.LoginPage}>
+      <div className={css.LoginPage_Area}>
+        <div className={css.LoginPage_Header}>
+          <img src={logo} alt="Money Guard" className={css.LoginPage_Logo} />
+          <h1 className={css.LoginPage_Title}>Money Guard</h1>
+        </div>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={handleSubmit}
+          validationSchema={logInSchema}
+        >
+          <Form className={css.LoginPage_Form}>
+            <div className={css.LoginPage_Form_Group}>
+              <MdEmail className={css.LoginPage_Icon} />
               <Field
-                className={css.loginInputField}
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder="E-mail"
+                className={css.LoginPage_Input}
               />
             </div>
             <ErrorMessage
               name="email"
               component="span"
-              className={css.loginErrorMessage}
+              className={css.LoginPage_Form_ErrorMessage}
             />
-          </div>
-          <div className={css.loginInputGroup}>
-            <div className={css.loginInput}>
-              <MdLock className={css.loginInputIcon} />
+            <div className={css.LoginPage_Form_Group}>
+              <MdLock className={css.LoginPage_Icon} />
               <Field
-                className={css.loginInputField}
                 type="password"
                 name="password"
                 placeholder="Password"
+                className={css.LoginPage_Input}
               />
             </div>
             <ErrorMessage
               name="password"
               component="span"
-              className={css.loginErrorMessage}
+              className={css.LoginPage_Form_ErrorMessage}
             />
-          </div>
-          <div className={css.loginButonGroup}>
-            <button className={css.loginButon} type="submit">
-              LOG IN
+            <button
+              type="submit"
+              className={[
+                css.LoginPage_Button,
+                css.LoginPage_Button_Submit,
+              ].join(" ")}
+            >
+              Log In
             </button>
             <button
-              className={css.loginRegisterButon}
+              onClick={() => {
+                navigate("/register", { replace: false });
+              }}
               type="button"
-              onClick={() => navigate("/register")}
+              className={css.LoginPage_Button}
             >
-              REGISTER
+              Register
             </button>
-          </div>
-        </Form>
-      </Formik>
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };
