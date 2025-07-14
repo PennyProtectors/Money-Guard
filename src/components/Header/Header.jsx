@@ -58,9 +58,6 @@ const Header = () => {
         <div className={css.exitButton} onClick={handleLogOut}>
           <img src={exit} alt="altButton" />
         </div>
-        {/* {showLogoutModal && (
-          <logoutModal navigate={navigate} dispatch={dispatch} onClose={() => setShowLogoutModal(false)} />
-        )} */}
       </div>
     </div>
   );

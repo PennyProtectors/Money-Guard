@@ -57,13 +57,14 @@
   border: transparent;
 }
 
-@media (min-width: 767px) {
+@media (min-width: 767px ) {
   .logout {
     width: 533px;
     height: 447px;
     border-radius: 8px;
-    padding: 60px;
-    top: 288px;
+    z-index:999;
+    
+  
   }
 
   .logoutLogo {
@@ -86,8 +87,9 @@
     width: 433px;
     height: 347px;
     border-radius: 8px;
-    padding: 60px;
-    top: 126px;
+    top: 104px;
+    
+
   }
 
   .logoutLogo {
