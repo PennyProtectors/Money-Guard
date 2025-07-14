@@ -1,12 +1,11 @@
 import React from "react";
 import css from "./Logout.module.css";
-import { logOut } from "../../redux/auth/operations"
+import { logOut } from "../../redux/auth/operations";
 
 import logoWithText from "../../assets/images/logo.png";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { confirmAlert } from "react-confirm-alert";
 export const logoutModal = ({ dispatch, navigate }) => {
- 
   confirmAlert({
     customUI: ({ onClose }) => {
       return (
@@ -18,7 +17,7 @@ export const logoutModal = ({ dispatch, navigate }) => {
               className={css.yesBtn}
               onClick={() => {
                 dispatch(logOut());
-                localStorage.removeItem("token");
+                // localStorage.removeItem("token");
                 navigate("/login");
                 onClose();
               }}
