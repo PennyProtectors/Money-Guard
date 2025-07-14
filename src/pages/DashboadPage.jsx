@@ -11,6 +11,11 @@ import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
 
+// Icons
+import { MdHome } from "react-icons/md";
+import { SlGraph } from "react-icons/sl";
+import { FaDollarSign } from "react-icons/fa6";
+
 import TransactionsList from "../components/TransactionsList/TransactionsList";
 import TransactionsListDesktop from "../components/TransactionsList/TransactionsListDesktop";
 import TransactionsListMobile from "../components/TransactionsList/TransactionsListMobile";
@@ -140,7 +145,9 @@ function DashboardPage() {
             <Currency />
           </div>
         </div>
-        <ButtonAddTransactions onClick={handleOpenModal} />
+        {location.pathname === "/" ? (
+          <ButtonAddTransactions onClick={handleOpenModal} />
+        ) : null}
         {showModal && (
           <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}
@@ -162,7 +169,7 @@ function DashboardPage() {
             }`}
           >
             <Link to="/">
-              <img src={home} alt="Home" />
+              <MdHome  className={css.navIcon}/>
             </Link>
           </div>
           <div
@@ -171,7 +178,7 @@ function DashboardPage() {
             }`}
           >
             <Link to="/statics">
-              <img src={stats} alt="Statistics" />
+              <SlGraph  className={css.navIcon}/>
             </Link>
           </div>
           <div
@@ -180,7 +187,7 @@ function DashboardPage() {
             }`}
           >
             <Link to="/currency">
-              <img src={dollar} alt="Currency" />
+              <FaDollarSign  className={css.navIcon}/>
             </Link>
           </div>
         </div>
@@ -204,7 +211,9 @@ function DashboardPage() {
           </div>
         )}
 
-        <ButtonAddTransactions onClick={handleOpenModal} />
+        {location.pathname === "/" ? (
+          <ButtonAddTransactions onClick={handleOpenModal} />
+        ) : null}
         {showModal && (
           <ModalTransaction show={showModal} onClose={handleCloseModal} />
         )}

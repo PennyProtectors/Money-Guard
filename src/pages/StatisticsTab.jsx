@@ -14,6 +14,11 @@ import home from "../assets/images/baseline-home-24px 3.png";
 import stats from "../assets/images/baseline-timeline-24px 3.png";
 import dollar from "../assets/images/baseline-timeline-24px 4.png";
 
+// Icons
+import { MdHome } from "react-icons/md";
+import { SlGraph } from "react-icons/sl";
+import { FaDollarSign } from "react-icons/fa6";
+
 const StatisticsTab = () => {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -55,7 +60,6 @@ const StatisticsTab = () => {
   if (isDesktop) {
     return (
       <div className={styles.desktopStatistics}>
-        
         <div className={styles.desktopContent}>
           <div className={styles.rightPanel}>
             <div className={styles.desktopMainContent}>
@@ -79,11 +83,21 @@ const StatisticsTab = () => {
         <div className={styles.tabletContent}>
           <div className={styles.leftSidebar}>
             <div className={styles.menuItems}>
-              <Link to="/" className={`${styles.menuItem} ${location.pathname === "/" ? styles.active : ""}`}>
+              <Link
+                to="/"
+                className={`${styles.menuItem} ${
+                  location.pathname === "/" ? styles.active : ""
+                }`}
+              >
                 <img src={home} alt="Home" />
                 <span>Home</span>
               </Link>
-              <Link to="/statics" className={`${styles.menuItem} ${location.pathname === "/statics" ? styles.active : ""}`}>
+              <Link
+                to="/statics"
+                className={`${styles.menuItem} ${
+                  location.pathname === "/statics" ? styles.active : ""
+                }`}
+              >
                 <img src={stats} alt="Statistics" />
                 <span>Statistics</span>
               </Link>
@@ -118,20 +132,35 @@ const StatisticsTab = () => {
       <div className={styles.mobileStatisticsPage}>
         <Header />
         <div className={styles.mobileNavigation}>
-          <Link to="/" className={`${styles.navItem} ${location.pathname === "/" ? styles.activeNavItem : ""}`}>
-            <img src={home} alt="Home" />
+          <Link
+            to="/"
+            className={`${styles.navItem} ${
+              location.pathname === "/" ? styles.activeNavItem : ""
+            }`}
+          >
+            <MdHome className={styles.navIcon} />
           </Link>
-          <Link to="/statics" className={`${styles.navItem} ${location.pathname === "/statics" ? styles.activeNavItem : ""}`}>
-            <img src={stats} alt="Statistics" />
+          <Link
+            to="/statics"
+            className={`${styles.navItem} ${
+              location.pathname === "/statics" ? styles.activeNavItem : ""
+            }`}
+          >
+            <SlGraph className={styles.navIcon} />
           </Link>
-          <Link to="/currency" className={`${styles.navItem} ${location.pathname === "/currency" ? styles.activeNavItem : ""}`}>
-            <img src={dollar} alt="Currency" />
+          <Link
+            to="/currency"
+            className={`${styles.navItem} ${
+              location.pathname === "/currency" ? styles.activeNavItem : ""
+            }`}
+          >
+            <FaDollarSign className={styles.navIcon} />
           </Link>
         </div>
         <div className={styles.statisticsTab}>
           <div className={styles.statisticsContainer}>
             <h2 className={styles.mobileStatsTitle}>Statistics</h2>
-            
+
             <div className={styles.mobileChartContainer}>
               <div className={styles.chartSection}>
                 <Chart />

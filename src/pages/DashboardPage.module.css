@@ -21,15 +21,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid black; */
   border-radius: 10px;
   cursor: pointer;
+  padding: 0;
   opacity: 0.6;
   transition: all 0.3s ease;
 }
 
-.navItem img {
-  width: 24px;
-  height: 24px;
+.navItem .navIcon {
+  width: 45px;
+  height: 45px;
+  color: #FBFBFB;
 }
 
 .activeNavItem {
@@ -269,4 +272,3 @@
   border-radius: 8px;
   padding: 20px;
 }
-

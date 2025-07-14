@@ -21,20 +21,18 @@
   height: 60px;
   border-radius: 16px;
   transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.1);
+  /* background: rgba(255, 255, 255, 0.1); */
 }
 
-.navItem img {
-  width: 28px;
-  height: 28px;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-  filter: brightness(0) invert(1);
+.navItem .navIcon {
+  width: 45px;
+  height: 45px;
+  color: #FBFBFB;
 }
 
 .activeNavItem {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: rgba(111, 85, 213, 0.7);
+  opacity: 1;
 }
 
 .activeNavItem img {
@@ -89,7 +87,7 @@
     min-height: calc(100vh - 120px);
     overflow-x: hidden;
   }
-  
+
   .statisticsContainer {
     gap: 20px;
     max-width: 100%;
@@ -114,7 +112,7 @@
     margin-bottom: 30px;
     min-height: 300px;
   }
-  
+
   .chartSection {
     background: transparent;
     padding: 0;
@@ -126,7 +124,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   .tableSection {
     background: transparent;
     padding: 0;
@@ -156,7 +154,7 @@
     background: transparent;
     min-height: auto;
   }
-  
+
   .statisticsContainer {
     max-width: 100%;
     margin: 0;
@@ -164,14 +162,14 @@
     gap: 20px;
     height: 100%;
   }
-  
+
   .statisticsContent {
     display: flex;
     flex-direction: column;
     gap: 20px;
     height: 100%;
   }
-  
+
   .chartSection {
     background: transparent;
     padding: 0;
@@ -179,7 +177,7 @@
     border-radius: 0;
     flex: 1;
   }
-  
+
   .tableSection {
     background: transparent;
     padding: 0;
@@ -289,12 +287,12 @@
   .statisticsTab {
     padding: 24px;
   }
-  
+
   .statisticsContent {
     grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
-  
+
   .chartSection,
   .tableSection {
     padding: 32px;
