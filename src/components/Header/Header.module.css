@@ -11,8 +11,10 @@
 }
 
 .logo {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .logoContainer {
@@ -49,6 +51,35 @@
   color: rgba(255, 255, 255, 0.8);
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   padding-left: 20px;
+}
+.exitButton img {
+  width: 24px;
+  height: 24px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Retina ekranlar için optimizasyon */
+@media (-webkit-min-device-pixel-ratio: 2), 
+       (min-resolution: 192dpi), 
+       (min-resolution: 2dppx) {
+  .logo,
+  .exitButton img {
+    image-rendering: auto;
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* High DPI ekranlar için */
+@media (-webkit-min-device-pixel-ratio: 3), 
+       (min-resolution: 288dpi), 
+       (min-resolution: 3dppx) {
+  .logo,
+  .exitButton img {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
 }
 @media (max-width: 767px) {
   .header {

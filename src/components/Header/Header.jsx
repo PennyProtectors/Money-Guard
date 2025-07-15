@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import css from "./Header.module.css";
-import logo from "../../assets/images/TabletLogo.png";
-import exit from "../../assets/images/exit.png";
+import OptimizedImage from "../OptimizedImage/OptimizedImage";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router";
-
 import { logoutModal } from "../Logout/Logout";
+
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,13 +21,22 @@ const Header = () => {
   return (
     <div className={css.header}>
       <div className={css.logoContainer}>
-        <img src={logo} alt="money_guard_logo" className={css.logo} />
+        <OptimizedImage 
+          imageName="TabletLogo"
+          alt="money_guard_logo" 
+          className={css.logo}
+          loading="eager"
+        />
         <span className={css.logoText}>Money Guard</span>
       </div>
       <div className={css.user}>
         <p className={css.username}>{username} |</p>
         <div className={css.exitButton} onClick={handleLogOut}>
-          <img src={exit} alt="altButton" />
+          <OptimizedImage 
+            imageName="exit"
+            alt="exit button"
+            loading="eager"
+          />
         </div>
       </div>
     </div>
