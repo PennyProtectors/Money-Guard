@@ -61,11 +61,16 @@ Money-Guard/
 
 ## Contributors
 
-| Name         | Role         | 
-| ------------ | ------------ | 
-| Merve Delibaşoğlu | Scrum Master | 
-| Özge Sevim   | Team Lead       | 
-| Mürsel Şen   | Developer |
+| Name              | Role         |
+| ----------------- | ------------ |
+| Merve Delibaşoğlu | Scrum Master |
+| Özge Sevim        | Team Lead    |
+| Mürsel Şen        | Developer    |
+| Burak Altun       | Developer    |
+| Beyza Nur Minteş  | Developer    |
+| Okan Özdemir      | Developer    |
+| Emre Soyaltın     | Developer    |
+| Özkan Bırak       | Developer    |
 
 _Please update the table with all contributors and their roles._
 
