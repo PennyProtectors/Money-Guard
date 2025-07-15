@@ -61,10 +61,11 @@ Money-Guard/
 
 ## Contributors
 
-| Name         | Role         | Areas of Contribution          |
-| ------------ | ------------ | ------------------------------ |
-| Murat Serdar | Project Lead | Architecture, Core Development |
-| [Add others] | [Role]       | [Areas]                        |
+| Name         | Role         | 
+| ------------ | ------------ | 
+| Merve Delibaşoğlu | Scrum Master | 
+| Özge Sevim   | Team Lead       | 
+| Mürsel Şen   | Developer |
 
 _Please update the table with all contributors and their roles._
 
