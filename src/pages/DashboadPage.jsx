@@ -7,9 +7,9 @@ import Currency from "../components/Currency/Currency";
 import StatisticsTab from "./StatisticsTab";
 import ButtonAddTransactions from "../components/ButtonAddTransactions/ButtonAddTransactions";
 import { useMediaQuery } from "react-responsive";
-import home from "../assets/images/baseline-home-24px 3.png";
-import stats from "../assets/images/baseline-timeline-24px 3.png";
-import dollar from "../assets/images/baseline-timeline-24px 4.png";
+import home from "../assets/images/baseline-home-24px.png";
+import stats from "../assets/images/baseline-timeline-24px.png";
+import dollar from "../assets/images/baseline-timeline-24px4.png";
 
 import TransactionsList from "../components/TransactionsList/TransactionsList";
 import TransactionsListDesktop from "../components/TransactionsList/TransactionsListDesktop";
@@ -126,7 +126,7 @@ function DashboardPage() {
                 <span>Home</span>
               </div>
               <div className={`${css.menuItem} ${css.location === "/statics"}`}>
-                <Link to="statics" className={css.menuItem}>
+                <Link to="/statics" className={css.menuItem}>
                   <img src={stats} alt="Statistics" />
                   <span>Statistics</span>
                 </Link>

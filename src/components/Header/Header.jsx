@@ -18,34 +18,6 @@ const Header = () => {
   const handleLogOut = () => {
     logoutModal({ dispatch, navigate });
   };
-  // const handleLogout = () => {
-  //   confirmAlert({
-  //     customUI: ({ onClose }) => {
-  //       return (
-  //         <div className={css.logout}>
-  //           <img src={logoWithText} className={css.logoutLogo}/>
-  //           <p className={css.exitMessg}>Are You sure you want to log out?</p>
-  //           <div className={css.btnGroup}>
-  //             <button
-  //               className={css.yesBtn}
-  //               onClick={() => {
-  //                 dispatch(logOut());
-  //                 localStorage.removeItem("token");
-  //                 navigate("/login");
-  //                 onClose();
-  //               }}
-  //             >
-  //               LOG OUT
-  //             </button>
-  //             <button className={css.noBtn} onClick={onClose}>
-  //               CANCEL
-  //             </button>
-  //           </div>
-  //         </div>
-  //       );
-  //     },
-  //   });
-  // };
 
   return (
     <div className={css.header}>

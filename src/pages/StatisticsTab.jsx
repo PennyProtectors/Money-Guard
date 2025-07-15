@@ -9,9 +9,9 @@ import StatisticsTable from "../components/StatisticsTable/StatisticsTable";
 import Currency from "../components/Currency/Currency";
 import { fetchTransactionSummary } from "../redux/statics/operations";
 import styles from "./StatisticsTab.module.css";
-import home from "../assets/images/baseline-home-24px 3.png";
-import stats from "../assets/images/baseline-timeline-24px 3.png";
-import dollar from "../assets/images/baseline-timeline-24px 4.png";
+import home from "../assets/images/baseline-home-24px.png";
+import stats from "../assets/images/baseline-timeline-24px.png";
+import dollar from "../assets/images/baseline-timeline-24px4.png";
 
 const StatisticsTab = () => {
   const dispatch = useDispatch();
