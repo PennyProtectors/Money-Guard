@@ -71,50 +71,67 @@ export default function Currency() {
   
   const [lastUpdated, setLastUpdated] = useState("");
   
-  // Saatlik veri çekme için interval oluştur
   useEffect(() => {
     const fetchCurrencyRates = async () => {
       try {
-        // API'den veri çek
+        // Önce cache'i kontrol et - 1 saat geçmişse yeni veri çek
+        const cachedData = getCurrencyDataFromLocalStorage();
+        if (cachedData) {
+          console.log("Cache'den veri kullanılıyor, henüz 1 saat geçmemiş");
+          processCurrencyData(cachedData.data);
+          const updateDate = new Date(cachedData.timestamp);
+          setLastUpdated(
+            `${updateDate.toLocaleDateString()} ${updateDate.getHours()}:${String(updateDate.getMinutes()).padStart(2, '0')}`
+          );
+          return; // 1 saat geçmemiş, API'ye gitme
+        }
+
+        // 1 saat geçmiş, yeni veri çek
+        console.log("1 saat geçmiş, API'den yeni veri çekiliyor...");
         const response = await currencyApi.get("/bank/currency");
-        console.log("Monobank API response:", response.data);
         
         if (response.data) {
-          // Veriyi localStorage'a kaydet
           setDataToLocalStorage(response.data);
-          
-          // Veriyi işle
           processCurrencyData(response.data);
-          
-          // Son güncelleme zamanını ayarla
           const updateDate = new Date();
           setLastUpdated(
             `${updateDate.toLocaleDateString()} ${updateDate.getHours()}:${String(updateDate.getMinutes()).padStart(2, '0')}`
           );
+          console.log("Yeni veri localStorage'a kaydedildi");
         }
       } catch (error) {
+        if (error.response?.status === 429) {
+          console.warn("API limit aşıldı. Cache'deki veri kullanılıyor.");
+          const cachedData = getCurrencyDataFromLocalStorage();
+          if (cachedData) {
+            processCurrencyData(cachedData.data);
+            const updateDate = new Date(cachedData.timestamp);
+            setLastUpdated(
+              `${updateDate.toLocaleDateString()} ${updateDate.getHours()}:${String(updateDate.getMinutes()).padStart(2, '0')} (Cache)`
+            );
+          }
+          return;
+        }
         console.error("Döviz kurları alınırken hata oluştu:", error);
         
-        // Hata durumunda localStorage'dan veri kontrolü yap
+        // Hata durumunda cache'deki veriyi kullan
         const cachedData = getCurrencyDataFromLocalStorage();
         if (cachedData) {
           processCurrencyData(cachedData.data);
-          // Son güncelleme zamanını ayarla
           const updateDate = new Date(cachedData.timestamp);
           setLastUpdated(
-            `${updateDate.toLocaleDateString()} ${updateDate.getHours()}:${String(updateDate.getMinutes()).padStart(2, '0')}`
+            `${updateDate.toLocaleDateString()} ${updateDate.getHours()}:${String(updateDate.getMinutes()).padStart(2, '0')} (Cache)`
           );
         }
       }
     };
 
-    // İlk veri çekme
+    // İlk yüklemede kontrol et
     fetchCurrencyRates();
     
-    // Saatlik veri çekme için interval oluştur
-    const intervalId = setInterval(fetchCurrencyRates, 60 * 60 * 1000); // 1 saat
+    // Her 1 saatte bir kontrol et
+    const intervalId = setInterval(fetchCurrencyRates, 60 * 60 * 1000);
     
-    // Component unmount olduğunda interval'i temizle
     return () => clearInterval(intervalId);
   }, []);
 

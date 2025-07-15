@@ -13,8 +13,8 @@ export const getCurrencyDataFromLocalStorage = () => {
         const now = Date.now();
         const oneHourStep = 60 * 60 * 1000; // 1 saat (milisaniye cinsinden)
         if (now - parsedStoredData.timestamp < oneHourStep) {
-            return parsedStoredData; // Tüm nesneyi döndür (timestamp dahil)
+            return parsedStoredData; // 1 saat geçmemiş, cache'deki veriyi döndür
         }
     }
-    return null;
+    return null; // Cache yok veya 1 saat geçmiş, yeni veri çek
 };
