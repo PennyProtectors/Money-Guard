@@ -78,8 +78,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobile styles */
-@media (max-width: 768px) {
+/* Mobile styles (max-width: 767px) */
+@media (max-width: 767px) {
   .statisticsTab {
     padding: 0;
     background: transparent;
@@ -147,8 +147,8 @@
   }
 }
 
-/* Tablet styles for Statistics */
-@media (min-width: 769px) and (max-width: 1280px) {
+/* Tablet styles (768px - 1279px) */
+@media (min-width: 768px) and (max-width: 1279px) {
   .statisticsTab {
     padding: 0;
     background: transparent;
@@ -184,6 +184,17 @@
     box-shadow: none;
     border-radius: 0;
     flex: 1;
+  }
+
+  .tabletStatisticsSection {
+    padding: 20px 40px 40px 40px;
+  }
+
+  .tabletStatisticsSection .statisticsContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
   }
 }
 
@@ -289,20 +300,27 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* Desktop styles */
-@media (min-width: 1025px) {
+/* Desktop styles (1280px and above) */
+@media (min-width: 1280px) {
   .statisticsTab {
     padding: 24px;
+    background: transparent;
   }
 
   .statisticsContent {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
+    align-items: start;
   }
 
   .chartSection,
   .tableSection {
     padding: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
