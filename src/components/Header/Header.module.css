@@ -81,6 +81,8 @@
     image-rendering: crisp-edges;
   }
 }
+
+/* Mobile styles (max-width: 767px) */
 @media (max-width: 767px) {
   .header {
     height: 60px;
@@ -94,5 +96,59 @@
   .exitButton {
     border: none;
     padding-left: 0;
+  }
+
+  .logo {
+    width: 20px;
+    height: 20px;
+  }
+
+  .exitButton img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Tablet styles (768px - 1279px) */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .header {
+    height: 70px;
+    padding: 0 20px;
+  }
+
+  .logo {
+    width: 22px;
+    height: 22px;
+  }
+
+  .logoText {
+    font-size: 16px;
+  }
+
+  .exitButton img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Desktop styles (1280px and above) */
+@media (min-width: 1280px) {
+  .header {
+    height: 80px;
+    padding: 0 24px;
+  }
+
+  .logo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .logoText {
+    font-size: 18px;
+  }
+
+  .exitButton img {
+    width: 24px;
+    height: 24px;
   }
 }

@@ -261,15 +261,21 @@
 }
 
 /* Responsive design */
+/* Mobile styles (max-width: 767px) */
 @media (max-width: 767px) {
   .chart-container {
-    /* margin: 16px; */
-    /* padding: 16px; */
     width: 100%;
+    margin: 16px auto;
+    padding: 16px;
   }
 
   .chart-title {
     font-size: 16px;
+  }
+
+  .chart-wrapper {
+    height: 280px;
+    padding: 16px;
   }
 
   .total-amount {
@@ -282,15 +288,55 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+/* Tablet styles (768px - 1279px) */
+@media (min-width: 768px) and (max-width: 1279px) {
   .chart-container {
     max-width: 600px;
+    padding: 20px;
+  }
+
+  .chart-wrapper {
+    height: 350px;
+    padding: 18px;
+  }
+
+  .chart-title {
+    font-size: 17px;
+  }
+
+  .total-amount {
+    font-size: 28px;
+    line-height: 42px;
+  }
+
+  .legend-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 1024px) {
+/* Desktop styles (1280px and above) */
+@media (min-width: 1280px) {
   .chart-container {
     max-width: 715px;
+    padding: 24px;
+  }
+
+  .chart-wrapper {
+    height: 384px;
+    padding: 20px;
+  }
+
+  .chart-title {
+    font-size: 18px;
+  }
+
+  .total-amount {
+    font-size: 30px;
+    line-height: 45px;
+  }
+
+  .legend-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
